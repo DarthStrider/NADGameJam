@@ -100,6 +100,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void checkIsGrounded()
     {
+        Vector3 center = bc.bounds.center;
+        float castDistance = bc.bounds.extents.y + overcast;
+        float rayOffset = bc.bounds.extents.x * raycastInset;
 
     }
 
