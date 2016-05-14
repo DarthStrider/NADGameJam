@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour
+{
 	public int playerNumber;
-
 
 	public GameObject theArm;
 	public GameObject theHead;
@@ -14,35 +14,49 @@ public class PlayerMovement : MonoBehaviour {
 	private Animator anim;
 	private RotateArm arm;
 	private HeadBob bobSpeed;
-	private float overcast = 0.1f;
+    private float raycastInset = 0.95f;
+	private float overcast = 0.05f;
 	private float moveSpeed = 4.0f;
 	private float jumpSpeed = 750.0f;
     private bool lockPosition = false;
 
+    private int hackedPlayerNumber; // adjusted because unity sometimes detects a non-existent controller as joystick 1
 
-	void Start () {
+	void Start ()
+    {
 		rb = GetComponent<Rigidbody2D> ();
 		bc = GetComponent<BoxCollider2D> ();
 		arm = theArm.GetComponent<RotateArm> ();
 		bobSpeed = theHead.GetComponent<HeadBob> ();
 
+        // hack that adjusts joystick number of player in case a non-existent joystick is using joystick 1
+        string[] joysticks = Input.GetJoystickNames();
+        if (joysticks.Length == 3 && joysticks[0] == "")
+        {
+            Debug.Log("empty string found as first joystick name. Why does Unity do this?");
+            playerNumber += 1;
+        }
 	}
 
 	void OnCollisionEnter2D(Collision2D other)
 	{
 		if (other.transform.tag == "MovingPlatform")
-			transform.parent = other.transform;
+        {
+            transform.parent = other.transform;
+        }
 	}
 
 	void OnCollisionExit2D(Collision2D other)
 	{
 		if (other.transform.tag == "MovingPlatform")
-			transform.parent = null;  //IF PLAYER WILL HAVE A PARENT (PROBABLY THE SHIP) THIS NEEDS TO BE CHANGED
+        {
+            transform.parent = null;  //IF PLAYER WILL HAVE A PARENT (PROBABLY THE SHIP) THIS NEEDS TO BE CHANGED
+        }
 	}
 
 	// Update is called once per frame
-	void Update () {
-
+	void Update ()
+    {
 		if (Input.GetAxis ("LeftAnalogHorizontal" + playerNumber) > 0)
 		{
 			arm.RotateTheArmLeft ();
