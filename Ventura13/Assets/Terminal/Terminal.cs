@@ -38,7 +38,6 @@ public class Terminal : MonoBehaviour {
                 {
                     tempBButton = Instantiate(bButton, new Vector3(transform.position.x, (transform.position.y + 1.25f), transform.position.z), Quaternion.identity) as GameObject;
                     bCount++;
-
                     
                 }
 
