@@ -92,9 +92,9 @@ public class environmentGenerator : MonoBehaviour {
         for (int i = 0; i <= amount; i++)
         {
             float width = Random.Range(0, Screen.width);
-            Vector2 spot = new Vector2(width, Screen.height);
+            Vector2 spot = new Vector2(width, Screen.height+5);
             Vector2 local = main.ScreenToWorldPoint(spot);
-            local = starPlacement(locations, local);
+           // local = starPlacement(locations, local);
             locations.Add(local);
             Instantiate(star, local, Quaternion.identity);
 
@@ -109,7 +109,7 @@ public class environmentGenerator : MonoBehaviour {
             if (w.x > spot.x - 1 && w.x < spot.x + 1)
             {
                 float width = Random.Range(0, Screen.width);
-                Vector2 s = new Vector2(width, Screen.height);
+                Vector2 s = new Vector2(width, Screen.height + 10);
                 Vector2 local = main.ScreenToWorldPoint(s);
                 l = true;
                 cloudPlacement(spots, local);
