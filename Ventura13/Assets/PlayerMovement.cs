@@ -6,6 +6,8 @@ using System.Collections.Generic;
 public class PlayerMovement : MonoBehaviour
 {
 	public int playerNumber;
+	public float moveSpeed = 4.5f;
+	public float jumpSpeed = 650.0f;
 
 	public GameObject theArm;
 	public GameObject theHead;
@@ -21,8 +23,6 @@ public class PlayerMovement : MonoBehaviour
 	private float overcast = 0.02f;
     private bool isGrounded = false;
     private bool isSideColliding = false;
-	private float moveSpeed = 4.0f;
-	private float jumpSpeed = 750.0f;
     private bool lockPosition = false;
 
     private int hackedPlayerNumber; // adjusted because unity sometimes detects a non-existent controller as joystick 1
@@ -63,10 +63,6 @@ public class PlayerMovement : MonoBehaviour
 	void Update ()
     {
         checkIsGrounded();
-        if (isGrounded == false)
-        {
-           // Debug.Log(isGrounded);
-        }
 
 		if (Input.GetAxis ("LeftAnalogHorizontal" + playerNumber) > 0)
 		{
@@ -103,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
             }
 		}
 
-		CheckForWallCollisions ();
+		checkIsSideColliding ();
 		if (isSideColliding && !isGrounded)
 		{
 			rb.velocity = new Vector2(0.0f, rb.velocity.y);
@@ -136,13 +132,8 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-
-    private void checkIsSideColliding()
-    {
-
-    }
-
-	private void CheckForWallCollisions(){
+		
+	private void checkIsSideColliding(){
 
 		Vector3 center = bc.bounds.center;
 		float yHeight = bc.bounds.extents.y * raycastInset;
@@ -154,21 +145,14 @@ public class PlayerMovement : MonoBehaviour
 		raycastHits.Add(Physics2D.Raycast(center ,  Vector3.right, xWidth,l));
 		raycastHits.Add(Physics2D.Raycast(center ,  -Vector3.right, xWidth,l));
 
-		Debug.DrawRay (center, Vector3.right);
-		Debug.DrawRay (center, -Vector3.right);
-
 		for (int i = 1; i <= 3; i++)
 		{
 			Vector3 newUpCenter = new Vector3 (center.x, center.y + (i * yHeight), center.z);
-			Debug.DrawRay (newUpCenter, Vector3.right);
-			Debug.DrawRay (newUpCenter, -Vector3.right);
 			raycastHits.Add(Physics2D.Raycast (newUpCenter , Vector3.right, xWidth,l));
 			raycastHits.Add(Physics2D.Raycast (newUpCenter , -Vector3.right,  xWidth,l));
 			Vector3 newDownCenter = new Vector3 (center.x, center.y + (-i * yHeight), center.z);
 			raycastHits.Add(Physics2D.Raycast (newDownCenter ,  Vector3.right, xWidth,l));
 			raycastHits.Add( Physics2D.Raycast (newDownCenter ,  -Vector3.right, xWidth,l));
-			Debug.DrawRay (newDownCenter, Vector3.right);
-			Debug.DrawRay (newDownCenter, -Vector3.right);
 		}
 
 		isSideColliding = false;
@@ -178,9 +162,7 @@ public class PlayerMovement : MonoBehaviour
 			{
 				isSideColliding = true;
 			}
-
 		}
-
 	}
 
     public int getPlayerNumber()
@@ -195,5 +177,4 @@ public class PlayerMovement : MonoBehaviour
     {
         lockPosition = lp;
     }
-
 }
