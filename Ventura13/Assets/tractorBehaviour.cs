@@ -27,6 +27,7 @@ public class tractorBehaviour : MonoBehaviour {
 
                 Vector3 beamPos = newBeam.GetComponent<StartBeam>().pulling().transform.position;
                 newBeam.GetComponent<StartBeam>().pulling().transform.position = Vector2.MoveTowards(new Vector2(beamPos.x, beamPos.y), transform.position, 2 * Time.deltaTime);
+                //unlock = false;
             }
         }
 
