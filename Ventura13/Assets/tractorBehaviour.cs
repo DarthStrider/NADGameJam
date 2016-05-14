@@ -33,7 +33,7 @@ public class tractorBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetAxis ("RT2") <= 0 && pressed == true) {
+		if (Input.GetAxis ("RT1") <= 0 && pressed == true) {
 			length = 0;
 			time = 0;
 			pressed = false;
@@ -48,11 +48,11 @@ public class tractorBehaviour : MonoBehaviour {
 			beams.Clear ();
 		}
 
-		if (Input.GetAxis("RT2")>0 && pressed == false)
+		if (Input.GetAxis("RT1") >0 && pressed == false)
         {
 			pressed = true;
 			//Debug.DrawRay(origin.transform,transform
-			RaycastHit2D hit = Physics2D.Raycast(origin.transform.position,origin.transform.up,tractorDistance);
+			RaycastHit2D hit = Physics2D.Raycast(origin.transform.position,transform.up,tractorDistance);
 
 			if (hit != null && hit.collider != null) {
 				capturedObject = hit.collider.gameObject;
@@ -74,7 +74,7 @@ public class tractorBehaviour : MonoBehaviour {
 			for (int i = 0; i < distance; i++) {
 				GameObject b;
 
-				b = Instantiate (beam, origin.transform.position + (i * origin.transform.up), Quaternion.identity) as GameObject;
+				b = Instantiate (beam, origin.transform.position + (i * transform.up), transform.rotation) as GameObject;
 				//origin = b;
 				beams.Add (b);
 			}

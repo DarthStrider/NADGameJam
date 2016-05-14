@@ -11,6 +11,7 @@ public class environmentGenerator : MonoBehaviour {
     public float starDelay;
     public Vector2 cloudAmount;
     public Vector2 starAmount;
+    public Vector2 heightDifference;
     
      
 	// Use this for initialization
@@ -91,8 +92,9 @@ public class environmentGenerator : MonoBehaviour {
         int amount = Random.Range((int)starAmount.x, (int)starAmount.y);
         for (int i = 0; i <= amount; i++)
         {
+            float heightOffset = Random.Range(heightDifference.x, heightDifference.y);
             float width = Random.Range(0, Screen.width);
-            Vector2 spot = new Vector2(width, Screen.height+5);
+            Vector2 spot = new Vector2(width, Screen.height+heightOffset);
             Vector2 local = main.ScreenToWorldPoint(spot);
            // local = starPlacement(locations, local);
             locations.Add(local);
