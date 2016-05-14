@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class Terminal : MonoBehaviour {
-    public enum terminalType { GUN, STEERING, SLOW, BEAM};
+    public enum TerminalType { GUN, STEERING, SLOW, BEAM};
+    public TerminalType terminalType;
     public GameObject terminalObject;
 
     public GameObject xButton;
@@ -37,6 +38,7 @@ public class Terminal : MonoBehaviour {
                 {
                     tempBButton = Instantiate(bButton, new Vector3(transform.position.x, (transform.position.y + 1.25f), transform.position.z), Quaternion.identity) as GameObject;
                     bCount++;
+                    
                 }
 
 
