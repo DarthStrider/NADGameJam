@@ -8,6 +8,7 @@ class xRumble
     public float timer;    // Rumble timer
     public float fadeTime; // Fade-out (in seconds)
     public Vector2 power;  // Rumble 'power'
+    public int playerIndex;
 
     // Decrease timer
     public void Update()
@@ -72,26 +73,27 @@ public class x360_Gamepad : MonoBehaviour
                                                Mathf.Max(rumbleEvents[i].power.y * timeLeft, currentPower.y));
 
                     // Apply vibration to gamepad motors
-                    GamePad.SetVibration(playerIndex, currentPower.x, currentPower.y);
+                    GamePad.SetVibration((PlayerIndex)rumbleEvents[i].playerIndex, currentPower.x, currentPower.y);
                 }
                 else
                 {
                     // Remove expired event
+                    if (rumbleEvents.Count == 1)
+                        GamePad.SetVibration((PlayerIndex)rumbleEvents[i].playerIndex, 0, 0);
                     rumbleEvents.Remove(rumbleEvents[i]);
-                    if (rumbleEvents.Count <= 0)
-                        GamePad.SetVibration(playerIndex, 0, 0);
                 }
             }
         }
     }
 
-    public void AddRumble(float timer, Vector2 power, float fadeTime = 0f)
+    public void AddRumble(int playerIndex, float timer, Vector2 power, float fadeTime = 0f)
     {
         xRumble rumble = new xRumble();
 
         rumble.timer = timer;
         rumble.power = power;
         rumble.fadeTime = fadeTime;
+        rumble.playerIndex = playerIndex;
 
         // Add rumble event to container
         rumbleEvents.Add(rumble);

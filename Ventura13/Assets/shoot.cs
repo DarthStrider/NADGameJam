@@ -15,7 +15,7 @@ public class shoot : MonoBehaviour {
 			Instantiate (bullet, bulletSpawn.position, Quaternion.identity);
             bullet.GetComponent<BulletForce>().parentShooter = bulletSpawn;
 			cooldownTimer = cooldownTime;
-            this.GetComponent<x360_Gamepad>().AddRumble(0.5f, new Vector2(10.0f, 10.0f));
+            this.GetComponent<x360_Gamepad>().AddRumble(0,0.5f, new Vector2(10.0f, 10.0f));
 		}
 		else
 		{
