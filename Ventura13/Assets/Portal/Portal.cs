@@ -39,6 +39,7 @@ public class Portal : MonoBehaviour
         if (collider.gameObject.tag == "Player" && tempPlayer == null)
         {
             tempXButton = Instantiate(xButton, new Vector3(transform.position.x, (transform.position.y + 1f), transform.position.z), Quaternion.identity) as GameObject;
+            tempXButton.transform.parent = GameObject.FindGameObjectWithTag("Ship").transform;
             tempPlayer = collider.gameObject;
         }
     }

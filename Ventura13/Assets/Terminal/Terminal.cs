@@ -37,6 +37,7 @@ public class Terminal : MonoBehaviour {
                 if (bCount == 0)
                 {
                     tempBButton = Instantiate(bButton, new Vector3(transform.position.x, (transform.position.y + 1.25f), transform.position.z), Quaternion.identity) as GameObject;
+                    tempBButton.transform.parent = GameObject.FindGameObjectWithTag("Ship").transform;
                     bCount++;
                     
                 }
@@ -66,6 +67,7 @@ public class Terminal : MonoBehaviour {
             
             tempPlayer = collider.gameObject;
             tempXButton = Instantiate(xButton, new Vector3(transform.position.x, (transform.position.y + 1.25f), transform.position.z), Quaternion.identity) as GameObject;
+            tempXButton.transform.parent = GameObject.FindGameObjectWithTag("Ship").transform;
         }
     }
     void OnTriggerExit2D(Collider2D collider)
