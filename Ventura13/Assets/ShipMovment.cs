@@ -21,8 +21,8 @@ public class ShipMovment : MonoBehaviour {
 	void Update () {
 		rb.velocity = Vector2.up * verticalMoveSpeed;
 
-		if(Input.GetAxis("Horizontal") < 0 || Input.GetAxis("Horizontal") > 0){
-			MoveShipHorizontal (Input.GetAxis ("Horizontal"));
+		if(Input.GetAxis("LeftAnalogHorizontal1") < 0 || Input.GetAxis("LeftAnalogHorizontal1") > 0){
+			MoveShipHorizontal (Input.GetAxis ("LeftAnalogHorizontal1"));
 		}
 	}
 }
