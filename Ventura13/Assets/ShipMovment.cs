@@ -35,10 +35,11 @@ public class ShipMovment : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-			
-		if (Input.GetAxis ("LT2") > 0) {
+        Debug.Log(Input.GetAxis("LT1"));
+        Debug.Log(Input.GetAxis("RT1"));
+        if (Input.GetAxis ("RT1") > 0) {
 			//Debug.Log ("left trigger");
-			rb.AddForce(-Vector2.right  * Input.GetAxis ("LT2") * horizontalMoveSpeed);
+			rb.AddForce(-Vector2.right  * Input.GetAxis ("RT1") * horizontalMoveSpeed);
 
 
             if (rightThrusterCooldownTimer <= 0)
@@ -57,8 +58,8 @@ public class ShipMovment : MonoBehaviour {
 
         } 
 
-		 if(Input.GetAxis ("RT2") > 0) {
-			rb.AddForce(Vector2.right * Input.GetAxis ("RT2") * horizontalMoveSpeed);
+		 if(Input.GetAxis ("LT1") > 0) {
+			rb.AddForce(Vector2.right * Input.GetAxis ("LT1") * horizontalMoveSpeed);
 
             if (leftThrusterCooldownTimer <= 0)
             {
