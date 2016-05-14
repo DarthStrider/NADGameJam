@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour {
 
 		string[] joys = Input.GetJoystickNames (); 
 		foreach (string joy in joys) {
-			Debug.Log (joy);
+			//Debug.Log (joy);
 		}
         if (lockPosition != true)
         {
