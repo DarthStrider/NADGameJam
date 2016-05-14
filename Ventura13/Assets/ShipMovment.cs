@@ -10,7 +10,11 @@ public class ShipMovment : MonoBehaviour {
 	public float horizontalMoveSpeed = 7.0f;
 	public float maxSpeed = 5.0f;
 
-	void Start () {
+    GameObject[] rightThrusters;
+    GameObject[] leftThrusters;
+    public GameObject puff;
+	void Start ()
+	{
 		rb = GetComponent<Rigidbody2D> ();
 		xMin = Camera.main.ScreenToWorldPoint (new Vector2(0,0));
 		xMax = Camera.main.ScreenToWorldPoint (new Vector2(Screen.width, 0));
@@ -27,12 +31,14 @@ public class ShipMovment : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 			
-		if (Input.GetAxis ("LT2") > 0) {
-			rb.AddForce(-Vector2.right  * Input.GetAxis ("LT2") * horizontalMoveSpeed);
+		if (Input.GetAxis ("LT1") > 0) {
+			Debug.Log ("left trigger");
+			rb.AddForce(-Vector2.right  * Input.GetAxis ("LT1") * horizontalMoveSpeed);
 		} 
 
-		 if(Input.GetAxis ("RT2") > 0) {
-			rb.AddForce(Vector2.right * Input.GetAxis ("RT2") * horizontalMoveSpeed);
+		 if(Input.GetAxis ("RT1") > 0) {
+			Debug.Log ("right trigger");
+			rb.AddForce(Vector2.right * Input.GetAxis ("RT1") * horizontalMoveSpeed);
 		} 
 
 		if (rb.velocity.magnitude > maxSpeed) {

@@ -43,21 +43,7 @@ public class PlayerMovement : MonoBehaviour
         }
 	}
 
-	void OnCollisionEnter2D(Collision2D other)
-	{
-		if (other.transform.tag == "MovingPlatform")
-        {
-            transform.parent = other.transform;
-        }
-	}
 
-	void OnCollisionExit2D(Collision2D other)
-	{
-		if (other.transform.tag == "MovingPlatform")
-        {
-            transform.parent = null;  //IF PLAYER WILL HAVE A PARENT (PROBABLY THE SHIP) THIS NEEDS TO BE CHANGED
-        }
-	}
 
 	// Update is called once per frame
 	void Update ()
@@ -133,8 +119,8 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 		
-	private void checkIsSideColliding(){
-
+	private void checkIsSideColliding()
+	{
 		Vector3 center = bc.bounds.center;
 		float yHeight = bc.bounds.extents.y * raycastInset;
 		yHeight /= 3;
@@ -158,7 +144,7 @@ public class PlayerMovement : MonoBehaviour
 		isSideColliding = false;
 		foreach (RaycastHit2D hit in raycastHits)
 		{
-			if (hit.collider != null)
+			if (hit.collider != null && Vector2.Angle(hit.normal, rb.velocity.normalized) >= 90.0f)
 			{
 				isSideColliding = true;
 			}

@@ -14,8 +14,7 @@ public class star : MonoBehaviour {
     public Rigidbody2D rb;
 	// Use this for initialization
 	void Start () {
-        Random.seed = System.DateTime.Now.Millisecond * Random.Range(0, 100); // resetting the random seed
-        Random.seed = System.DateTime.Now.Millisecond * Random.Range(0, 55); // resetting the random seed
+        
         float speedDiff = Random.Range(speedOffset.x, speedOffset.y);
         duration = Random.Range(durations.x, durations.y);
         if (speedDiff > 1)
