@@ -10,6 +10,9 @@ public class ShipMovment : MonoBehaviour {
 	public float horizontalMoveSpeed = 7.0f;
 	public float maxSpeed = 5.0f;
 
+    GameObject[] rightThrusters;
+    GameObject[] leftThrusters;
+    public GameObject puff;
 	void Start ()
 	{
 		rb = GetComponent<Rigidbody2D> ();
