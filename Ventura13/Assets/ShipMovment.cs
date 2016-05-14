@@ -10,7 +10,8 @@ public class ShipMovment : MonoBehaviour {
 	public float horizontalMoveSpeed = 7.0f;
 	public float maxSpeed = 5.0f;
 
-	void Start () {
+	void Start ()
+	{
 		rb = GetComponent<Rigidbody2D> ();
 		xMin = Camera.main.ScreenToWorldPoint (new Vector2(0,0));
 		xMax = Camera.main.ScreenToWorldPoint (new Vector2(Screen.width, 0));
