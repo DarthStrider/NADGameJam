@@ -7,9 +7,14 @@ public class ShipMovment : MonoBehaviour {
 	private Vector3 xMin;
 	private Vector3 xMax;
 	public BoxCollider2D box;
-	private float horizontalMoveSpeed = 2.0f;
+	public float horizontalMoveSpeed = 7.0f;
+	public float maxSpeed = 5.0f;
 
-	void Start () {
+    GameObject[] rightThrusters;
+    GameObject[] leftThrusters;
+    public GameObject puff;
+	void Start ()
+	{
 		rb = GetComponent<Rigidbody2D> ();
 		xMin = Camera.main.ScreenToWorldPoint (new Vector2(0,0));
 		xMax = Camera.main.ScreenToWorldPoint (new Vector2(Screen.width, 0));
@@ -18,20 +23,28 @@ public class ShipMovment : MonoBehaviour {
 
 
 	public void MoveShipHorizontal(float speed){
-		rb.velocity = new Vector2 (speed * horizontalMoveSpeed, rb.velocity.y);
+		
+
 	}
 
 
 	// Update is called once per frame
 	void Update () {
-		
-		Debug.Log (xMax.x);
 			
-		if (Input.GetAxis ("LeftAnalogHorizontal1") < 0 || Input.GetAxis ("LeftAnalogHorizontal1") > 0) {
-			MoveShipHorizontal (Input.GetAxis ("LeftAnalogHorizontal1"));
-		} else {
-			rb.velocity = new Vector2 (0, rb.velocity.y);
+		if (Input.GetAxis ("LT1") > 0) {
+			Debug.Log ("left trigger");
+			rb.AddForce(-Vector2.right  * Input.GetAxis ("LT1") * horizontalMoveSpeed);
+		} 
+
+		 if(Input.GetAxis ("RT1") > 0) {
+			Debug.Log ("right trigger");
+			rb.AddForce(Vector2.right * Input.GetAxis ("RT1") * horizontalMoveSpeed);
+		} 
+
+		if (rb.velocity.magnitude > maxSpeed) {
+			rb.velocity = rb.velocity.normalized * maxSpeed;
 		}
+
 		Vector3 extent = box.bounds.extents;
 		float x = transform.position.x;
 		x = Mathf.Clamp (transform.position.x, xMin.x+extent.x, xMax.x-extent.x);

@@ -8,9 +8,11 @@ public class GunBehaviour : MonoBehaviour
     public float rightWorldAngle;
     public GameObject gunPodSprite;
 
+
     // Use this for initialization
     void Start()
     {
+        
  /*
         if (leftWorldAngle == -135.0f && rightWorldAngle == 45.0f)  // left gun
         {
@@ -26,7 +28,7 @@ public class GunBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GunMovement(Vector2.zero);
+        //GunMovement(Vector2.zero);
     }
     public void GunMovement(Vector2 input)
     {
@@ -37,7 +39,7 @@ public class GunBehaviour : MonoBehaviour
         if (joyX != 0 || joyY != 0)
         {
             //Debug.Log("-----------------------------------------");
-            float angle = Mathf.Atan2(joyX, joyY) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(input.x, input.x) * Mathf.Rad2Deg;
             //Debug.Log(angle);
             if (leftWorldAngle == -135.0f && rightWorldAngle == 45.0f)  // left gun
             {
