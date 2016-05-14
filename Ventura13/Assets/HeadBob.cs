@@ -10,7 +10,7 @@ public class HeadBob : MonoBehaviour {
 
 	}
 	
-	public void increaseSpeed(int speed){
+	public void increaseSpeed(float speed){
 		anim.speed = speed;
 	}
 }

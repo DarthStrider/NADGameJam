@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour {
 		if (Input.GetAxis ("LeftAnalogHorizontal" + playerNumber) == 0)
 		{
 			arm.ResetArm ();
-			bobSpeed.increaseSpeed (1);
+			bobSpeed.increaseSpeed (.5f);
 		}
 
 		string[] joys = Input.GetJoystickNames (); 
