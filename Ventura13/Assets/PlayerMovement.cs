@@ -95,6 +95,25 @@ public class PlayerMovement : MonoBehaviour
 	}
 
 
+	private void CheckForWallCollisions(){
+		float yHeight = bc.bounds.extents.y * raycastInset;
+		yHeight /= 3;
+
+		float xWidth = bc.bounds.extents.x + overcast;
+
+		for (int i = 0; i < 7; i++) {
+			Debug.DrawLine (new Vector3(transform.position.x, transform.position.y + yHeight, 0) , Vector3.right * xWidth);
+			yHeight*=3;
+		}
+
+		for (int i = 0; i < 7; i++) {
+			Debug.DrawLine (new Vector3(transform.position.x, transform.position.y + yHeight, 0) , Vector3.left * xWidth);
+			yHeight *= 3;
+		}
+
+
+	}
+
     public int getPlayerNumber()
     {
         return playerNumber;
