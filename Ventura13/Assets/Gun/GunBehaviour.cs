@@ -8,9 +8,11 @@ public class GunBehaviour : MonoBehaviour
     public float rightWorldAngle;
     public GameObject gunPodSprite;
 
+
     // Use this for initialization
     void Start()
     {
+        
  /*
         if (leftWorldAngle == -135.0f && rightWorldAngle == 45.0f)  // left gun
         {
@@ -26,7 +28,7 @@ public class GunBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GunMovement(Vector2.zero);
+        //GunMovement(Vector2.zero);
     }
     public void GunMovement(Vector2 input)
     {
