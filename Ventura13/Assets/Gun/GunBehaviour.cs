@@ -36,9 +36,9 @@ public class GunBehaviour : MonoBehaviour
 
         if (joyX != 0 || joyY != 0)
         {
-            Debug.Log("-----------------------------------------");
+            //Debug.Log("-----------------------------------------");
             float angle = Mathf.Atan2(joyX, joyY) * Mathf.Rad2Deg;
-            Debug.Log(angle);
+            //Debug.Log(angle);
             if (leftWorldAngle == -135.0f && rightWorldAngle == 45.0f)  // left gun
             {
                 if (angle < 45 && angle > -135)
@@ -69,7 +69,7 @@ public class GunBehaviour : MonoBehaviour
                     angle = 90;
                 }
             }
-            Debug.Log(angle);
+            //Debug.Log(angle);
             angle = Mathf.Lerp(transform.localRotation.eulerAngles.z, angle, rotationSpeed * Time.deltaTime);
             transform.localRotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
