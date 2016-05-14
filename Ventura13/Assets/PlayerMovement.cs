@@ -57,18 +57,9 @@ public class PlayerMovement : MonoBehaviour {
 		foreach (string joy in joys) {
 			Debug.Log (joy);
 		}
-
         if (lockPosition != true)
         {
             rb.velocity = new Vector2(Input.GetAxis("LeftAnalogHorizontal" + playerNumber) * moveSpeed, rb.velocity.y);
-
-
-            ///string[] joys = Input.GetJoystickNames();
-            //foreach (string joy in joys)
-            //{
-                //Debug.Log(joy);
-           // }
-
 
             //Debug.DrawLine(bc.bounds.center, new Vector3(bc.bounds.center.x, (bc.bounds.center.y - (bc.bounds.extents.y + overcast)), bc.bounds.center.z));
 
