@@ -23,6 +23,7 @@ public class Terminal : MonoBehaviour {
             {
 
                 tempPlayer.GetComponent<PlayerMovement>().setLockPosition(true);
+				tempPlayer.GetComponent<SwapSprites> ().SwapFace ();
                 
 
             }
@@ -30,6 +31,7 @@ public class Terminal : MonoBehaviour {
             {
 
                 tempPlayer.GetComponent<PlayerMovement>().setLockPosition(false);
+				tempPlayer.GetComponent<SwapSprites> ().SwapSide ();
                 
             }
         }
