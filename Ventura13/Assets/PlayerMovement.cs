@@ -145,7 +145,7 @@ public class PlayerMovement : MonoBehaviour
 		float xWidth = bc.bounds.extents.x + overcast;
 
 		List<RaycastHit2D> raycastHits = new List<RaycastHit2D> ();
-		LayerMask l = ~LayerMask.GetMask (ignoredLayers);
+		LayerMask l = LayerMask.GetMask (ignoredLayers);
 		raycastHits.Add(Physics2D.Raycast(center ,  Vector3.right, xWidth,l));
 		raycastHits.Add(Physics2D.Raycast(center ,  -Vector3.right, xWidth,l));
 		Debug.DrawRay (center, Vector3.right);
