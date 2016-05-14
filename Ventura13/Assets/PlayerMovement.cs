@@ -65,9 +65,9 @@ public class PlayerMovement : MonoBehaviour
         checkIsGrounded();
         if (isGrounded == false)
         {
-            Debug.Log(isGrounded);
+           // Debug.Log(isGrounded);
         }
-        CheckForWallCollisions ();
+
 		if (Input.GetAxis ("LeftAnalogHorizontal" + playerNumber) > 0)
 		{
 			arm.RotateTheArmLeft ();
@@ -81,8 +81,7 @@ public class PlayerMovement : MonoBehaviour
 			theHead.transform.eulerAngles = new Vector3(theHead.transform.eulerAngles.x, 0.0f, theHead.transform.eulerAngles.z);
 			bobSpeed.increaseSpeed (2);
 		}
-
-		if (Input.GetAxis ("LeftAnalogHorizontal" + playerNumber) == 0)
+		else
 		{
 			arm.ResetArm ();
 			bobSpeed.increaseSpeed (.5f);
@@ -98,11 +97,17 @@ public class PlayerMovement : MonoBehaviour
 
             //Debug.DrawLine(bc.bounds.center, new Vector3(bc.bounds.center.x, (bc.bounds.center.y - (bc.bounds.extents.y + overcast)), bc.bounds.center.z));
 
-            if (Input.GetButtonDown("A" + playerNumber))
+			if (Input.GetButtonDown("A" + playerNumber) && isGrounded)
             {
                 rb.AddForce(new Vector2(0, jumpSpeed));
             }
-        }
+		}
+
+		CheckForWallCollisions ();
+		if (isSideColliding && !isGrounded)
+		{
+			rb.velocity = new Vector2(0.0f, rb.velocity.y);
+		}
 	}
 
     private void checkIsGrounded()
@@ -145,9 +150,10 @@ public class PlayerMovement : MonoBehaviour
 		float xWidth = bc.bounds.extents.x + overcast;
 
 		List<RaycastHit2D> raycastHits = new List<RaycastHit2D> ();
-		LayerMask l = LayerMask.GetMask (ignoredLayers);
+		LayerMask l = ~LayerMask.GetMask (ignoredLayers);
 		raycastHits.Add(Physics2D.Raycast(center ,  Vector3.right, xWidth,l));
 		raycastHits.Add(Physics2D.Raycast(center ,  -Vector3.right, xWidth,l));
+
 		Debug.DrawRay (center, Vector3.right);
 		Debug.DrawRay (center, -Vector3.right);
 
@@ -165,10 +171,12 @@ public class PlayerMovement : MonoBehaviour
 			Debug.DrawRay (newDownCenter, -Vector3.right);
 		}
 
-		foreach (RaycastHit2D hit in raycastHits) {
-			if(hit.collider.tag == "Wall"){
-				rb.velocity = new Vector2 (0, rb.velocity.y);
-				Debug.Log ("HIIIII");
+		isSideColliding = false;
+		foreach (RaycastHit2D hit in raycastHits)
+		{
+			if (hit.collider != null)
+			{
+				isSideColliding = true;
 			}
 
 		}
