@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
 	private HeadBob bobSpeed;
     private float raycastInset = 0.95f;
 	private float overcast = 0.05f;
+    private bool isGrounded = false;
+    private bool isSideColliding = false;
 	private float moveSpeed = 4.0f;
 	private float jumpSpeed = 750.0f;
     private bool lockPosition = false;
@@ -94,6 +96,15 @@ public class PlayerMovement : MonoBehaviour
         }
 	}
 
+    private void checkIsGrounded()
+    {
+
+    }
+
+    private void checkIsSideColliding()
+    {
+
+    }
 
 	private void CheckForWallCollisions(){
 		float yHeight = bc.bounds.extents.y * raycastInset;
