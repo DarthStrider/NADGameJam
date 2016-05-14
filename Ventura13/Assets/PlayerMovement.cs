@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
 	private RotateArm arm;
 	private HeadBob bobSpeed;
     private float raycastInset = 0.95f;
-	private float overcast = 0.05f;
+	private float overcast = 0.02f;
     private bool isGrounded = false;
     private bool isSideColliding = false;
 	private float moveSpeed = 4.0f;
@@ -59,6 +59,8 @@ public class PlayerMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+
+		CheckForWallCollisions ();
 		if (Input.GetAxis ("LeftAnalogHorizontal" + playerNumber) > 0)
 		{
 			arm.RotateTheArmLeft ();
@@ -107,19 +109,22 @@ public class PlayerMovement : MonoBehaviour
     }
 
 	private void CheckForWallCollisions(){
+		Vector3 center = bc.bounds.center;
 		float yHeight = bc.bounds.extents.y * raycastInset;
 		yHeight /= 3;
 
 		float xWidth = bc.bounds.extents.x + overcast;
 
-		for (int i = 0; i < 7; i++) {
-			Debug.DrawLine (new Vector3(transform.position.x, transform.position.y + yHeight, 0) , Vector3.right * xWidth);
-			yHeight*=3;
-		}
-
-		for (int i = 0; i < 7; i++) {
-			Debug.DrawLine (new Vector3(transform.position.x, transform.position.y + yHeight, 0) , Vector3.left * xWidth);
-			yHeight *= 3;
+		Debug.DrawLine (center , center + (Vector3.right * xWidth), Color.blue);
+		Debug.DrawLine (center , center + (-Vector3.right * xWidth), Color.blue);
+		for (int i = 1; i <= 3; i++)
+		{
+			Vector3 newUpCenter = new Vector3 (center.x, center.y + (i * yHeight), center.z);
+			Debug.DrawLine (newUpCenter , newUpCenter + (Vector3.right * xWidth), Color.blue);
+			Debug.DrawLine (newUpCenter , newUpCenter + (-Vector3.right * xWidth), Color.blue);
+			Vector3 newDownCenter = new Vector3 (center.x, center.y + (-i * yHeight), center.z);
+			Debug.DrawLine (newDownCenter , newDownCenter + (Vector3.right * xWidth), Color.blue);
+			Debug.DrawLine (newDownCenter , newDownCenter + (-Vector3.right * xWidth), Color.blue);
 		}
 
 
