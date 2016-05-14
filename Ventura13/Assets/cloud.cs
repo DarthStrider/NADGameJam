@@ -2,9 +2,9 @@
 using System.Collections;
 
 public class cloud : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
+    public Vector2 speedOffest;
+    // Use this for initialization
+    void Start () {
 	
 	}
 	
@@ -13,12 +13,5 @@ public class cloud : MonoBehaviour {
 	
 	}
 
-    void OnCollisionEnter2D (Collision2D col)
-    {
-        Debug.Log("Hit");
-        if (col.gameObject.tag == "Cloud")
-        {
-            Destroy(this);
-        }
-    }
+ 
 }

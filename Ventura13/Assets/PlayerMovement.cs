@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour {
 	private float overcast = 0.1f;
 	private float moveSpeed = 4.0f;
 	private float jumpSpeed = 750.0f;
+    private bool lockPosition = false;
 
 
 	void Start () {
@@ -35,9 +36,8 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-	
-		rb.velocity = new Vector2 (Input.GetAxis ("LeftAnalogHorizontal" + playerNumber) * moveSpeed, rb.velocity.y);
 
+<<<<<<< HEAD
 		if (Input.GetAxis ("LeftAnalogHorizontal" + playerNumber) > 0)
 		{
 			arm.RotateTheArmLeft ();
@@ -58,12 +58,40 @@ public class PlayerMovement : MonoBehaviour {
 		foreach (string joy in joys) {
 			Debug.Log (joy);
 		}
+=======
+        if (lockPosition != true)
+        {
+            rb.velocity = new Vector2(Input.GetAxis("LeftAnalogHorizontal" + playerNumber) * moveSpeed, rb.velocity.y);
+>>>>>>> 3c9fab1c538455f3ffac83a529d27f8c32dee973
 
-		Debug.Log (bc.bounds.extents.y);
-		Debug.DrawLine (bc.bounds.center, new Vector3 (bc.bounds.center.x, (bc.bounds.center.y - (bc.bounds.extents.y + overcast)), bc.bounds.center.z));
+            string[] joys = Input.GetJoystickNames();
+            foreach (string joy in joys)
+            {
+                //Debug.Log(joy);
+            }
 
-		if (Input.GetButtonDown ("A" + playerNumber)) {
-			rb.AddForce (new Vector2(0, jumpSpeed));
-		}
+
+            //Debug.DrawLine(bc.bounds.center, new Vector3(bc.bounds.center.x, (bc.bounds.center.y - (bc.bounds.extents.y + overcast)), bc.bounds.center.z));
+
+            if (Input.GetButtonDown("A" + playerNumber))
+            {
+                rb.AddForce(new Vector2(0, jumpSpeed));
+            }
+        }
 	}
+
+
+    public int getPlayerNumber()
+    {
+        return playerNumber;
+    }
+    public bool getLock()
+    {
+        return lockPosition;
+    }
+    public void setLockPosition(bool lp)
+    {
+        lockPosition = lp;
+    }
+
 }
