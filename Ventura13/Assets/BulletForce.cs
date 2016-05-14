@@ -7,11 +7,12 @@ public class BulletForce : MonoBehaviour {
 	private float impulseSpeed = 50.0f;
 	private Vector3 bulletWorldPoint;
 	private Renderer render;
+    public Transform parentShooter;
 
 	void Start () {
 		rb = GetComponent<Rigidbody2D> ();
-		transform.Rotate (0, 0, 90);
-		rb.AddForce (Vector2.up * impulseSpeed, ForceMode2D.Impulse);
+        transform.rotation = parentShooter.transform.rotation;
+		rb.AddForce ( parentShooter.right * impulseSpeed, ForceMode2D.Impulse);
 		render = GetComponent<Renderer> ();
 	}
 
