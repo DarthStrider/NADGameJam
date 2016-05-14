@@ -37,7 +37,7 @@ public class GunBehaviour : MonoBehaviour
         if (joyX != 0 || joyY != 0)
         {
             //Debug.Log("-----------------------------------------");
-            float angle = Mathf.Atan2(joyX, joyY) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(input.x, input.x) * Mathf.Rad2Deg;
             //Debug.Log(angle);
             if (leftWorldAngle == -135.0f && rightWorldAngle == 45.0f)  // left gun
             {
