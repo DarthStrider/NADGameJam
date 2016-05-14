@@ -43,21 +43,7 @@ public class PlayerMovement : MonoBehaviour
         }
 	}
 
-	void OnCollisionEnter2D(Collision2D other)
-	{
-		if (other.transform.tag == "MovingPlatform")
-        {
-            transform.parent = other.transform;
-        }
-	}
 
-	void OnCollisionExit2D(Collision2D other)
-	{
-		if (other.transform.tag == "MovingPlatform")
-        {
-            transform.parent = null;  //IF PLAYER WILL HAVE A PARENT (PROBABLY THE SHIP) THIS NEEDS TO BE CHANGED
-        }
-	}
 
 	// Update is called once per frame
 	void Update ()

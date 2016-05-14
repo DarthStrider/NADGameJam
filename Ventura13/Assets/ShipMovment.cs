@@ -27,12 +27,14 @@ public class ShipMovment : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 			
-		if (Input.GetAxis ("LT2") > 0) {
-			rb.AddForce(-Vector2.right  * Input.GetAxis ("LT2") * horizontalMoveSpeed);
+		if (Input.GetAxis ("LT1") > 0) {
+			Debug.Log ("left trigger");
+			rb.AddForce(-Vector2.right  * Input.GetAxis ("LT1") * horizontalMoveSpeed);
 		} 
 
-		 if(Input.GetAxis ("RT2") > 0) {
-			rb.AddForce(Vector2.right * Input.GetAxis ("RT2") * horizontalMoveSpeed);
+		 if(Input.GetAxis ("RT1") > 0) {
+			Debug.Log ("right trigger");
+			rb.AddForce(Vector2.right * Input.GetAxis ("RT1") * horizontalMoveSpeed);
 		} 
 
 		if (rb.velocity.magnitude > maxSpeed) {
