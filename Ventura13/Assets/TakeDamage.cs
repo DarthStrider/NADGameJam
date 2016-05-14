@@ -10,7 +10,7 @@ public class TakeDamage : MonoBehaviour {
 	}
 
 
-	void OnCollisionEnter2D(Collision2D other)
+	void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.transform.tag == "Bullet") {
 			health -= 5;
