@@ -19,7 +19,7 @@ public class StartBeam : MonoBehaviour {
         if(counter>2 && sideCounter < 10)
         {
             counter = 0;
-            transform.localScale += new Vector3(0.1f, 0.5f, 0);
+            transform.localScale += new Vector3(0.15f, 0.5f, 0);
             sideCounter++;
         }
 
@@ -27,10 +27,10 @@ public class StartBeam : MonoBehaviour {
 	}
     void OnTriggerEnter2D(Collider2D collider)
     {
-        
-        if (collider.gameObject.tag == "Parts")
+       
+        if (collider.gameObject.tag == "Scrap")
         {
-            Debug.Log("InHERE1");
+            
             pullIn = true;
             objPulled = collider.gameObject;
 

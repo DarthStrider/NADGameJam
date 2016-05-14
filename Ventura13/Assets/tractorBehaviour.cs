@@ -17,15 +17,18 @@ public class tractorBehaviour : MonoBehaviour {
         {
             newBeam = Instantiate(beam, transform.position, Quaternion.identity) as GameObject;
             unlock = true;
+
         }
-	    if(unlock == true)
+        if (unlock == true)
         {
+
             if (newBeam.GetComponent<StartBeam>().pullIn == true)
             {
-                Debug.Log("OKAY");
+
                 Vector3 beamPos = newBeam.GetComponent<StartBeam>().pulling().transform.position;
-                beamPos = Vector2.MoveTowards(new Vector2(beamPos.x, beamPos.y), transform.position, 100 * Time.deltaTime);
+                newBeam.GetComponent<StartBeam>().pulling().transform.position = Vector2.MoveTowards(new Vector2(beamPos.x, beamPos.y), transform.position, 2 * Time.deltaTime);
             }
         }
-	}
+
+    }
 }
