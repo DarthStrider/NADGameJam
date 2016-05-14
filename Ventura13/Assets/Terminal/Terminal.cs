@@ -8,7 +8,7 @@ public class Terminal : MonoBehaviour {
     private GameObject tempPlayer;
 
     private bool lockTerminal = false;
-  
+    public bool buttonPressed = false;
 	// Use this for initialization
 	void Start () {
 	
@@ -23,21 +23,20 @@ public class Terminal : MonoBehaviour {
             {
 
                 tempPlayer.GetComponent<PlayerMovement>().setLockPosition(true);
-
+                
 
             }
             if (Input.GetButton("B" + tempPlayer.GetComponent<PlayerMovement>().getPlayerNumber()))
             {
 
                 tempPlayer.GetComponent<PlayerMovement>().setLockPosition(false);
+                
             }
         }
+        
 	}
 
-    void checkButton()
-    {
 
-    }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
@@ -51,5 +50,18 @@ public class Terminal : MonoBehaviour {
     void OnTriggerExit2D(Collider2D collider)
     {
         lockTerminal = false;
+    }
+
+    public bool GetLock()
+    {
+        return lockTerminal;
+    }
+    public void SetLock(bool sl)
+    {
+        lockTerminal = sl;
+    }
+    public GameObject GetTempPlayer()
+    {
+        return tempPlayer;
     }
 }

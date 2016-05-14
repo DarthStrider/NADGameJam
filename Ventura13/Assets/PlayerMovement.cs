@@ -56,7 +56,10 @@ public class PlayerMovement : MonoBehaviour {
     {
         return playerNumber;
     }
-
+    public bool getLock()
+    {
+        return lockPosition;
+    }
     public void setLockPosition(bool lp)
     {
         lockPosition = lp;
