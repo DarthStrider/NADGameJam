@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
 	public GameObject theArm;
 	public GameObject theHead;
 
+    public string[] ignoredLayers;
 
 	private Rigidbody2D rb;
 	private BoxCollider2D bc;
@@ -62,8 +63,12 @@ public class PlayerMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-
-		CheckForWallCollisions ();
+        checkIsGrounded();
+        if (isGrounded == false)
+        {
+            Debug.Log(isGrounded);
+        }
+        CheckForWallCollisions ();
 		if (Input.GetAxis ("LeftAnalogHorizontal" + playerNumber) > 0)
 		{
 			arm.RotateTheArmLeft ();
@@ -103,10 +108,29 @@ public class PlayerMovement : MonoBehaviour
 
     private void checkIsGrounded()
     {
-        Vector3 center = bc.bounds.center;
-        float castDistance = bc.bounds.extents.y + overcast;
+        Vector3 center     = bc.bounds.center;
         float rayOffset = bc.bounds.extents.x * raycastInset;
+        float castDistance = bc.bounds.extents.y + overcast;
 
+        Ray2D leftRay   = new Ray2D(center + (transform.right * rayOffset), -transform.up);
+        Ray2D centerRay = new Ray2D(center, -transform.up);
+        Ray2D rightRay  = new Ray2D(center + (-transform.right * rayOffset), -transform.up);
+
+        int ignoredLayersMask = ~LayerMask.GetMask(ignoredLayers);
+
+        RaycastHit2D[] hits = new RaycastHit2D[3];
+        hits[0] = Physics2D.Raycast(center + (transform.right * rayOffset), -transform.up, castDistance, ignoredLayersMask);
+        hits[1] = Physics2D.Raycast(center, -transform.up, castDistance, ignoredLayersMask);
+        hits[2] = Physics2D.Raycast(center + (-transform.right * rayOffset), -transform.up, castDistance, ignoredLayersMask);
+
+        isGrounded = false;
+        foreach (RaycastHit2D currentHit in hits)
+        {
+            if (currentHit.collider != null)
+            {
+                isGrounded = true;
+            }
+        }
     }
 
     private void checkIsSideColliding()
