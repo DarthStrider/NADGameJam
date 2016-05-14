@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -21,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
 	private float moveSpeed = 4.0f;
 	private float jumpSpeed = 750.0f;
     private bool lockPosition = false;
+	public string[] layerMask;
 
     private int hackedPlayerNumber; // adjusted because unity sometimes detects a non-existent controller as joystick 1
 
@@ -112,24 +115,40 @@ public class PlayerMovement : MonoBehaviour
     }
 
 	private void CheckForWallCollisions(){
+
 		Vector3 center = bc.bounds.center;
 		float yHeight = bc.bounds.extents.y * raycastInset;
 		yHeight /= 3;
-
 		float xWidth = bc.bounds.extents.x + overcast;
 
-		Debug.DrawLine (center , center + (Vector3.right * xWidth), Color.blue);
-		Debug.DrawLine (center , center + (-Vector3.right * xWidth), Color.blue);
+		List<RaycastHit2D> raycastHits = new List<RaycastHit2D> ();
+		LayerMask l = ~LayerMask.GetMask (layerMask);
+		raycastHits.Add(Physics2D.Raycast(center ,  Vector3.right, xWidth,l));
+		raycastHits.Add(Physics2D.Raycast(center ,  -Vector3.right, xWidth,l));
+		Debug.DrawRay (center, Vector3.right);
+		Debug.DrawRay (center, -Vector3.right);
+
 		for (int i = 1; i <= 3; i++)
 		{
 			Vector3 newUpCenter = new Vector3 (center.x, center.y + (i * yHeight), center.z);
-			Debug.DrawLine (newUpCenter , newUpCenter + (Vector3.right * xWidth), Color.blue);
-			Debug.DrawLine (newUpCenter , newUpCenter + (-Vector3.right * xWidth), Color.blue);
+			Debug.DrawRay (newUpCenter, Vector3.right);
+			Debug.DrawRay (newUpCenter, -Vector3.right);
+			raycastHits.Add(Physics2D.Raycast (newUpCenter , Vector3.right, xWidth,l));
+			raycastHits.Add(Physics2D.Raycast (newUpCenter , -Vector3.right,  xWidth,l));
 			Vector3 newDownCenter = new Vector3 (center.x, center.y + (-i * yHeight), center.z);
-			Debug.DrawLine (newDownCenter , newDownCenter + (Vector3.right * xWidth), Color.blue);
-			Debug.DrawLine (newDownCenter , newDownCenter + (-Vector3.right * xWidth), Color.blue);
+			raycastHits.Add(Physics2D.Raycast (newDownCenter ,  Vector3.right, xWidth,l));
+			raycastHits.Add( Physics2D.Raycast (newDownCenter ,  -Vector3.right, xWidth,l));
+			Debug.DrawRay (newDownCenter, Vector3.right);
+			Debug.DrawRay (newDownCenter, -Vector3.right);
 		}
 
+		foreach (RaycastHit2D hit in raycastHits) {
+			if(hit.collider.tag == "Wall"){
+				rb.velocity = new Vector2 (0, rb.velocity.y);
+				Debug.Log ("HIIIII");
+			}
+
+		}
 
 	}
 
