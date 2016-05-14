@@ -1,10 +1,13 @@
 fileFormatVersion: 2
 guid: 3dfa1903fbd86434ab1367f7c1df890e
-timeCreated: 1463212100
+timeCreated: 1463238902
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - terminalObject: {instanceID: 0}
+  - xButton: {fileID: 184912, guid: 34c92e8fefa2f7b42842699a13f3f2e7, type: 2}
+  - bButton: {fileID: 148766, guid: 8931c1cfeff68394db7292ee9fa3e57e, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
