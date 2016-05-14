@@ -4,6 +4,7 @@ using System.Collections;
 public class TakeDamage : MonoBehaviour {
 
 	private float health = 50;
+    public GameObject explotionAnimation;
 
 	void Start () {
 	
@@ -22,7 +23,8 @@ public class TakeDamage : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (health <= 0) {
-			Destroy (this.gameObject);
-		}
-	}
+            Instantiate(explotionAnimation, this.transform.position, this.transform.rotation);
+            Destroy(this.gameObject);
+        }
+    }
 }
