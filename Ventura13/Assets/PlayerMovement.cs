@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
 	private Animator anim;
 	private RotateArm arm;
 	private HeadBob bobSpeed;
-    private float raycastInset = 0.95f;
+    private float raycastInset = 0.975f;
 	private float overcast = 0.02f;
     private bool isGrounded = false;
     private bool isSideColliding = false;
