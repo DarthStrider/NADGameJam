@@ -10,7 +10,7 @@ public class shoot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetAxis ("RT2") > 0 && cooldownTimer <= 0)
+		if (Input.GetAxis ("RT1") > 0 && cooldownTimer <= 0)
 		{
 			Instantiate (bullet, bulletSpawn.position, Quaternion.identity);
 			cooldownTimer = cooldownTime;
