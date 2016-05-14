@@ -15,7 +15,7 @@ public class environmentGenerator : MonoBehaviour {
      
 	// Use this for initialization
 	void Start () {
-        env = Environment.Earth;
+        env = Environment.Space;
         Random.seed = System.DateTime.Now.Millisecond; // resetting the random seed
     }
 
@@ -32,7 +32,12 @@ public class environmentGenerator : MonoBehaviour {
         }
         if (env == Environment.Space)
         {
-            starGenerator();
+            time += Time.deltaTime;
+            if (time >= starDelay)
+            {
+                starGenerator();
+                time = 0;
+            }
         }
         if (env == Environment.Mars)
         {
@@ -43,7 +48,7 @@ public class environmentGenerator : MonoBehaviour {
     private void cloudGenerator()
     {
         List<Vector2> locations = new List<Vector2>();
-            int amount = Random.Range((int)cloudAmount.x, (int)cloudAmount.y + 1);
+            int amount = Random.Range((int)cloudAmount.x, (int)cloudAmount.y);
             for (int i = 0; i <= amount; i++)
             {
                 float width = Random.Range(0, Screen.width);
@@ -82,7 +87,42 @@ public class environmentGenerator : MonoBehaviour {
     
     private void starGenerator()
     {
+        List<Vector2> locations = new List<Vector2>();
+        int amount = Random.Range((int)starAmount.x, (int)starAmount.y);
+        for (int i = 0; i <= amount; i++)
+        {
+            float width = Random.Range(0, Screen.width);
+            Vector2 spot = new Vector2(width, Screen.height);
+            Vector2 local = main.ScreenToWorldPoint(spot);
+            local = starPlacement(locations, local);
+            locations.Add(local);
+            Instantiate(star, local, Quaternion.identity);
 
+        }
+    }
+
+    private Vector2 starPlacement(List<Vector2> spots, Vector2 w)
+    {
+        bool l = false;
+        foreach (Vector2 spot in spots)
+        {
+            if (w.x > spot.x - 1 && w.x < spot.x + 1)
+            {
+                float width = Random.Range(0, Screen.width);
+                Vector2 s = new Vector2(width, Screen.height);
+                Vector2 local = main.ScreenToWorldPoint(s);
+                l = true;
+                cloudPlacement(spots, local);
+            }
+        }
+        if (l == false)
+        {
+            return w;
+        }
+        else
+        {
+            return (new Vector2(-999, -999));
+        }
     }
 
     private void marsCloudGenerator()
