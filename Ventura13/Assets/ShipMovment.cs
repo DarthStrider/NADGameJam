@@ -6,9 +6,12 @@ public class ShipMovment : MonoBehaviour {
 	private Rigidbody2D rb;
 	private Vector3 xMin;
 	private Vector3 xMax;
-	public BoxCollider2D box;
+    private float leftThrusterCooldownTimer = 0;
+    private float rightThrusterCooldownTimer = 0;
+    public BoxCollider2D box;
 	public float horizontalMoveSpeed = 7.0f;
 	public float maxSpeed = 5.0f;
+    public float thrusterCooldown;
 
     GameObject[] rightThrusters;
     GameObject[] leftThrusters;
@@ -18,6 +21,8 @@ public class ShipMovment : MonoBehaviour {
 		rb = GetComponent<Rigidbody2D> ();
 		xMin = Camera.main.ScreenToWorldPoint (new Vector2(0,0));
 		xMax = Camera.main.ScreenToWorldPoint (new Vector2(Screen.width, 0));
+        rightThrusters = GameObject.FindGameObjectsWithTag("RightThruster");
+        leftThrusters = GameObject.FindGameObjectsWithTag("LeftThruster");
 
 	}
 
@@ -31,15 +36,45 @@ public class ShipMovment : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 			
-		if (Input.GetAxis ("LT1") > 0) {
-			Debug.Log ("left trigger");
-			rb.AddForce(-Vector2.right  * Input.GetAxis ("LT1") * horizontalMoveSpeed);
-		} 
+		if (Input.GetAxis ("LT2") > 0) {
+			//Debug.Log ("left trigger");
+			rb.AddForce(-Vector2.right  * Input.GetAxis ("LT2") * horizontalMoveSpeed);
 
-		 if(Input.GetAxis ("RT1") > 0) {
-			Debug.Log ("right trigger");
-			rb.AddForce(Vector2.right * Input.GetAxis ("RT1") * horizontalMoveSpeed);
-		} 
+
+            if (rightThrusterCooldownTimer <= 0)
+            {
+                Debug.Log("firing thrusters");
+                foreach (GameObject thruster in rightThrusters)
+                {
+                    Instantiate(puff, thruster.transform.position + thruster.transform.right * 0.8f, Quaternion.Euler(0, 0, thruster.transform.eulerAngles.z - 90f));
+                }
+                rightThrusterCooldownTimer = thrusterCooldown;
+            }
+            else if (rightThrusterCooldownTimer > 0)
+            {
+                rightThrusterCooldownTimer -= Time.deltaTime;
+            }
+
+        } 
+
+		 if(Input.GetAxis ("RT2") > 0) {
+			rb.AddForce(Vector2.right * Input.GetAxis ("RT2") * horizontalMoveSpeed);
+
+            if (leftThrusterCooldownTimer <= 0)
+            {
+                Debug.Log("firing thrusters");
+                foreach (GameObject thruster in leftThrusters)
+                {
+                    Instantiate(puff, thruster.transform.position + thruster.transform.right*0.8f, Quaternion.Euler(0,0,thruster.transform.eulerAngles.z-90f));
+                }
+                leftThrusterCooldownTimer = thrusterCooldown;
+            }
+            else if (leftThrusterCooldownTimer > 0)
+            {
+                leftThrusterCooldownTimer -= Time.deltaTime;
+            }
+
+        } 
 
 		if (rb.velocity.magnitude > maxSpeed) {
 			rb.velocity = rb.velocity.normalized * maxSpeed;
