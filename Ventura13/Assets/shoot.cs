@@ -13,6 +13,7 @@ public class shoot : MonoBehaviour {
 		if (Input.GetAxis ("RT1") > 0 && cooldownTimer <= 0)
 		{
 			Instantiate (bullet, bulletSpawn.position, Quaternion.identity);
+            bullet.GetComponent<BulletForce>().parentShooter = bulletSpawn;
 			cooldownTimer = cooldownTime;
 		}
 		else

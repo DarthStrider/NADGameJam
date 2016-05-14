@@ -7,6 +7,9 @@ public class Portal : MonoBehaviour
     public float cooldownTime;
     public float cooldownTimer;
 
+    public GameObject xButton;
+    private GameObject tempXButton;
+
     private GameObject tempPlayer;
     // Use this for initialization
     void Start ()
@@ -35,6 +38,7 @@ public class Portal : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player" && tempPlayer == null)
         {
+            tempXButton = Instantiate(xButton, new Vector3(transform.position.x, (transform.position.y + 1f), transform.position.z), Quaternion.identity) as GameObject;
             tempPlayer = collider.gameObject;
         }
     }
@@ -43,6 +47,7 @@ public class Portal : MonoBehaviour
     {
         if (collider.gameObject == tempPlayer)
         {
+            Destroy(tempXButton);
             tempPlayer = null;
         }
     }
