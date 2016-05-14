@@ -4,7 +4,7 @@ using System.Collections;
 public class ShipMovment : MonoBehaviour {
 
 	Rigidbody2D rb;
-	private float verticalMoveSpeed = 5.0f;
+	private float verticalMoveSpeed = 3.0f;
 	private float horizontalMoveSpeed = 10.0f;
 
 	void Start () {
