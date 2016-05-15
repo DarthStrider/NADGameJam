@@ -8,39 +8,32 @@ public class GunBehaviour : MonoBehaviour
     public float rightWorldAngle;
     public GameObject gunPodSprite;
 
+    public Transform bulletSpawn;
+    public GameObject bullet;
+    public float cooldownTime = .2f;
+    private float cooldownTimer = 0.0f;
+    public float startAngle;
 
     // Use this for initialization
     void Start()
     {
-        
- /*
-        if (leftWorldAngle == -135.0f && rightWorldAngle == 45.0f)  // left gun
-        {
-            gunPodSprite.transform.localRotation = Quaternion.Euler(new Vector3(gunPodSprite.transform.rotation.eulerAngles.x, gunPodSprite.transform.rotation.eulerAngles.y, 180.0f));
-        }
-        else if (leftWorldAngle == -45.0f && rightWorldAngle == 135.0f) // right gun
-        {
-            gunPodSprite.transform.localRotation = Quaternion.Euler(new Vector3(gunPodSprite.transform.rotation.eulerAngles.x, gunPodSprite.transform.rotation.eulerAngles.y, 180.0f));
-        }
- */
+        transform.localRotation = Quaternion.Euler(new Vector3(0, 0, startAngle));
     }
 
     // Update is called once per frame
     void Update()
     {
-        //GunMovement(Vector2.zero);
+        
     }
-    public void GunMovement(Vector2 input)
+    public void gunMovement(Vector2 input)
     {
         //Debug.Log(Input.GetJoystickNames().Length);
         float joyX = Input.GetAxis("RightAnalogHorizontal1");
         float joyY = Input.GetAxis("RightAnalogVertical1");
 
-        if (joyX != 0 || joyY != 0)
+        if (input.x != 0 || input.y != 0)
         {
-            //Debug.Log("-----------------------------------------");
-            float angle = Mathf.Atan2(joyX, joyY) * Mathf.Rad2Deg;
-            //Debug.Log(angle);
+            float angle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg;
             if (leftWorldAngle == -135.0f && rightWorldAngle == 45.0f)  // left gun
             {
                 if (angle < 45 && angle > -135)
@@ -71,10 +64,23 @@ public class GunBehaviour : MonoBehaviour
                     angle = 90;
                 }
             }
-            //Debug.Log(angle);
             angle = Mathf.Lerp(transform.localRotation.eulerAngles.z, angle, rotationSpeed * Time.deltaTime);
             transform.localRotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
     }
 
+    public void shoot(int playerIndex)
+    {
+        if (cooldownTimer <= 0)
+        {
+            Instantiate(bullet, bulletSpawn.position, bulletSpawn.localRotation);
+            bullet.GetComponent<BulletForce>().parentShooter = bulletSpawn;
+            cooldownTimer = cooldownTime;
+            this.GetComponent<x360_Gamepad>().AddRumble(playerIndex-1, 0.2f, new Vector2(5.0f, 5.0f));
+        }
+        else
+        {
+            cooldownTimer -= Time.deltaTime;
+        }
+    }
 }

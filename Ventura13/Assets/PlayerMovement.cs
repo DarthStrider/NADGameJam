@@ -59,7 +59,6 @@ public class PlayerMovement : MonoBehaviour
         if (terminalObject == null)
         {
             checkIsGrounded();
-            Debug.Log("walking");
             if (Input.GetAxis("LeftAnalogHorizontal" + playerNumber) == 0)
             {
                 rb.velocity += new Vector2(theShip.GetComponent<Rigidbody2D>().velocity.x, 0);
@@ -134,7 +133,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void steering()
     {
-        Debug.Log("steering");
         terminalObject.GetComponent<ShipMovment>().moveShip(triggers, playerNumber);
     }
 
@@ -145,7 +143,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void gun()
     {
-
+        terminalObject.GetComponent<GunBehaviour>().gunMovement(rightAnalogInput);
+        if (triggers.y > 0)
+        {
+            terminalObject.GetComponent<GunBehaviour>().shoot(playerNumber);
+        }
     }
 
     private void beam()
