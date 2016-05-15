@@ -7,7 +7,7 @@ public class BulletForce : MonoBehaviour {
 	private float impulseSpeed = 25;
 	private Vector3 bulletWorldPoint;
 	private Renderer render;
-    public float BulletDamage = 50;
+    public float BulletDamage = 70;
    
     
     public void Initalize(Transform gunTip)

@@ -70,7 +70,7 @@ public class Spawner : MonoBehaviour {
             GameObject newAsteroid = Instantiate(asteroids[(int)randAsteroid], local, Quaternion.identity) as GameObject ;
 
             float randAsteroidSize = Random.Range(1f, 6f);
-            newAsteroid.GetComponent<ObstacleHealth>().Health = 10 * randAsteroidSize;
+            newAsteroid.GetComponent<ObstacleHealth>().Health = 6 * randAsteroidSize;
             newAsteroid.transform.localScale = new Vector3(randAsteroidSize, randAsteroidSize,1);
             
             

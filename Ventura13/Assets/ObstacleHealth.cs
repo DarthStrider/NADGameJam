@@ -16,7 +16,6 @@ public class ObstacleHealth : MonoBehaviour {
         {
             switch (obsType) {
                 case ObstacleType.AST:
-                    Debug.Log(gameObject.tag);
                     this.gameObject.GetComponent<AstroidDestroy>().destAsteroid();
                     Destroy(this.gameObject);
                     break;
