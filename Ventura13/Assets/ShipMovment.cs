@@ -16,6 +16,8 @@ public class ShipMovment : MonoBehaviour {
     GameObject[] rightThrusters;
     GameObject[] leftThrusters;
     public GameObject puff;
+
+    
 	void Start ()
 	{
 		rb = GetComponent<Rigidbody2D> ();
@@ -28,6 +30,23 @@ public class ShipMovment : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        Debug.Log(transform.position);
+
+
+        if(transform.position.x < -18.5f)
+        {
+            rb.velocity = Vector2.zero;
+            transform.position = new Vector3(-18.5f, transform.position.y, transform.position.z);
+        }
+        else if(transform.position.x > 18.5f)
+        {
+            rb.velocity = Vector2.zero;
+            transform.position = new Vector3(18.5f, transform.position.y, transform.position.z);
+        }
+        else
+        {
+
+        }
     
 	}
 
