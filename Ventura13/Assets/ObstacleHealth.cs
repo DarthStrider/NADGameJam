@@ -6,6 +6,7 @@ public class ObstacleHealth : MonoBehaviour {
     public enum ObstacleType { AST, SAT, BLI};
     public ObstacleType obsType;
     public GameObject PuffHit;
+    public GameObject BlimpExp;
     // Use this for initialization
     void Start() {
 
@@ -29,13 +30,14 @@ public class ObstacleHealth : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-
-        if(col.gameObject.tag == "Bullet")
+        Debug.Log("Blimp Interactions");
+        if (col.gameObject.tag == "Bullet")
         {
             switch (obsType)
             {
                 case ObstacleType.AST:
                     Health -= col.gameObject.GetComponent<BulletForce>().BulletDamage;
+                    Destroy(col.gameObject);
                     
                     break;
                 case ObstacleType.SAT:
@@ -45,6 +47,24 @@ public class ObstacleHealth : MonoBehaviour {
                     GameObject ph = Instantiate(PuffHit, col.transform.position, Quaternion.identity) as GameObject;
                     Destroy(ph, .83f);
                     Destroy(col.gameObject);
+                    break;
+
+            }
+
+        }
+        else if(col.gameObject.tag == "Ship")
+        {
+            Debug.Log("Blimp Interactions");
+            switch (obsType)
+            {
+                case ObstacleType.AST:
+                    break;
+                case ObstacleType.SAT:
+                    break;
+                case ObstacleType.BLI:
+                    GameObject bl = Instantiate(BlimpExp, transform.position, Quaternion.identity) as GameObject;
+                    
+                    Destroy(this.gameObject,1f);
                     break;
 
             }

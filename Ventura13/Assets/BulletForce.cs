@@ -44,12 +44,4 @@ public class BulletForce : MonoBehaviour {
 
     }*/
 
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.gameObject.tag == "Obstacle")
-        {
-           
-            Destroy(this.gameObject, .2f);
-        }
-    }
 }
