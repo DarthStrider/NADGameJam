@@ -6,7 +6,7 @@ public class Portal : MonoBehaviour
     public GameObject otherPortal;
     public float cooldownTime;
     public float cooldownTimer;
-
+    public AudioSource portalSound;
     public GameObject xButton;
     private GameObject tempXButton;
 
@@ -23,6 +23,7 @@ public class Portal : MonoBehaviour
         {
             if (Input.GetButton("X" + tempPlayer.GetComponent<PlayerMovement>().getPlayerNumber()))
             {
+                portalSound.Play();
                 tempPlayer.transform.position = otherPortal.transform.position;
                 cooldownTimer = cooldownTime;
                 otherPortal.GetComponent<Portal>().cooldownTimer = cooldownTime;

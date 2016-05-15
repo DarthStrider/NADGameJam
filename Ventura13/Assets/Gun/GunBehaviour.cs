@@ -7,7 +7,8 @@ public class GunBehaviour : MonoBehaviour
     public float leftWorldAngle;
     public float rightWorldAngle;
     public GameObject gunPodSprite;
-
+    public AudioSource gunRotation;
+    public AudioSource gunShooting;
     public Transform bulletSpawn;
     public GameObject bullet;
     public float cooldownTime = .2f;
@@ -33,6 +34,14 @@ public class GunBehaviour : MonoBehaviour
 
         if (input.x != 0 || input.y != 0)
         {
+            if (gunRotation.isPlaying)
+            {
+                
+            }
+            else
+            {
+                gunRotation.Play();
+            }
             float angle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg;
             if (leftWorldAngle == -135.0f && rightWorldAngle == 45.0f)  // left gun
             {
@@ -67,12 +76,18 @@ public class GunBehaviour : MonoBehaviour
             angle = Mathf.Lerp(transform.localRotation.eulerAngles.z, angle, rotationSpeed * Time.deltaTime);
             transform.localRotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
+        else
+        {
+            //stop sound
+            gunRotation.Stop();
+        }
     }
 
     public void shoot(int playerIndex)
     {
         if (cooldownTimer <= 0)
         {
+            gunShooting.Play();
             GameObject laser = Instantiate(bullet, bulletSpawn.position, bulletSpawn.localRotation) as GameObject;
             laser.GetComponent<BulletForce>().Initalize(bulletSpawn);
             cooldownTimer = cooldownTime;
