@@ -13,16 +13,15 @@ public class AstroidDestroy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        health--;
 
         if (health <= 0)
         {
-            Random.seed = System.DateTime.Now.Millisecond;
+            
             Destroy(this.gameObject);
-            health = 1000000;
             for(int i =0; i < 8; i++)
             {
                 Instantiate(debris[i], transform.position, Quaternion.identity);
+                Destroy(debris[i], 2.0f);
             }
         }
 	}
