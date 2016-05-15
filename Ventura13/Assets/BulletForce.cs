@@ -4,10 +4,10 @@ using System.Collections;
 public class BulletForce : MonoBehaviour {
 
 	private Rigidbody2D rb;
-	private float impulseSpeed = 50.0f;
+	private float impulseSpeed = 25;
 	private Vector3 bulletWorldPoint;
 	private Renderer render;
-    public float BulletDamage = 25;
+    public float BulletDamage = 50;
    
     
     public void Initalize(Transform gunTip)
@@ -28,4 +28,28 @@ public class BulletForce : MonoBehaviour {
 			Destroy (this.gameObject);
 		}
 	}
+
+    /*
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        Debug.Log("Tag" + col.gameObject.name);
+        if(col.gameObject.tag == "Obstacle")
+        {
+            col.gameObject.GetComponent<ObstacleHealth>().Health -= BulletDamage;
+        }
+    }
+    void onCollisionEnter2D(Collision2D col)
+    {
+        Debug.Log("Hit by " + col.gameObject.name);
+
+    }*/
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Obstacle")
+        {
+           
+            Destroy(this.gameObject, .2f);
+        }
+    }
 }

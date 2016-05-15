@@ -67,10 +67,10 @@ public class Spawner : MonoBehaviour {
             // local = starPlacement(locations, local);
             locations.Add(local);
             int randAsteroid = Random.Range(0, 4);
-            Debug.Log("Random Number Asteroids" +randAsteroid);
             GameObject newAsteroid = Instantiate(asteroids[(int)randAsteroid], local, Quaternion.identity) as GameObject ;
-            Debug.Log(newAsteroid);
+
             float randAsteroidSize = Random.Range(1f, 6f);
+            newAsteroid.GetComponent<ObstacleHealth>().Health = 10 * randAsteroidSize;
             newAsteroid.transform.localScale = new Vector3(randAsteroidSize, randAsteroidSize,1);
             
             
