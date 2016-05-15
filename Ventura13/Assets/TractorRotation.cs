@@ -1,36 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GunBehaviour : MonoBehaviour
+public class TractorRotation : MonoBehaviour
 {
     public float rotationSpeed;
     public float leftWorldAngle;
     public float rightWorldAngle;
-    public GameObject gunPodSprite;
-
-
     // Use this for initialization
     void Start()
     {
-        
- /*
-        if (leftWorldAngle == -135.0f && rightWorldAngle == 45.0f)  // left gun
-        {
-            gunPodSprite.transform.localRotation = Quaternion.Euler(new Vector3(gunPodSprite.transform.rotation.eulerAngles.x, gunPodSprite.transform.rotation.eulerAngles.y, 180.0f));
-        }
-        else if (leftWorldAngle == -45.0f && rightWorldAngle == 135.0f) // right gun
-        {
-            gunPodSprite.transform.localRotation = Quaternion.Euler(new Vector3(gunPodSprite.transform.rotation.eulerAngles.x, gunPodSprite.transform.rotation.eulerAngles.y, 180.0f));
-        }
- */
+
     }
 
     // Update is called once per frame
     void Update()
-    {
-        //GunMovement(Vector2.zero);
-    }
-    public void GunMovement(Vector2 input)
     {
         //Debug.Log(Input.GetJoystickNames().Length);
         float joyX = Input.GetAxis("RightAnalogHorizontal1");
@@ -76,5 +59,4 @@ public class GunBehaviour : MonoBehaviour
             transform.localRotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
     }
-
 }
