@@ -15,10 +15,13 @@ public class Spawner : MonoBehaviour {
 
 
     public GameObject Skybox;
-    float timer = 0f;
+    public float timerTotal = 3f;
+    public float timer;
     float coolDown = 2f;
     public int StartAsteroidSpawnLocation;
     public float asteroidSpawnTimer;
+
+    public bool unlockAsteroids = false;
 	// Use this for initialization
 	void Start () {
         asteroids = new GameObject[4];
@@ -28,22 +31,22 @@ public class Spawner : MonoBehaviour {
         asteroids[3] = asteroid4;
         asteroidSpawnTimer = 10;
         //asteroids = asteroid1 }
-
+        timer = timerTotal;
     }
 	
 	// Update is called once per frame
 	void Update () {
-
-        if (Skybox.transform.position.y < StartAsteroidSpawnLocation)
+        if (unlockAsteroids == true)
         {
-            if (timer > asteroidSpawnTimer)
+            if (timer <= 0)
             {
                 asteriodGenerator();
-                timer = 0;
+                timerTotal -= Time.deltaTime;
+                timer = timerTotal;
             }
             else
             {
-                timer += Time.deltaTime;
+                timer -= Time.deltaTime;
             }
         }
     }
