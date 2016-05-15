@@ -7,7 +7,7 @@ public class ButtonPressed : MonoBehaviour {
     GameObject tempXButton;
     bool unlockPush = false;
     bool useButton = true;
-
+    public AudioSource slowMo;
     // Use this for initialization
     void Start () {
 	
@@ -21,6 +21,7 @@ public class ButtonPressed : MonoBehaviour {
         {
             if (Input.GetButton("X" + tempPlayer.GetComponent<PlayerMovement>().getPlayerNumber()))
             {
+                slowMo.Play();
                 tempPlayer.GetComponent<PlayerMovement>().theArm.transform.localEulerAngles = new Vector3(0, 0, -60);
                 Destroy(tempXButton);
                 
@@ -37,7 +38,7 @@ public class ButtonPressed : MonoBehaviour {
     IEnumerator popItLikeItsHawt()
     {
 
-       yield return new WaitForSeconds(4.0f);
+       yield return new WaitForSeconds(4.5f);
         transform.position = new Vector2(transform.position.x - .2f, transform.position.y);
         useButton = true;
     }

@@ -21,30 +21,20 @@ public class scrapGenerator : MonoBehaviour {
         time += Time.deltaTime;
         if(time>= timeWait)
         {
-            float height = Random.Range(Screen.height *(4/5), Screen.height);
+            float width = Random.Range(0, Screen.width);
             int rightOrLeft = Random.Range(0, 2);
             Vector2 location;
-            if(rightOrLeft == 0)
-            {
-                 location = main.ScreenToWorldPoint(new Vector2(0 - 1, height));
+          
+                 location = main.ScreenToWorldPoint(new Vector2(width,Screen.height+1 ));
 
-            }
-            else
-            {
-                 location = main.ScreenToWorldPoint(new Vector2(Screen.width + 1, height));
-            }
+           
 
             int scrapSelector = Random.Range(0, scraps.Length);
             GameObject scrap = Instantiate(scraps[scrapSelector], location, Quaternion.Euler(0, 0, Random.Range(0, 360)))as GameObject;
-            if (rightOrLeft == 0)
-            {
-                scrap.GetComponent<scrap>().setDirection(Quaternion.Euler(0, 0, Random.Range(-5, -15)) * Vector2.right);
-            }
-            else
-            {
-                scrap.GetComponent<scrap>().setDirection(Quaternion.Euler(0, 0, Random.Range(5, 15)) * -Vector2.right);
+           
+                scrap.GetComponent<scrap>().setDirection(-Vector2.up);
 
-            }
+            
             time = 0;
             timeWait = Random.Range(timeDifference.x, timeDifference.y);
         }
