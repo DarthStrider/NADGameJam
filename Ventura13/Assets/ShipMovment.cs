@@ -34,10 +34,8 @@ public class ShipMovment : MonoBehaviour {
 
 
 	// Update is called once per frame
-	void Update () {
-
-		Debug.Log(Input.GetAxis("LT1"));
-        Debug.Log(Input.GetAxis("RT1"));
+	void Update ()
+    {
         if (Input.GetAxis ("RT1") > 0) {
 			//Debug.Log ("left trigger");
 			rb.AddForce(-Vector2.right  * Input.GetAxis ("RT1") * horizontalMoveSpeed, ForceMode2D.Impulse);
