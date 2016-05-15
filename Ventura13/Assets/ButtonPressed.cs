@@ -8,6 +8,14 @@ public class ButtonPressed : MonoBehaviour {
     bool unlockPush = false;
     bool useButton = true;
     public AudioSource slowMo;
+
+	public float cooldown;
+	private float cooldownTimer = 0.0f;
+
+	public static bool isSlowing = false;
+	public static float slowAmount = 4.0f;
+
+
     // Use this for initialization
     void Start () {
 	
@@ -15,11 +23,11 @@ public class ButtonPressed : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		Debug.Log (isSlowing);
 
         if (unlockPush == true)
         {
-            if (Input.GetButton("X" + tempPlayer.GetComponent<PlayerMovement>().getPlayerNumber()))
+			if (Input.GetButton ("X" + tempPlayer.GetComponent<PlayerMovement> ().getPlayerNumber ()))
             {
                 slowMo.Play();
                 tempPlayer.GetComponent<PlayerMovement>().theArm.transform.localEulerAngles = new Vector3(0, 0, -60);
@@ -28,8 +36,14 @@ public class ButtonPressed : MonoBehaviour {
                 transform.position = new Vector2(transform.position.x + .2f, transform.position.y);
                 useButton = false;
                 StartCoroutine(popItLikeItsHawt());
+				isSlowing = true;
+
             }
         }
+		else
+		{
+			cooldownTimer -= Time.deltaTime;
+		}
 
  
         
@@ -41,6 +55,10 @@ public class ButtonPressed : MonoBehaviour {
        yield return new WaitForSeconds(4.5f);
         transform.position = new Vector2(transform.position.x - .2f, transform.position.y);
         useButton = true;
+		useButton = true;
+		isSlowing = false;
+		cooldownTimer = cooldown;
+
     }
 
 

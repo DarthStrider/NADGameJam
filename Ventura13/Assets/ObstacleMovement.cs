@@ -4,18 +4,31 @@ using System.Collections;
 public class ObstacleMovement : MonoBehaviour {
     public bool first;
 	private int moveSpeed;
+	private int initialSpeed;
 	private Rigidbody2D rb;
     public bool tractorBeamed;
     ObstacleHealth.ObstacleType obType;
 	void Start () {
         first = false;
 		moveSpeed = Random.Range (3, 7);
+		initialSpeed = moveSpeed;
 		rb = GetComponent<Rigidbody2D> ();
         obType = gameObject.GetComponent<ObstacleHealth>().obsType;
 	}
 
     // Update is called once per frame
     void Update() {
+
+		if (ButtonPressed.isSlowing) {
+			moveSpeed = initialSpeed - (int)ButtonPressed.slowAmount;
+			moveSpeed = Mathf.Clamp (moveSpeed, 1, 7);
+		}
+		else 
+		{
+			moveSpeed = initialSpeed;
+		}
+
+
 
         switch (obType) {
             case ObstacleHealth.ObstacleType.AST:
