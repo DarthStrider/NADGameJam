@@ -149,8 +149,8 @@ public class ShipHealth : MonoBehaviour
                 damaged = true;
             }
             health -= x;
-            Text text = gameObject.GetComponent<Text>();
-            text.text = health/maxHealth + "%";
+            Text txt = text.gameObject.GetComponent<Text>();
+            txt.text = (health / maxHealth) * 100 + "%";
         }
     }
 
@@ -159,14 +159,14 @@ public class ShipHealth : MonoBehaviour
         if (health + x > maxHealth)
         {
             health = maxHealth;
-            Text text = gameObject.GetComponent<Text>();
-            text.text = health / maxHealth + "%";
+            Text txt = text.gameObject.GetComponent<Text>();
+            txt.text = (health / maxHealth)*100 + "%";
         }
         else
         {
             maxHealth += x;
-            Text text = gameObject.GetComponent<Text>();
-            text.text = health / maxHealth + "%";
+            Text txt = text.gameObject.GetComponent<Text>();
+            txt.text = (health / maxHealth) * 100 + "%";
         }
     }
 }
