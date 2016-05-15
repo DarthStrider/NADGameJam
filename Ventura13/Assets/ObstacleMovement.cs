@@ -14,6 +14,10 @@ public class ObstacleMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (transform.position.y <= 0)
+        {
+            Destroy(this.gameObject);
+        }
         if (tractorBeamed == false)
         {
             rb.velocity = (Vector2.down * moveSpeed);

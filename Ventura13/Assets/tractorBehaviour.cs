@@ -21,13 +21,13 @@ public class tractorBehaviour : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update()
+    public void fireTractor(Vector2 triggers)
     {
 
         //Debug.DrawRay(origin.transform.position, transform.up , Color.red, 30);
        // Debug.DrawRay(origin.transform.position, Quaternion.Euler(0, 0, coneAngle) * transform.up, Color.red, 30);
         //Debug.DrawRay(origin.transform.position, Quaternion.Euler(0, 0, -coneAngle) * transform.up, Color.red, 30);
-        if (Input.GetAxis("RT1") <= 0 && pressed == true)
+        if (triggers.y <= 0 && pressed == true)
         {
             pressed = false;
             hitObjects = false;
@@ -48,7 +48,7 @@ public class tractorBehaviour : MonoBehaviour {
 
         }
 
-        if (Input.GetAxis("RT1") > 0 && pressed == false)
+        if (triggers.y > 0 && pressed == false)
         {
             pressed = true;
             cone = Instantiate(conePrefab, transform.position + (transform.up * 6.7f), transform.rotation) as GameObject;

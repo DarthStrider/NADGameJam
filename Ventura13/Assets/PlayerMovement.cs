@@ -149,7 +149,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void beam()
     {
-
+        terminalObject.GetComponent<TractorRotation>().beamMovement(rightAnalogInput);
+        terminalObject.GetComponent<TractorRotation>().tractorFireScript.fireTractor(triggers);
     }
 
     private void checkIsGrounded()

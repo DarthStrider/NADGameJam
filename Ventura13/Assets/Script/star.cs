@@ -8,7 +8,8 @@ public class star : MonoBehaviour {
     public Vector2 scaleOffset;
     public SpriteRenderer render;
     private float duration;
-    private float speed = 2;
+    public float maxSpeed;
+    private float speed;
     private float speedDiff;
     float speedRatio;
     public Rigidbody2D rb;
@@ -45,5 +46,15 @@ public class star : MonoBehaviour {
         {
             Destroy(this.gameObject);
         }
+    }
+
+    public void slowDown()
+    {
+        speed = maxSpeed / 2;
+    }
+
+    public void speedUp()
+    {
+        speed = maxSpeed;
     }
 }
