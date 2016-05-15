@@ -5,6 +5,7 @@ public class SkyBoxScrolling : MonoBehaviour {
     public bool start;
     float speed;
     public float maxSpeed;
+  
 
 	// Use this for initialization
 	void Start () {
@@ -15,16 +16,8 @@ public class SkyBoxScrolling : MonoBehaviour {
 	void Update () {
 	if (start == true)
         {
-            transform.position += -transform.up * speed;
+            
+            transform.Translate(0, -1 * Time.deltaTime, 0);
         }
-	}
-    public void slowDown()
-    {
-        speed = maxSpeed / 2;
-    }
-
-    public void speedUp()
-    {
-        speed = maxSpeed;
-    }
+	}  
 }
