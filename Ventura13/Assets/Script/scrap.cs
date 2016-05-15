@@ -20,8 +20,9 @@ public class scrap : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (transform.position.y <= -5)
+        if (transform.position.y <= -100)
         {
+            Debug.Log("here");
             Destroy(this.gameObject);
         }
         if (tractorBeamed == false)

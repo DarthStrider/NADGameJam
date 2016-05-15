@@ -41,7 +41,7 @@ public class star : MonoBehaviour {
         float alpha = Mathf.Lerp(brightness.x, brightness.y, lerp);
         render.color = new Color(1f, 1f, 1f, alpha);
         rb.AddForce(-Vector2.up * (speed * speedRatio));
-        if (transform.position.y <= 0)
+        if (transform.position.y <= -45)
         {
             Destroy(this.gameObject);
         }

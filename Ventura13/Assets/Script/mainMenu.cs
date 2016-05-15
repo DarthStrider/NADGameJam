@@ -12,8 +12,10 @@ public class mainMenu : MonoBehaviour {
     public Canvas canvas;
     public GameObject credit;
     public GameObject menu;
+    public GameObject tutorial;
     public GameObject startButton;
     public GameObject backButton;
+    public GameObject backTutButton;
     public pauseMenu pause;
     public AudioSource rocketLaunch;
     public AudioSource select;
@@ -55,6 +57,23 @@ public class mainMenu : MonoBehaviour {
         eventSystem.SetSelectedGameObject(backButton);
         menu.gameObject.SetActive(false);
         credit.gameObject.SetActive(true);
+    }
+
+    public void Tutorial()
+    {
+        select.Play();
+        eventSystem.SetSelectedGameObject(backTutButton);
+        menu.gameObject.SetActive(false);
+        tutorial.gameObject.SetActive(true);
+    }
+    public void tutBack()
+    {
+        select.Play();
+        eventSystem.SetSelectedGameObject(startButton);
+        tutorial.gameObject.SetActive(false);
+        menu.gameObject.SetActive(true);
+
+
     }
 
     public void back()
