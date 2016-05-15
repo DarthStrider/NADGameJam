@@ -14,6 +14,7 @@ public class tractorBehaviour : MonoBehaviour {
     public float maxSpeed;
     List<GameObject> objects=new List<GameObject>();
     public TractorRotation tRotation;
+    public x360_Gamepad rumbleScript;
     public string[] ignoreLayerMask;
 	// Use this for initialization
 	void Start () {
@@ -23,7 +24,7 @@ public class tractorBehaviour : MonoBehaviour {
     }
 
     // Update is called once per frame
-    public void fireTractor(Vector2 triggers)
+    public void fireTractor(Vector2 triggers, int playerIndex)
     {
         LayerMask l = ~LayerMask.GetMask(ignoreLayerMask);
 
@@ -54,7 +55,7 @@ public class tractorBehaviour : MonoBehaviour {
         if (triggers.y > 0 && pressed == false)
         {
             pressed = true;
-            cone = Instantiate(conePrefab, transform.position + (transform.up * 6.7f), transform.rotation) as GameObject;
+            cone = Instantiate(conePrefab, transform.position + (transform.up * 6f), transform.rotation) as GameObject;
             cone.transform.parent = origin.transform;
             RaycastHit2D hit = Physics2D.Raycast(origin.transform.position, transform.up, tractorDistance);
             if(hit.collider != null)
@@ -98,6 +99,7 @@ public class tractorBehaviour : MonoBehaviour {
 
         if (pressed == true)
         {
+            rumbleScript.AddRumble(playerIndex - 1, 0.02f, new Vector2(0.1f, 0.1f));
             List<GameObject> temp = new List<GameObject>();
             RaycastHit2D hit = Physics2D.Raycast(origin.transform.position, transform.up, tractorDistance);
             if (hit.collider != null)
@@ -150,6 +152,8 @@ public class tractorBehaviour : MonoBehaviour {
             }
             objects.Clear();
             objects = temp;
+            Debug.Log(objects.Count);
+
             if (objects.Count > 0)
             {
                 hitObjects = true;

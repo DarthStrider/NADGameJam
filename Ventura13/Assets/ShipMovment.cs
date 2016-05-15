@@ -82,12 +82,12 @@ public class ShipMovment : MonoBehaviour {
         x = Mathf.Clamp(transform.position.x, xMin.x + extent.x, xMax.x - extent.x);
         transform.position = new Vector2(x, transform.position.y);
 
-        if (transform.position.x <= xMin.x + extent.x && rb.velocity.x < 0.0f)
+        if (transform.position.x <= xMin.x + extent.x)
         {
             rb.velocity = new Vector2(0, 0);
         }
 
-        if (transform.position.x >= xMax.x - extent.x && rb.velocity.x > 0.0f)
+        if (transform.position.x >= xMax.x - extent.x)
         {
             rb.velocity = new Vector2(0, 0);
         }
