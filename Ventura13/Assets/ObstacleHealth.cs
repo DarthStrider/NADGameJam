@@ -23,8 +23,14 @@ public class ObstacleHealth : MonoBehaviour {
                     break;
                 case ObstacleType.SAT:
                     break;
-            
-             }
+
+                case ObstacleType.BLI:
+                    GameObject bl = Instantiate(BlimpExp, transform.position, Quaternion.identity) as GameObject;
+
+                    Destroy(this.gameObject, 1f);
+                    break;
+
+            }
         }
     }
 
@@ -44,6 +50,7 @@ public class ObstacleHealth : MonoBehaviour {
 
                     break;
                 case ObstacleType.BLI:
+                    Health -= col.gameObject.GetComponent<BulletForce>().BulletDamage;
                     GameObject ph = Instantiate(PuffHit, col.transform.position, Quaternion.identity) as GameObject;
                     Destroy(ph, .83f);
                     Destroy(col.gameObject);
