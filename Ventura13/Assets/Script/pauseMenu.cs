@@ -51,7 +51,20 @@ public class pauseMenu : MonoBehaviour {
             }
 
         }
+
+        if (Input.GetButtonDown("Start1"))
+        {
+            Debug.Log("player1");
+        }
+        if (Input.GetButtonDown("Start2")) { 
+
+            Debug.Log("player2");
     }
+        if (Input.GetButtonDown("Start3"))
+        {
+        Debug.Log("player3");
+        }
+        }
 
     public void continueButton()
     {

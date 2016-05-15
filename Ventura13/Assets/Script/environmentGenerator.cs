@@ -13,7 +13,7 @@ public class environmentGenerator : MonoBehaviour {
      
 	// Use this for initialization
 	void Start () {
-        env = Environment.Earth;
+        env = Environment.Space;
         Random.seed = System.DateTime.Now.Millisecond; // resetting the random seed
     }
 
