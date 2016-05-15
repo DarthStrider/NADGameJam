@@ -36,7 +36,7 @@ public class Spawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (unlockAsteroids == false)
+        if (unlockAsteroids == true)
         {
             if (timer <= 0)
             {
