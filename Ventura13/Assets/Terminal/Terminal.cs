@@ -11,14 +11,14 @@ public class Terminal : MonoBehaviour {
     int bCount = 0;
     private GameObject tempXButton;
     private GameObject tempBButton;
-
+    public AudioSource enter;
     private GameObject tempPlayer;
-
+    private bool occupied;
     private bool lockTerminal = false;
     public bool buttonPressed = false;
 	// Use this for initialization
 	void Start () {
-	
+        occupied = false;
 	}
 	
 	// Update is called once per frame
@@ -26,13 +26,14 @@ public class Terminal : MonoBehaviour {
 	
         if(lockTerminal == true)
         {
-            if (Input.GetButton("X" + tempPlayer.GetComponent<PlayerMovement>().getPlayerNumber()))
+            if (Input.GetButton("X" + tempPlayer.GetComponent<PlayerMovement>().getPlayerNumber()) && occupied == false)
             {
-
+                enter.Play();
+                occupied = true;
                 tempPlayer.GetComponent<PlayerMovement>().setLockPosition(true);
 				tempPlayer.GetComponent<SwapSprites> ().SwapFace ();
                 tempPlayer.GetComponent<PlayerMovement>().setTerminalAttributes(terminalObject, terminalType);
-
+              
                 Destroy(tempXButton);
 
                 if (bCount == 0)
@@ -45,8 +46,10 @@ public class Terminal : MonoBehaviour {
 
 
             }
-            if (Input.GetButton("B" + tempPlayer.GetComponent<PlayerMovement>().getPlayerNumber()))
+            if (Input.GetButton("B" + tempPlayer.GetComponent<PlayerMovement>().getPlayerNumber()) && occupied == true)
             {
+                occupied = false;
+                enter.Play();
                 Destroy(tempBButton);
                 bCount = 0;
                 tempPlayer.GetComponent<PlayerMovement>().setLockPosition(false);

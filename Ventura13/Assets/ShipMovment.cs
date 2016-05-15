@@ -12,7 +12,7 @@ public class ShipMovment : MonoBehaviour {
 	public float horizontalMoveSpeed = 7.0f;
 	public float maxSpeed = 5.0f;
     public float thrusterCooldown;
-
+    public AudioSource thursters;
     GameObject[] rightThrusters;
     GameObject[] leftThrusters;
     public GameObject puff;
@@ -56,9 +56,13 @@ public class ShipMovment : MonoBehaviour {
 
             if (rightThrusterCooldownTimer <= 0)
             {
+                thursters.Play();
+
+                int i = 0;
                 foreach (GameObject thruster in rightThrusters)
                 {
                     Instantiate(puff, thruster.transform.position + thruster.transform.right * 0.8f, Quaternion.Euler(0, 0, thruster.transform.eulerAngles.z - 90f));
+                    ++i;
                 }
                 rightThrusterCooldownTimer = thrusterCooldown;
                 this.GetComponent<x360_Gamepad>().AddRumble(player - 1, 0.2f, new Vector2(5.0f, 5.0f));
@@ -75,6 +79,8 @@ public class ShipMovment : MonoBehaviour {
 
             if (leftThrusterCooldownTimer <= 0)
             {
+                thursters.Play();
+
                 foreach (GameObject thruster in leftThrusters)
                 {
                     Instantiate(puff, thruster.transform.position + thruster.transform.right * 0.8f, Quaternion.Euler(0, 0, thruster.transform.eulerAngles.z - 90f));

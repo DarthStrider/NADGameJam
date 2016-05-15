@@ -46,7 +46,7 @@ public class ObstacleMovement : MonoBehaviour {
                 }
                 if (tractorBeamed == false)
                 {
-                    //rb.velocity = (Vector2.down * moveSpeed*.9f);
+                    rb.velocity = (Vector2.down * moveSpeed*.9f);
                    
                 }
                 if (tractorBeamed == true)
