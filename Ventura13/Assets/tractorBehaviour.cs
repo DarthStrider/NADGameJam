@@ -114,7 +114,7 @@ public class tractorBehaviour : MonoBehaviour {
 
         if (pressed == true)
         {
-            rumbleScript.AddRumble(playerIndex - 1, 0.02f, new Vector2(0.1f, 0.1f));
+            rumbleScript.AddRumble(playerIndex-1, 0.02f, new Vector2(0.1f, 0.1f));
             List<GameObject> temp = new List<GameObject>();
             RaycastHit2D hit = Physics2D.Raycast(origin.transform.position, transform.up, tractorDistance);
             if (hit.collider != null)
@@ -173,7 +173,6 @@ public class tractorBehaviour : MonoBehaviour {
             }
             objects.Clear();
             objects = temp;
-            Debug.Log(objects.Count);
 
             if (objects.Count > 0)
             {
@@ -201,7 +200,7 @@ public class tractorBehaviour : MonoBehaviour {
                 //obj.transform.position = Vector3.MoveTowards(obj.transform.position, transform.gameObject.transform.position, 2 * Time.deltaTime);
                 Vector2 targetToBeam =  origin.transform.position - obj.transform.position;
                 targetToBeam.Normalize();
-                obj.GetComponent<Rigidbody2D>().AddForce(targetToBeam * (tractorBeamSpeed * Time.deltaTime));
+                obj.GetComponent<Rigidbody2D>().AddForce(targetToBeam * (1.5f*tractorBeamSpeed * Time.deltaTime));
                 if (obj.GetComponent<Rigidbody2D>().velocity.magnitude > maxSpeed)
                 {
                     Vector2 velocityNormalized = obj.GetComponent<Rigidbody2D>().velocity.normalized;

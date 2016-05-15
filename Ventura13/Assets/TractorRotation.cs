@@ -34,8 +34,6 @@ public class TractorRotation : MonoBehaviour
         {
             float angle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg;
 
-			Debug.Log (angle);
-
             if (leftWorldAngle == -135.0f && rightWorldAngle == 45.0f)  // left gun
             {
                 if (angle < 45 && angle > -135)

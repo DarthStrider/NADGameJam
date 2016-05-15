@@ -88,6 +88,8 @@ public class x360_Gamepad : MonoBehaviour
 
     public void AddRumble(int playerIndex, float timer, Vector2 power, float fadeTime = 0f)
     {
+        playerIndex = playerIndex == 0 ? 1 : 0; // hack needs fixing
+        //Debug.Log(playerIndex);
         xRumble rumble = new xRumble();
 
         rumble.timer = timer;

@@ -139,7 +139,13 @@ public class ShipHealth : MonoBehaviour
     {
         if (health - x <= 0)
         {
+           
             dead.SetActive(true);
+            Destroy(this.gameObject);
+            Time.timeScale = 0;
+            Debug.Log("dead");
+
+
         }
         else
         {
@@ -150,7 +156,7 @@ public class ShipHealth : MonoBehaviour
             }
             health -= x;
             Text txt = text.gameObject.GetComponent<Text>();
-            txt.text = ((int)(health / maxHealth) * 100) + "%";
+            txt.text = ((int)((health / maxHealth) * 100)) + "%";
         }
     }
 
@@ -160,13 +166,13 @@ public class ShipHealth : MonoBehaviour
         {
             health = maxHealth;
             Text txt = text.gameObject.GetComponent<Text>();
-            txt.text = ((int)(health / maxHealth) * 100) + "%";
+            txt.text = ((int)((health / maxHealth) * 100)) + "%";
         }
         else
         {
             maxHealth += x;
             Text txt = text.gameObject.GetComponent<Text>();
-            txt.text = ((int)(health / maxHealth) * 100) + "%";
+            txt.text = ((int)((health / maxHealth) * 100)) + "%";
         }
     }
 }
