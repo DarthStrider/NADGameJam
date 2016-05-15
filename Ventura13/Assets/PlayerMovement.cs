@@ -59,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
         if (terminalObject == null)
         {
             checkIsGrounded();
+            Debug.Log(isGrounded);
             if (Input.GetAxis("LeftAnalogHorizontal" + playerNumber) == 0)
             {
                 rb.velocity += new Vector2(theShip.GetComponent<Rigidbody2D>().velocity.x, 0);
@@ -163,6 +164,8 @@ public class PlayerMovement : MonoBehaviour
         Ray2D centerRay = new Ray2D(center, -transform.up);
         Ray2D rightRay  = new Ray2D(center + (-transform.right * rayOffset), -transform.up);
 
+        //Debug.DrawLine(center + (transform.right * rayOffset));
+
         int ignoredLayersMask = ~LayerMask.GetMask(ignoredLayers);
 
         RaycastHit2D[] hits = new RaycastHit2D[3];
@@ -175,6 +178,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (currentHit.collider != null)
             {
+                Debug.Log(currentHit.collider.gameObject.name);
                 isGrounded = true;
             }
         }
