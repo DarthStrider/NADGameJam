@@ -25,9 +25,12 @@ public class GunBehaviour : MonoBehaviour
     {
         
     }
-
     public void gunMovement(Vector2 input)
     {
+        //Debug.Log(Input.GetJoystickNames().Length);
+        float joyX = Input.GetAxis("RightAnalogHorizontal1");
+        float joyY = Input.GetAxis("RightAnalogVertical1");
+
         if (input.x != 0 || input.y != 0)
         {
             float angle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg;
@@ -70,8 +73,8 @@ public class GunBehaviour : MonoBehaviour
     {
         if (cooldownTimer <= 0)
         {
-            Instantiate(bullet, bulletSpawn.position, bulletSpawn.localRotation);
-            bullet.GetComponent<BulletForce>().parentShooter = bulletSpawn;
+            GameObject laser = Instantiate(bullet, bulletSpawn.position, bulletSpawn.localRotation) as GameObject;
+            laser.GetComponent<BulletForce>().Initalize(bulletSpawn);
             cooldownTimer = cooldownTime;
             this.GetComponent<x360_Gamepad>().AddRumble(playerIndex-1, 0.2f, new Vector2(5.0f, 5.0f));
         }
