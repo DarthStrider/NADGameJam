@@ -104,4 +104,5 @@ public class GunBehaviour : MonoBehaviour
             cooldownTimer -= Time.deltaTime;
         }
     }
+
 }
