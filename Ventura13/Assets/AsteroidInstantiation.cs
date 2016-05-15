@@ -20,6 +20,7 @@ public class AsteroidInstantiation : MonoBehaviour {
         
         if (col.gameObject.tag == "Ship")
         {
+            
             Spawner.GetComponent<Spawner>().unlockAsteroids = true;
         }
     }

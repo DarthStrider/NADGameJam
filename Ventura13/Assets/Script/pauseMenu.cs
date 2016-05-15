@@ -6,14 +6,15 @@ using UnityEngine.UI;
 
 public class pauseMenu : MonoBehaviour {
     public EventSystem eventSystem;
-    public Camera main;
     public Canvas pauseCanvas;
     public GameObject pauseButton;
-	// Use this for initialization
+    public AudioSource select;
+    public AudioSource inMenu;
+
+    // Use this for initialization
 
     void Awake()
     {
-        eventSystem.gameObject.SetActive(false);
     }
 	void Start () {
 	
@@ -23,28 +24,10 @@ public class pauseMenu : MonoBehaviour {
 	void Update () {
         if (Input.GetButtonDown("Start1") || Input.GetButtonDown("Start2") || Input.GetButtonDown("Start3"))
         {
-            eventSystem.gameObject.SetActive(true);
-
-           // GameObject.FindGameObjectWithTag("player").GetComponent<CharacterMovement>().setIsLockedControls(true);
-            if (!pauseCanvas.gameObject.activeSelf)
-            {
-                eventSystem.SetSelectedGameObject(pauseButton);
-
+            inMenu.Play();
                 Time.timeScale = 0;
                 pauseCanvas.gameObject.SetActive(true);
-                eventSystem.SetSelectedGameObject(pauseButton);
-            }
-            else if (pauseCanvas.gameObject.activeSelf)
-            {
-                eventSystem.gameObject.SetActive(false);
-
-               // GameObject.FindGameObjectWithTag("player").GetComponent<CharacterMovement>().setIsLockedControls(false);
-                eventSystem.SetSelectedGameObject(null);
-                Time.timeScale = 1;
-                main.gameObject.SetActive(true);
-                eventSystem.SetSelectedGameObject(pauseButton);
-
-            }
+            eventSystem.SetSelectedGameObject(pauseButton);
 
         }
 
@@ -64,12 +47,11 @@ public class pauseMenu : MonoBehaviour {
 
     public void continueButton()
     {
-        eventSystem.gameObject.SetActive(false);
+        select.Play();
 
-        // GameObject.FindGameObjectWithTag("player").GetComponent<CharacterMovement>().setIsLockedControls(false);
-        eventSystem.SetSelectedGameObject(null);
+        pauseCanvas.gameObject.SetActive(false);
+       
         Time.timeScale = 1;
-        eventSystem.SetSelectedGameObject(pauseButton);
 
     }
 
@@ -77,6 +59,8 @@ public class pauseMenu : MonoBehaviour {
 
     public void exitButton()
     {
+        select.Play();
+
         Application.Quit();
     }
 }

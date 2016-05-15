@@ -15,7 +15,7 @@ public class Spawner : MonoBehaviour {
 
 
     public GameObject Skybox;
-    public float timerTotal = 3f;
+    public float timerTotal = 1.8f;
     public float timer;
     float coolDown = 2f;
     public int StartAsteroidSpawnLocation;

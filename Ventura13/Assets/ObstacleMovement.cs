@@ -40,6 +40,23 @@ public class ObstacleMovement : MonoBehaviour {
             case ObstacleHealth.ObstacleType.SAT:
                 break;
             case ObstacleHealth.ObstacleType.BLI:
+                if (transform.position.y <= -40)
+                {
+                    Destroy(this.gameObject);
+                }
+                if (tractorBeamed == false)
+                {
+                    rb.velocity = (Vector2.down * moveSpeed*.9f);
+                   
+                }
+                if (tractorBeamed == true)
+                {
+                    if (first == false)
+                    {
+                        rb.velocity = Vector2.zero;
+                        first = true;
+                    }
+                }
                 break;
         }
 

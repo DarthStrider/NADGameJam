@@ -8,15 +8,18 @@ public class mainMenu : MonoBehaviour {
 
     // Use this for initialization
     public EventSystem eventSystem;
+    public GameObject[] startUps;
+    public Canvas canvas;
+    public GameObject credit;
+    public GameObject menu;
+    public GameObject startButton;
+    public GameObject backButton;
+    public pauseMenu pause;
+    public AudioSource rocketLaunch;
+    public AudioSource select;
 
-
-    void Awake()
-    {
-        eventSystem.gameObject.SetActive(true);
-
-    }
     void Start () {
-	
+        eventSystem.SetSelectedGameObject(startButton);
 	}
 	
 	// Update is called once per frame
@@ -26,8 +29,38 @@ public class mainMenu : MonoBehaviour {
 
     public void startMenu()
     {
-        eventSystem.gameObject.SetActive(false);
-        Application.LoadLevel("layout");
+        select.Play();
+        canvas.gameObject.SetActive(false);
+        foreach(GameObject start in startUps)
+        {
+            start.gameObject.SetActive(true);
+        }
+        pause.enabled = true;
+        rocketLaunch.Play();
+    }
+
+    public void Quit()
+    {
+        select.Play();
+        Application.Quit();
+    }
+
+    public void Credits()
+    {
+        select.Play();
+        eventSystem.SetSelectedGameObject(backButton);
+        menu.gameObject.SetActive(false);
+        credit.gameObject.SetActive(true);
+    }
+
+    public void back()
+    {
+        select.Play();
+        eventSystem.SetSelectedGameObject(startButton);
+        credit.gameObject.SetActive(false);
+        menu.gameObject.SetActive(true);
+      
+
     }
 
 }
