@@ -146,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
         terminalObject.GetComponent<GunBehaviour>().gunMovement(rightAnalogInput);
         if (triggers.y > 0)
         {
-            terminalObject.GetComponent<GunBehaviour>().shoot();
+            terminalObject.GetComponent<GunBehaviour>().shoot(playerNumber);
         }
     }
 

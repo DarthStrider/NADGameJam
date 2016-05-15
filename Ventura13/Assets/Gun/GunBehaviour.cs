@@ -66,14 +66,14 @@ public class GunBehaviour : MonoBehaviour
         }
     }
 
-    public void shoot()
+    public void shoot(int playerIndex)
     {
         if (cooldownTimer <= 0)
         {
             Instantiate(bullet, bulletSpawn.position, Quaternion.identity);
             bullet.GetComponent<BulletForce>().parentShooter = bulletSpawn;
             cooldownTimer = cooldownTime;
-            this.GetComponent<x360_Gamepad>().AddRumble(0, 0.5f, new Vector2(10.0f, 10.0f));
+            this.GetComponent<x360_Gamepad>().AddRumble(playerIndex-1, 0.2f, new Vector2(5.0f, 5.0f));
         }
         else
         {
