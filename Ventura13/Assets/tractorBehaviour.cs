@@ -15,7 +15,6 @@ public class tractorBehaviour : MonoBehaviour {
     List<GameObject> objects=new List<GameObject>();
     public TractorRotation tRotation;
     public x360_Gamepad rumbleScript;
-    public string[] ignoreLayerMask;
 	// Use this for initialization
 	void Start () {
         //origin.transform.rotation = transform.rotation;
@@ -26,8 +25,6 @@ public class tractorBehaviour : MonoBehaviour {
     // Update is called once per frame
     public void fireTractor(Vector2 triggers, int playerIndex)
     {
-        LayerMask l = ~LayerMask.GetMask(ignoreLayerMask);
-
         //Debug.DrawRay(origin.transform.position, transform.up , Color.red, 30);
        // Debug.DrawRay(origin.transform.position, Quaternion.Euler(0, 0, coneAngle) * transform.up, Color.red, 30);
         //Debug.DrawRay(origin.transform.position, Quaternion.Euler(0, 0, -coneAngle) * transform.up, Color.red, 30);
@@ -93,6 +90,20 @@ public class tractorBehaviour : MonoBehaviour {
             }
             if (objects.Count > 0)
             {
+                foreach (GameObject obj in objects)
+                {
+                    if (obj.tag == "Obstacle")
+                    {
+                        obj.GetComponent<ObstacleMovement>().tractorBeamed = true;
+
+                    }
+                    if (obj.tag == "Scrap")
+                    {
+                        obj.GetComponent<scrap>().tractorBeamed = true;
+
+                    }
+
+                }
                 hitObjects = true;
             }
         }
@@ -135,7 +146,6 @@ public class tractorBehaviour : MonoBehaviour {
                     }
                 }
             }
-            Debug.Log(objects.Count);
             foreach (GameObject obj in objects)
             {
                 if (!temp.Contains(obj))
@@ -146,6 +156,13 @@ public class tractorBehaviour : MonoBehaviour {
                         obj.GetComponent<ObstacleMovement>().first = false;
 
                     }
+                    if (obj.tag == "Scrap")
+                    {
+                        obj.GetComponent<scrap>().tractorBeamed = false;
+                        obj.GetComponent<scrap>().first = false;
+
+                    }
+
                     objects.Remove(obj);
                 }
               
@@ -156,7 +173,21 @@ public class tractorBehaviour : MonoBehaviour {
 
             if (objects.Count > 0)
             {
+                foreach (GameObject obj in objects)
+                {
+                    if (obj.tag == "Obstacle")
+                    {
+                        obj.GetComponent<ObstacleMovement>().tractorBeamed = true;
+
+                    }
+                    if (obj.tag == "Scrap")
+                    {
+                        obj.GetComponent<scrap>().tractorBeamed = true;
+
+                    }
+                }
                 hitObjects = true;
+                Debug.Log(hitObjects);
             }
         }
 
@@ -183,6 +214,7 @@ public class tractorBehaviour : MonoBehaviour {
         if (col.tag == "Scrap" && hitObjects == true)
         {
             objects.Remove(col.gameObject);
+            col.gameObject.GetComponent<scrap>().healShip();
             Destroy(col.gameObject);
         }
         if (col.tag == "Obstacle" && hitObjects == true)

@@ -74,13 +74,17 @@ public class Terminal : MonoBehaviour {
     }
     void OnTriggerExit2D(Collider2D collider)
     {
-        if (tempPlayer.GetComponent<PlayerMovement>().getPlayerNumber() == collider.GetComponent<PlayerMovement>().getPlayerNumber())
+        if (collider.gameObject.tag == "Player")
         {
-            if (tempXButton != null)
+
+            if (tempPlayer.GetComponent<PlayerMovement>().getPlayerNumber() == collider.GetComponent<PlayerMovement>().getPlayerNumber())
             {
-                Destroy(tempXButton);
+                if (tempXButton != null)
+                {
+                    Destroy(tempXButton);
+                }
+                lockTerminal = false;
             }
-            lockTerminal = false;
         }
     }
 
