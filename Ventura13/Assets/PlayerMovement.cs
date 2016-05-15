@@ -131,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void steering()
     {
-
+        terminalObject.GetComponent<ShipMovment>().moveShip(leftAnalogInput, playerNumber);
     }
 
     private void slow()
@@ -220,6 +220,12 @@ public class PlayerMovement : MonoBehaviour
 			}
 		}
 	}
+
+    public void setTerminalAttributes(GameObject terminalObject, Terminal.TerminalType terminalType)
+    {
+        this.terminalObject = terminalObject;
+        this.terminalType = terminalType;
+    }
 
     public int getPlayerNumber()
     {
