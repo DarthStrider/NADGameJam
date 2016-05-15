@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class ShipHealth : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class ShipHealth : MonoBehaviour
     public float wait;
     public float onWait;
     float onTime;
+    public GameObject text;
+    public GameObject dead;
     // Use this for initialization
     void Start()
     {
@@ -136,7 +139,7 @@ public class ShipHealth : MonoBehaviour
     {
         if (health - x <= 0)
         {
-
+            dead.SetActive(true);
         }
         else
         {
@@ -146,6 +149,8 @@ public class ShipHealth : MonoBehaviour
                 damaged = true;
             }
             health -= x;
+            Text txt = text.gameObject.GetComponent<Text>();
+            txt.text = ((int)(health / maxHealth) * 100) + "%";
         }
     }
 
@@ -154,10 +159,14 @@ public class ShipHealth : MonoBehaviour
         if (health + x > maxHealth)
         {
             health = maxHealth;
+            Text txt = text.gameObject.GetComponent<Text>();
+            txt.text = ((int)(health / maxHealth) * 100) + "%";
         }
         else
         {
             maxHealth += x;
+            Text txt = text.gameObject.GetComponent<Text>();
+            txt.text = ((int)(health / maxHealth) * 100) + "%";
         }
     }
 }

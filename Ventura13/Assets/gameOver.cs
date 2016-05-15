@@ -7,13 +7,14 @@ public class gameOver : MonoBehaviour {
     public GameObject button;
 	// Use this for initialization
 	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+        eventSystem.SetSelectedGameObject(button);
+
+    }
+
+    // Update is called once per frame
+    void Update () {
+
+    }
 
     public void Restart()
     {

@@ -12,6 +12,7 @@ public class Spawner : MonoBehaviour {
     public Vector2 asteroidAmount;
     public Vector2 heightDifference;
     int heightChance = 1;
+    public GameObject environment;
 
 
     public GameObject Skybox;
@@ -38,6 +39,7 @@ public class Spawner : MonoBehaviour {
 	void Update () {
         if (unlockAsteroids == true)
         {
+            environment.gameObject.SetActive(true);
             if (timer <= 0)
             {
                 asteriodGenerator();
