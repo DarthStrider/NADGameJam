@@ -15,6 +15,7 @@ public class tractorBehaviour : MonoBehaviour {
     List<GameObject> objects=new List<GameObject>();
     public TractorRotation tRotation;
     public x360_Gamepad rumbleScript;
+    public AudioSource sucction;
 	// Use this for initialization
 	void Start () {
         //origin.transform.rotation = transform.rotation;
@@ -30,6 +31,8 @@ public class tractorBehaviour : MonoBehaviour {
         //Debug.DrawRay(origin.transform.position, Quaternion.Euler(0, 0, -coneAngle) * transform.up, Color.red, 30);
         if (triggers.y <= 0 && pressed == true)
         {
+            sucction.Stop();
+
             pressed = false;
             hitObjects = false;
             if (objects.Count > 0)
@@ -51,6 +54,7 @@ public class tractorBehaviour : MonoBehaviour {
 
         if (triggers.y > 0 && pressed == false)
         {
+            sucction.Play();
             pressed = true;
             cone = Instantiate(conePrefab, transform.position + (transform.up * 6f), transform.rotation) as GameObject;
             cone.transform.parent = origin.transform;
