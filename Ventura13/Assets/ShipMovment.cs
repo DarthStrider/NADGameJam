@@ -8,7 +8,7 @@ public class ShipMovment : MonoBehaviour {
 	private Vector3 xMax;
     private float leftThrusterCooldownTimer = 0;
     private float rightThrusterCooldownTimer = 0;
-    public BoxCollider2D box;
+	public BoxCollider2D box;
 	public float horizontalMoveSpeed = 7.0f;
 	public float maxSpeed = 5.0f;
     public float thrusterCooldown;
@@ -35,7 +35,8 @@ public class ShipMovment : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(Input.GetAxis("LT1"));
+
+		Debug.Log(Input.GetAxis("LT1"));
         Debug.Log(Input.GetAxis("RT1"));
         if (Input.GetAxis ("RT1") > 0) {
 			//Debug.Log ("left trigger");
@@ -85,5 +86,16 @@ public class ShipMovment : MonoBehaviour {
 		float x = transform.position.x;
 		x = Mathf.Clamp (transform.position.x, xMin.x+extent.x, xMax.x-extent.x);
 		transform.position = new Vector2 (x, transform.position.y);
+
+		if (transform.position.x <= xMin.x + extent.x && rb.velocity.x < 0.0f) {
+			rb.velocity = new Vector2 (0, 0);
+		}
+
+		if (transform.position.x >= xMax.x-extent.x && rb.velocity.x > 0.0f) {
+			rb.velocity = new Vector2 (0, 0);
+		}
+
 	}
+
+
 }

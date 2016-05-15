@@ -9,11 +9,14 @@ public class PlayerMovement : MonoBehaviour
 	public float moveSpeed = 4.5f;
 	public float jumpSpeed = 650.0f;
 
+	public GameObject theShip;
 	public GameObject theArm;
 	public GameObject theHead;
-
     public string[] ignoredLayers;
 
+	private Vector3 currentShipPos;
+	private Vector3 lastShipPos;
+	private float xOffset;
 	private Rigidbody2D rb;
 	private BoxCollider2D bc;
 	private Animator anim;
@@ -33,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
 		bc = GetComponent<BoxCollider2D> ();
 		arm = theArm.GetComponent<RotateArm> ();
 		bobSpeed = theHead.GetComponent<HeadBob> ();
-
+		lastShipPos = theShip.transform.position;
         // hack that adjusts joystick number of player in case a non-existent joystick is using joystick 1
         string[] joysticks = Input.GetJoystickNames();
         if (joysticks.Length == 3 && joysticks[0] == "")
@@ -48,9 +51,14 @@ public class PlayerMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        checkIsGrounded();
 
-		if (Input.GetAxis ("LeftAnalogHorizontal" + playerNumber) > 0)
+		checkIsGrounded();
+
+		if (Input.GetAxis ("LeftAnalogHorizontal" + playerNumber) == 0) {
+			rb.velocity += new Vector2 (theShip.GetComponent<Rigidbody2D> ().velocity.x, 0);
+		}
+			
+		else if (Input.GetAxis ("LeftAnalogHorizontal" + playerNumber) > 0)
 		{
 			arm.RotateTheArmLeft ();
 			theHead.transform.eulerAngles = new Vector3(theHead.transform.eulerAngles.x, 180.0f, theHead.transform.eulerAngles.z);
@@ -75,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
 		}
         if (lockPosition != true)
         {
-            rb.velocity = new Vector2(Input.GetAxis("LeftAnalogHorizontal" + playerNumber) * moveSpeed, rb.velocity.y);
+			rb.velocity = new Vector2(((Input.GetAxis("LeftAnalogHorizontal" + playerNumber) * moveSpeed) + theShip.GetComponent<Rigidbody2D> ().velocity.x), rb.velocity.y);
 
             //Debug.DrawLine(bc.bounds.center, new Vector3(bc.bounds.center.x, (bc.bounds.center.y - (bc.bounds.extents.y + overcast)), bc.bounds.center.z));
 
@@ -90,6 +98,8 @@ public class PlayerMovement : MonoBehaviour
 		{
 			rb.velocity = new Vector2(0.0f, rb.velocity.y);
 		}
+
+
 	}
 
     private void checkIsGrounded()
