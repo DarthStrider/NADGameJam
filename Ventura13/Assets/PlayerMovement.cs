@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isSideColliding = false;
     private bool lockPosition = false;
     private GameObject terminalObject = null;
-    private Terminal.TerminalType terminalType;
+    private Terminal.TerminalType terminalType = Terminal.TerminalType.FREE;
 
     private bool didJump;
     private Vector2 leftAnalogInput;
@@ -56,11 +56,10 @@ public class PlayerMovement : MonoBehaviour
 	void Update ()
     {
         collectInput();
-
         if (terminalObject == null)
         {
             checkIsGrounded();
-
+            Debug.Log("walking");
             if (Input.GetAxis("LeftAnalogHorizontal" + playerNumber) == 0)
             {
                 rb.velocity += new Vector2(theShip.GetComponent<Rigidbody2D>().velocity.x, 0);
@@ -94,12 +93,16 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb.velocity = new Vector2(((Input.GetAxis("LeftAnalogHorizontal" + playerNumber) * moveSpeed) + theShip.GetComponent<Rigidbody2D>().velocity.x), rb.velocity.y);
 
-                //Debug.DrawLine(bc.bounds.center, new Vector3(bc.bounds.center.x, (bc.bounds.center.y - (bc.bounds.extents.y + overcast)), bc.bounds.center.z));
-
                 if (Input.GetButtonDown("A" + playerNumber) && isGrounded)
                 {
                     rb.AddForce(new Vector2(0, jumpSpeed));
                 }
+            }
+
+            else
+            {
+                rb.velocity = Vector2.zero;
+                rb.velocity = new Vector2(theShip.GetComponent<Rigidbody2D>().velocity.x, 0);
             }
 
             checkIsSideColliding();
@@ -131,7 +134,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void steering()
     {
-        terminalObject.GetComponent<ShipMovment>().moveShip(leftAnalogInput, playerNumber);
+        Debug.Log("steering");
+        terminalObject.GetComponent<ShipMovment>().moveShip(triggers, playerNumber);
     }
 
     private void slow()
