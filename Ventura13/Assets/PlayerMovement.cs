@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     private bool lockPosition = false;
     private GameObject terminalObject = null;
     private Terminal.TerminalType terminalType = Terminal.TerminalType.FREE;
+	private RaycastHit2D groundHit;
+	private bool onMovingPlatform;
 
     private bool didJump;
     private Vector2 leftAnalogInput;
@@ -126,6 +128,7 @@ public class PlayerMovement : MonoBehaviour
                     break;
             }
         }
+		adjustToMovingPlatform ();
         didJump = false;
 	}
 
@@ -154,6 +157,15 @@ public class PlayerMovement : MonoBehaviour
         terminalObject.GetComponent<TractorRotation>().tractorFireScript.fireTractor(triggers,playerNumber);
     }
 
+	private void adjustToMovingPlatform()
+	{
+		if (groundHit.collider != null && groundHit.collider.gameObject.tag == "MovingPlatform")
+		{
+			Vector3 localVelocity = groundHit.collider.gameObject.transform.InverseTransformDirection (groundHit.collider.gameObject.GetComponent<Rigidbody2D> ().velocity);
+			rb.velocity += new Vector2(localVelocity.x, localVelocity.y);
+		}
+	}
+
     private void checkIsGrounded()
     {
         Vector3 center     = bc.bounds.center;
@@ -180,6 +192,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Debug.Log(currentHit.collider.gameObject.name);
                 isGrounded = true;
+				groundHit = currentHit;
             }
         }
     }
