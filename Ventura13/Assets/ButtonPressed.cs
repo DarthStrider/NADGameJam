@@ -17,14 +17,14 @@ public class ButtonPressed : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
 	
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		Debug.Log (isSlowing);
-
+	void Update ()
+    {
         if (unlockPush == true)
         {
 			if (Input.GetButton ("X" + tempPlayer.GetComponent<PlayerMovement> ().getPlayerNumber ()))
