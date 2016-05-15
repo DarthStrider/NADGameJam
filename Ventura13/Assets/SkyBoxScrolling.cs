@@ -18,4 +18,13 @@ public class SkyBoxScrolling : MonoBehaviour {
             transform.position += -transform.up * speed;
         }
 	}
+    public void slowDown()
+    {
+        speed = maxSpeed / 2;
+    }
+
+    public void speedUp()
+    {
+        speed = maxSpeed;
+    }
 }
