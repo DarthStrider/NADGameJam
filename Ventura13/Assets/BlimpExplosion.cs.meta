@@ -1,11 +1,10 @@
 fileFormatVersion: 2
-guid: 52b3aa8f3ea916b42819a3de0fdbbafb
-timeCreated: 1463330286
+guid: d5c3bd81a3be2b04abfe2f6c3a7e4c6a
+timeCreated: 1463331373
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences:
-  - PuffHit: {fileID: 115446, guid: 4a45d13813ad80842a1c0c4b22227500, type: 2}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
