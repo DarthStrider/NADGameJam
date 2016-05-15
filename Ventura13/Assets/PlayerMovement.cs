@@ -61,7 +61,6 @@ public class PlayerMovement : MonoBehaviour
         if (terminalObject == null)
         {
             checkIsGrounded();
-            Debug.Log(isGrounded);
             if (Input.GetAxis("LeftAnalogHorizontal" + playerNumber) == 0)
             {
                 rb.velocity += new Vector2(theShip.GetComponent<Rigidbody2D>().velocity.x, 0);
@@ -190,7 +189,6 @@ public class PlayerMovement : MonoBehaviour
         {
             if (currentHit.collider != null)
             {
-                Debug.Log(currentHit.collider.gameObject.name);
                 isGrounded = true;
 				groundHit = currentHit;
             }
