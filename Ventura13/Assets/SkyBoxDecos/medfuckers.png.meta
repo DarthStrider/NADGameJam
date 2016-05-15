@@ -1,0 +1,319 @@
+fileFormatVersion: 2
+guid: 7cd913a58994dcb4f8865b8723a4b48f
+timeCreated: 1463318170
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: medfuckers_0
+    21300002: medfuckers_1
+    21300004: medfuckers_2
+    21300006: medfuckers_3
+    21300008: medfuckers_4
+    21300010: medfuckers_5
+    21300012: medfuckers_6
+    21300014: medfuckers_7
+    21300016: medfuckers_8
+    21300018: medfuckers_9
+    21300020: medfuckers_10
+    21300022: medfuckers_11
+    21300024: medfuckers_12
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: medfuckers_0
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 7409
+        width: 1013
+        height: 366
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -133.49478, y: 13.092529}
+        - {x: -133.49478, y: -41.90747}
+        - {x: -74.49478, y: -47.90747}
+        - {x: 125.50522, y: -47.90747}
+        - {x: 134.50522, y: -38.90747}
+        - {x: 134.50522, y: -12.907471}
+        - {x: 120.50522, y: 5.0925293}
+        - {x: 65.50522, y: 49.09253}
+        - {x: -56.49478, y: 49.09253}
+        - {x: -103.49478, y: 46.09253}
+    - name: medfuckers_1
+      rect:
+        serializedVersion: 2
+        x: 1891
+        y: 7348
+        width: 1014
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -47.894775, y: 49.52466}
+        - {x: -107.894775, y: 44.52466}
+        - {x: -133.89478, y: 3.5246582}
+        - {x: -133.89478, y: -39.47534}
+        - {x: -79.894775, y: -48.47534}
+        - {x: 126.105225, y: -48.47534}
+        - {x: 134.10522, y: -39.47534}
+        - {x: 134.10522, y: -1.4753418}
+        - {x: 82.105225, y: 49.52466}
+    - name: medfuckers_2
+      rect:
+        serializedVersion: 2
+        x: 1637
+        y: 6889
+        width: 900
+        height: 432
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -118.80051, y: -46.87976}
+        - {x: -85.80051, y: -56.87976}
+        - {x: 119.19949, y: -56.87976}
+        - {x: 119.19949, y: 58.12024}
+        - {x: -19.800507, y: 58.12024}
+        - {x: -118.80051, y: 35.12024}
+    - name: medfuckers_3
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 6277
+        width: 808
+        height: 296
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -106.523346, y: 39.914307}
+        - {x: -106.523346, y: -17.085693}
+        - {x: -65.523346, y: -39.085693}
+        - {x: 49.476654, y: -39.085693}
+        - {x: 107.476654, y: 7.9143066}
+        - {x: 107.476654, y: 32.914307}
+        - {x: 101.476654, y: 39.914307}
+    - name: medfuckers_4
+      rect:
+        serializedVersion: 2
+        x: 2123
+        y: 5062
+        width: 785
+        height: 255
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -90.28406, y: 34.37317}
+        - {x: -103.28406, y: 29.373169}
+        - {x: -103.28406, y: -9.626831}
+        - {x: -95.28406, y: -27.626831}
+        - {x: -53.284058, y: -33.62683}
+        - {x: 83.71594, y: -33.62683}
+        - {x: 103.71594, y: -13.626831}
+        - {x: 103.71594, y: 24.373169}
+        - {x: 53.715942, y: 34.37317}
+    - name: medfuckers_5
+      rect:
+        serializedVersion: 2
+        x: 1569
+        y: 4364
+        width: 888
+        height: 338
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -38.21228, y: 45.514038}
+        - {x: -117.21228, y: 12.514038}
+        - {x: -117.21228, y: -44.485962}
+        - {x: 82.78772, y: -44.485962}
+        - {x: 117.78772, y: -33.485962}
+        - {x: 117.78772, y: -4.485962}
+        - {x: 44.78772, y: 45.514038}
+    - name: medfuckers_6
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 3673
+        width: 850
+        height: 342
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 43.99312, y: 45.9989}
+        - {x: 1.9931183, y: 45.9989}
+        - {x: -112.00688, y: -6.0010986}
+        - {x: -112.00688, y: -45.0011}
+        - {x: 111.99312, y: -45.0011}
+        - {x: 112.99312, y: -42.0011}
+        - {x: 112.99312, y: -5.0010986}
+    - name: medfuckers_7
+      rect:
+        serializedVersion: 2
+        x: 1535
+        y: 3271
+        width: 967
+        height: 265
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -123.66815, y: 36.108765}
+        - {x: -127.66815, y: 29.108765}
+        - {x: -127.66815, y: -16.891235}
+        - {x: -118.66815, y: -34.891235}
+        - {x: 71.33185, y: -34.891235}
+        - {x: 128.33185, y: -7.8912354}
+        - {x: 128.33185, y: 23.108765}
+        - {x: 110.33185, y: 36.108765}
+    - name: medfuckers_8
+      rect:
+        serializedVersion: 2
+        x: 237
+        y: 2090
+        width: 812
+        height: 323
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -62.07222, y: 43.5235}
+        - {x: -106.07222, y: -3.4765015}
+        - {x: -107.07222, y: -8.476501}
+        - {x: -107.07222, y: -30.476501}
+        - {x: -98.07222, y: -42.4765}
+        - {x: 107.92778, y: -42.4765}
+        - {x: 107.92778, y: 9.523499}
+        - {x: 37.92778, y: 43.5235}
+    - name: medfuckers_9
+      rect:
+        serializedVersion: 2
+        x: 2070
+        y: 2394
+        width: 1011
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -35.24469, y: 49.59961}
+        - {x: -123.24469, y: 39.59961}
+        - {x: -133.24469, y: 16.59961}
+        - {x: -133.24469, y: -40.40039}
+        - {x: -32.24469, y: -48.40039}
+        - {x: 125.75531, y: -48.40039}
+        - {x: 133.75531, y: -33.40039}
+        - {x: 133.75531, y: -1.4003906}
+        - {x: 80.75531, y: 49.59961}
+    - name: medfuckers_10
+      rect:
+        serializedVersion: 2
+        x: 1641
+        y: 1775
+        width: 736
+        height: 266
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -77.24689, y: 36.049835}
+        - {x: -97.24689, y: 10.049835}
+        - {x: -97.24689, y: -34.950165}
+        - {x: 91.75311, y: -34.950165}
+        - {x: 97.75311, y: -25.950165}
+        - {x: 97.75311, y: -4.950165}
+        - {x: 61.753113, y: 36.049835}
+    - name: medfuckers_11
+      rect:
+        serializedVersion: 2
+        x: 1990
+        y: 666
+        width: 903
+        height: 433
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 11.682617, y: 57.929962}
+        - {x: 11.682617, y: 56.929962}
+        - {x: 9.682617, y: 43.929962}
+        - {x: -111.31738, y: -5.070038}
+        - {x: -119.31738, y: -10.070038}
+        - {x: -119.31738, y: -33.070038}
+        - {x: -108.31738, y: -57.070038}
+        - {x: 119.68262, y: -57.070038}
+        - {x: 119.68262, y: 35.929962}
+        - {x: 89.68262, y: 57.929962}
+    - name: medfuckers_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1011
+        height: 363
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -83.5, y: 48}
+        - {x: -133.5, y: 40}
+        - {x: -133.5, y: -39}
+        - {x: -128.5, y: -44}
+        - {x: -52.5, y: -48}
+        - {x: 123.5, y: -48}
+        - {x: 133.5, y: -35}
+        - {x: 133.5, y: -4}
+        - {x: 83.5, y: 48}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,351 @@
+fileFormatVersion: 2
+guid: 52478e0aa03070b4f91655c61e89d9b1
+timeCreated: 1463318281
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: smallfuckers_0
+    21300002: smallfuckers_1
+    21300004: smallfuckers_2
+    21300006: smallfuckers_3
+    21300008: smallfuckers_4
+    21300010: smallfuckers_5
+    21300012: smallfuckers_6
+    21300014: smallfuckers_7
+    21300016: smallfuckers_8
+    21300018: smallfuckers_9
+    21300020: smallfuckers_10
+    21300022: smallfuckers_11
+    21300024: smallfuckers_12
+    21300026: smallfuckers_13
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: smallfuckers_0
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 5804
+        width: 443
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 55.978928, y: 22.729614}
+        - {x: 27.978928, y: 27.729614}
+        - {x: -36.021072, y: 27.729614}
+        - {x: -65.02107, y: 3.7296143}
+        - {x: -76.02107, y: -7.2703857}
+        - {x: -76.02107, y: -27.270386}
+        - {x: 38.978928, y: -27.270386}
+        - {x: 72.97893, y: -20.270386}
+        - {x: 76.97893, y: -15.270386}
+        - {x: 76.97893, y: 0.72961426}
+    - name: smallfuckers_1
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 5557
+        width: 394
+        height: 151
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 14.330811, y: 26.90393}
+        - {x: -12.669189, y: 26.90393}
+        - {x: -22.66919, y: 24.90393}
+        - {x: -67.66919, y: -4.0960693}
+        - {x: -67.66919, y: -26.09607}
+        - {x: 66.33081, y: -26.09607}
+        - {x: 68.33081, y: -22.09607}
+        - {x: 68.33081, y: -5.0960693}
+        - {x: 66.33081, y: -0.096069336}
+    - name: smallfuckers_2
+      rect:
+        serializedVersion: 2
+        x: 1874
+        y: 5437
+        width: 393
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -27.4245, y: 26.693115}
+        - {x: -67.4245, y: 0.69311523}
+        - {x: -67.4245, y: -26.306885}
+        - {x: 68.5755, y: -26.306885}
+        - {x: 68.5755, y: -3.3068848}
+        - {x: 22.5755, y: 26.693115}
+    - name: smallfuckers_3
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 4558
+        width: 577
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 89.92162, y: 26.323975}
+        - {x: 31.921623, y: 33.323975}
+        - {x: -93.07838, y: 33.323975}
+        - {x: -99.07838, y: 27.323975}
+        - {x: -99.07838, y: -6.6760254}
+        - {x: -58.078377, y: -32.676025}
+        - {x: 72.92162, y: -32.676025}
+        - {x: 95.92162, y: -11.676025}
+        - {x: 99.92162, y: -3.6760254}
+        - {x: 99.92162, y: 16.323975}
+      - - {x: 93.92162, y: 33.323975}
+        - {x: 94.92162, y: 29.323975}
+        - {x: 98.92162, y: 26.323975}
+        - {x: 99.92162, y: 26.323975}
+        - {x: 99.92162, y: 33.323975}
+    - name: smallfuckers_4
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 4701
+        width: 495
+        height: 239
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -69.04413, y: 41.93347}
+        - {x: -85.04413, y: 1.9334717}
+        - {x: -85.04413, y: -41.06653}
+        - {x: 81.95587, y: -41.06653}
+        - {x: 85.95587, y: -35.06653}
+        - {x: 85.95587, y: -4.0665283}
+        - {x: 21.955872, y: 41.93347}
+    - name: smallfuckers_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4037
+        width: 601
+        height: 239
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 100.5, y: -1.0996094}
+        - {x: 52.5, y: 36.90039}
+        - {x: 42.5, y: 41.90039}
+        - {x: 1.5, y: 41.90039}
+        - {x: -103.5, y: -5.0996094}
+        - {x: -103.5, y: -36.09961}
+        - {x: -86.5, y: -41.09961}
+        - {x: 94.5, y: -41.09961}
+        - {x: 103.5, y: -32.09961}
+        - {x: 103.5, y: -12.099609}
+    - name: smallfuckers_6
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 3035
+        width: 652
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -51.020004, y: 45.29004}
+        - {x: -97.020004, y: 8.290039}
+        - {x: -109.020004, y: -6.709961}
+        - {x: -112.020004, y: -12.709961}
+        - {x: -112.020004, y: -42.70996}
+        - {x: -110.020004, y: -44.70996}
+        - {x: 112.979996, y: -44.70996}
+        - {x: 112.979996, y: -0.70996094}
+        - {x: 8.979996, y: 45.29004}
+    - name: smallfuckers_7
+      rect:
+        serializedVersion: 2
+        x: 1053
+        y: 2768
+        width: 445
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 50.624878, y: 28.59607}
+        - {x: -41.375122, y: 28.59607}
+        - {x: -76.37512, y: 4.5960693}
+        - {x: -76.37512, y: -27.40393}
+        - {x: 63.624878, y: -27.40393}
+        - {x: 72.62488, y: -24.40393}
+        - {x: 77.62488, y: -18.40393}
+        - {x: 77.62488, y: 13.596069}
+    - name: smallfuckers_8
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 2520
+        width: 396
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 26.97676, y: 26.427063}
+        - {x: -29.02324, y: 26.427063}
+        - {x: -68.02324, y: -1.572937}
+        - {x: -68.02324, y: -25.572937}
+        - {x: 53.97676, y: -25.572937}
+        - {x: 68.97676, y: -16.572937}
+        - {x: 68.97676, y: -1.572937}
+    - name: smallfuckers_9
+      rect:
+        serializedVersion: 2
+        x: 2383
+        y: 2401
+        width: 392
+        height: 151
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -23.121948, y: 27.059631}
+        - {x: -67.12195, y: 8.059631}
+        - {x: -67.12195, y: -19.940369}
+        - {x: -59.12195, y: -25.940369}
+        - {x: 67.87805, y: -25.940369}
+        - {x: 67.87805, y: 2.0596313}
+        - {x: 30.878052, y: 27.059631}
+    - name: smallfuckers_10
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 1521
+        width: 576
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -80.932434, y: 32.847046}
+        - {x: -98.932434, y: 20.847046}
+        - {x: -98.932434, y: 1.8470459}
+        - {x: -88.932434, y: -15.152954}
+        - {x: -47.932434, y: -32.152954}
+        - {x: 84.067566, y: -32.152954}
+        - {x: 100.067566, y: -15.152954}
+        - {x: 100.067566, y: 23.847046}
+        - {x: 65.067566, y: 32.847046}
+      - - {x: 95.067566, y: 32.847046}
+        - {x: 95.067566, y: 30.847046}
+        - {x: 99.067566, y: 26.847046}
+        - {x: 100.067566, y: 26.847046}
+        - {x: 100.067566, y: 32.847046}
+    - name: smallfuckers_11
+      rect:
+        serializedVersion: 2
+        x: 1315
+        y: 1664
+        width: 495
+        height: 239
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -57.898193, y: 41.956604}
+        - {x: -84.89819, y: 22.956604}
+        - {x: -84.89819, y: -41.043396}
+        - {x: 73.10181, y: -41.043396}
+        - {x: 86.10181, y: -39.043396}
+        - {x: 86.10181, y: -6.043396}
+        - {x: 15.101807, y: 41.956604}
+    - name: smallfuckers_12
+      rect:
+        serializedVersion: 2
+        x: 508
+        y: 997
+        width: 603
+        height: 242
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -31.540894, y: 42.393158}
+        - {x: -103.54089, y: -4.606842}
+        - {x: -103.54089, y: -30.606842}
+        - {x: -87.54089, y: -41.606842}
+        - {x: 104.45911, y: -41.606842}
+        - {x: 104.45911, y: 12.393158}
+        - {x: 41.459106, y: 42.393158}
+    - name: smallfuckers_13
+      rect:
+        serializedVersion: 2
+        x: 954
+        y: 0
+        width: 652
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 22.125946, y: 44.5}
+        - {x: -60.874054, y: 44.5}
+        - {x: -101.874054, y: 10.5}
+        - {x: -111.874054, y: -7.5}
+        - {x: -111.874054, y: -38.5}
+        - {x: -109.874054, y: -44.5}
+        - {x: 96.125946, y: -44.5}
+        - {x: 111.125946, y: -41.5}
+        - {x: 113.125946, y: -39.5}
+        - {x: 113.125946, y: -4.5}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

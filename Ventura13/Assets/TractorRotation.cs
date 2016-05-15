@@ -113,8 +113,6 @@ public class TractorRotation : MonoBehaviour
 				}
 			}
 
-			Debug.Log (angle);
-
             angle = Mathf.Lerp(transform.localRotation.eulerAngles.z, angle, (rotationSpeed *rotationScalar * Time.deltaTime));
             transform.localRotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }

@@ -15,7 +15,7 @@ public class star : MonoBehaviour {
     public Rigidbody2D rb;
 	// Use this for initialization
 	void Start () {
-        
+        speed = maxSpeed;
         float speedDiff = Random.Range(speedOffset.x, speedOffset.y);
         duration = Random.Range(durations.x, durations.y);
         if (speedDiff > 1)
@@ -40,7 +40,6 @@ public class star : MonoBehaviour {
         float lerp = Mathf.PingPong(Time.time, duration) / duration;
         float alpha = Mathf.Lerp(brightness.x, brightness.y, lerp);
         render.color = new Color(1f, 1f, 1f, alpha);
-        Debug.Log(speed + "   " + speedRatio);
         rb.AddForce(-Vector2.up * (speed * speedRatio));
         if (transform.position.y <= 0)
         {

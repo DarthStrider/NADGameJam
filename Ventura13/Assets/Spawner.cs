@@ -15,9 +15,13 @@ public class Spawner : MonoBehaviour {
 
 
     public GameObject Skybox;
-    float timer = 0f;
+    public float timerTotal = 1.8f;
+    public float timer;
     float coolDown = 2f;
+    public int StartAsteroidSpawnLocation;
+    public float asteroidSpawnTimer;
 
+    public bool unlockAsteroids = false;
 	// Use this for initialization
 	void Start () {
         asteroids = new GameObject[4];
@@ -25,23 +29,25 @@ public class Spawner : MonoBehaviour {
         asteroids[1] = asteroid2;
         asteroids[2] = asteroid3;
         asteroids[3] = asteroid4;
-
+        asteroidSpawnTimer = 10;
         //asteroids = asteroid1 }
-
+        timer = timerTotal;
     }
 	
 	// Update is called once per frame
 	void Update () {
-
-        
-        if (timer > (Ship.transform.position.y))
+        if (unlockAsteroids == true)
         {
-            asteriodGenerator();
-            timer = 0;
-        }
-        else
-        {
-            timer += Time.deltaTime;
+            if (timer <= 0)
+            {
+                asteriodGenerator();
+                timerTotal -= Time.deltaTime;
+                timer = timerTotal;
+            }
+            else
+            {
+                timer -= Time.deltaTime;
+            }
         }
     }
 
@@ -70,7 +76,7 @@ public class Spawner : MonoBehaviour {
             GameObject newAsteroid = Instantiate(asteroids[(int)randAsteroid], local, Quaternion.identity) as GameObject ;
 
             float randAsteroidSize = Random.Range(1f, 6f);
-            newAsteroid.GetComponent<ObstacleHealth>().Health = 10 * randAsteroidSize;
+            newAsteroid.GetComponent<ObstacleHealth>().Health = 6 * randAsteroidSize;
             newAsteroid.transform.localScale = new Vector3(randAsteroidSize, randAsteroidSize,1);
             
             
