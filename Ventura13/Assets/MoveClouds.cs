@@ -12,7 +12,7 @@ public class MoveClouds : MonoBehaviour {
 
         render = GetComponent<SpriteRenderer>();
         layer = render.sortingOrder;
-        Debug.Log(layer);
+        //Debug.Log(layer);
 
         if(layer == -6)
         {

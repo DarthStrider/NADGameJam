@@ -14,6 +14,9 @@ public class GunBehaviour : MonoBehaviour
     public float cooldownTime = .2f;
     private float cooldownTimer = 0.0f;
     public float startAngle;
+    private float lastFrameAngle;
+    private float deltaAngle;
+    public float playSoundAngleDelta;
 
     // Use this for initialization
     void Start()
@@ -24,7 +27,6 @@ public class GunBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
     public void gunMovement(Vector2 input)
     {
@@ -34,14 +36,6 @@ public class GunBehaviour : MonoBehaviour
 
         if (input.x != 0 || input.y != 0)
         {
-            if (gunRotation.isPlaying)
-            {
-                
-            }
-            else
-            {
-                gunRotation.Play();
-            }
             float angle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg;
             if (leftWorldAngle == -135.0f && rightWorldAngle == 45.0f)  // left gun
             {
@@ -75,6 +69,18 @@ public class GunBehaviour : MonoBehaviour
             }
             angle = Mathf.Lerp(transform.localRotation.eulerAngles.z, angle, rotationSpeed * Time.deltaTime);
             transform.localRotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
+            deltaAngle = Mathf.Abs(transform.eulerAngles.z - lastFrameAngle);
+            lastFrameAngle = transform.eulerAngles.z;
+
+            if (deltaAngle >= playSoundAngleDelta)
+                {
+                    if (!gunRotation.isPlaying)
+                        gunRotation.Play();
+                }
+            else
+                gunRotation.Stop();
+
         }
         else
         {
