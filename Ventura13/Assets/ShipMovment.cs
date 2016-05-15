@@ -39,7 +39,7 @@ public class ShipMovment : MonoBehaviour {
         Debug.Log(Input.GetAxis("RT1"));
         if (Input.GetAxis ("RT1") > 0) {
 			//Debug.Log ("left trigger");
-			rb.AddForce(-Vector2.right  * Input.GetAxis ("RT1") * horizontalMoveSpeed);
+			rb.AddForce(-Vector2.right  * Input.GetAxis ("RT1") * horizontalMoveSpeed, ForceMode2D.Impulse);
 
 
             if (rightThrusterCooldownTimer <= 0)
@@ -59,7 +59,7 @@ public class ShipMovment : MonoBehaviour {
         } 
 
 		 if(Input.GetAxis ("LT1") > 0) {
-			rb.AddForce(Vector2.right * Input.GetAxis ("LT1") * horizontalMoveSpeed);
+			rb.AddForce(Vector2.right * Input.GetAxis ("LT1") * horizontalMoveSpeed, ForceMode2D.Impulse);
 
             if (leftThrusterCooldownTimer <= 0)
             {
