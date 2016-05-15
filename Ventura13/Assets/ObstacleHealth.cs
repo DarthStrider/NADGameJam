@@ -3,6 +3,8 @@ using System.Collections;
 
 public class ObstacleHealth : MonoBehaviour {
     public float Health = 50;
+    public enum ObstacleType { AST, SAT};
+    public ObstacleType obsType;
     // Use this for initialization
     void Start() {
 
@@ -12,7 +14,14 @@ public class ObstacleHealth : MonoBehaviour {
     void Update() {
         if (Health <= 0)
         {
-            Destroy(this.gameObject);
+            switch (obsType) {
+                case ObstacleType.AST:
+                    gameObject.GetComponent<AstroidDestroy>().destAsteroid();
+                    break;
+                case ObstacleType.SAT:
+                    break;
+            
+             }
         }
     }
 
@@ -23,4 +32,6 @@ public class ObstacleHealth : MonoBehaviour {
             Health -= col.gameObject.GetComponent<BulletForce>().BulletDamage;
         }
     }
+
+    
 }
