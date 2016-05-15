@@ -113,16 +113,16 @@ public class PlayerMovement : MonoBehaviour
             switch (terminalType)
             {
                 case Terminal.TerminalType.STEERING:
-
+                    steering();
                     break;
                 case Terminal.TerminalType.SLOW:
-
+                    slow();
                     break;
                 case Terminal.TerminalType.GUN:
-
+                    gun();
                     break;
                 case Terminal.TerminalType.BEAM:
-
+                    beam();
                     break;
             }
         }
