@@ -8,7 +8,8 @@ public class TractorRotation : MonoBehaviour
     public float rightWorldAngle;
     public tractorBehaviour tractorFireScript;
     public float startAngle;
-
+    float rotationScalar;
+    public float scalar;
     // Use this for initialization
     void Start()
     {
@@ -18,7 +19,14 @@ public class TractorRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (tractorFireScript.pressed)
+        {
+            rotationScalar = scalar;
+        }
+        else
+        {
+            rotationScalar = 1;
+        }
     }
     public void beamMovement(Vector2 input)
     {
@@ -55,7 +63,7 @@ public class TractorRotation : MonoBehaviour
                     angle = 90;
                 }
             }
-            angle = Mathf.Lerp(transform.localRotation.eulerAngles.z, angle, rotationSpeed * Time.deltaTime);
+            angle = Mathf.Lerp(transform.localRotation.eulerAngles.z, angle, (rotationSpeed *rotationScalar * Time.deltaTime));
             transform.localRotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
     }

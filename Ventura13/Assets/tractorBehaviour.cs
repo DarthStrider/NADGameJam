@@ -6,13 +6,15 @@ public class tractorBehaviour : MonoBehaviour {
     public GameObject conePrefab;
      GameObject cone;
     public float coneAngle;
-    bool pressed;
+    public bool pressed;
     bool hitObjects;
     public float tractorBeamSpeed;
 	public float tractorDistance;
 	GameObject capturedObject;
     public float maxSpeed;
     List<GameObject> objects=new List<GameObject>();
+    public TractorRotation tRotation;
+    public string[] ignoreLayerMask;
 	// Use this for initialization
 	void Start () {
         //origin.transform.rotation = transform.rotation;
@@ -23,6 +25,7 @@ public class tractorBehaviour : MonoBehaviour {
     // Update is called once per frame
     public void fireTractor(Vector2 triggers)
     {
+        LayerMask l = ~LayerMask.GetMask(ignoreLayerMask);
 
         //Debug.DrawRay(origin.transform.position, transform.up , Color.red, 30);
        // Debug.DrawRay(origin.transform.position, Quaternion.Euler(0, 0, coneAngle) * transform.up, Color.red, 30);
@@ -53,45 +56,37 @@ public class tractorBehaviour : MonoBehaviour {
             pressed = true;
             cone = Instantiate(conePrefab, transform.position + (transform.up * 6.7f), transform.rotation) as GameObject;
             cone.transform.parent = origin.transform;
-            RaycastHit2D[] hits = Physics2D.RaycastAll(origin.transform.position, transform.up, tractorDistance);
-            foreach(RaycastHit2D hit in hits)
+            RaycastHit2D hit = Physics2D.Raycast(origin.transform.position, transform.up, tractorDistance);
+            if(hit.collider != null)
             {
-                if (hit.collider != null)
-                {
-                    if (hit.transform.tag == "Obstacle")
-                    {
-                        hit.transform.gameObject.GetComponent<ObstacleMovement>().tractorBeamed = true;
-                    }
-                    objects.Add(hit.collider.gameObject);
-                }
-            }
-            RaycastHit2D[] leftHits = Physics2D.RaycastAll(origin.transform.position, Quaternion.Euler(0, 0, -coneAngle) * transform.up, tractorDistance);
-            foreach (RaycastHit2D hit in leftHits)
-            {
-                if (hit.collider != null)
+                if(hit.collider.tag=="Obstacle" || hit.collider.tag == "Scrap")
                 {
                     if (!objects.Contains(hit.collider.gameObject))
                     {
-                        if (hit.transform.tag == "Obstacle")
-                        {
-                            hit.transform.gameObject.GetComponent<ObstacleMovement>().tractorBeamed = true;
-                        }
                         objects.Add(hit.collider.gameObject);
                     }
                 }
             }
-            RaycastHit2D[] rightHits = Physics2D.RaycastAll(origin.transform.position, Quaternion.Euler(0, 0, coneAngle) * transform.up, tractorDistance);
-            foreach (RaycastHit2D hit in rightHits)
+
+            RaycastHit2D leftHit = Physics2D.Raycast(origin.transform.position, Quaternion.Euler(0, 0, -coneAngle) * transform.up, tractorDistance);
+            if (leftHit.collider != null)
             {
-                if (hit.collider != null)
+                if (leftHit.collider.tag == "Obstacle" || leftHit.collider.tag == "Scrap")
                 {
-                    if (!objects.Contains(hit.collider.gameObject))
+                    if (!objects.Contains(leftHit.collider.gameObject))
                     {
-                        if (hit.transform.tag == "Obstacle")
-                        {
-                            hit.transform.gameObject.GetComponent<ObstacleMovement>().tractorBeamed = true;
-                        }
-                        objects.Add(hit.collider.gameObject);
+                        objects.Add(leftHit.collider.gameObject);
+                    }
+                }
+            }
+            RaycastHit2D rightHit = Physics2D.Raycast(origin.transform.position, Quaternion.Euler(0, 0, coneAngle) * transform.up, tractorDistance);
+            if (rightHit.collider != null)
+            {
+                if (rightHit.collider.tag == "Obstacle" || rightHit.collider.tag == "Scrap")
+                {
+                    if (!objects.Contains(rightHit.collider.gameObject))
+                    {
+                        objects.Add(rightHit.collider.gameObject);
                     }
                 }
             }
@@ -104,49 +99,42 @@ public class tractorBehaviour : MonoBehaviour {
         if (pressed == true)
         {
             List<GameObject> temp = new List<GameObject>();
-            RaycastHit2D[] hits = Physics2D.RaycastAll(origin.transform.position, transform.up, tractorDistance);
-            foreach (RaycastHit2D hit in hits)
+            RaycastHit2D hit = Physics2D.Raycast(origin.transform.position, transform.up, tractorDistance);
+            if (hit.collider != null)
             {
-                if (hit.collider != null)
-                {
-                    if (hit.transform.tag == "Obstacle")
-                    {
-                        hit.transform.gameObject.GetComponent<ObstacleMovement>().tractorBeamed = true;
-                    }
-                    temp.Add(hit.collider.gameObject);
-                }
-            }
-            RaycastHit2D[] leftHits = Physics2D.RaycastAll(origin.transform.position, Quaternion.Euler(0, 0, -coneAngle) * transform.up, tractorDistance);
-            foreach (RaycastHit2D hit in leftHits)
-            {
-                if (hit.collider != null)
+                if (hit.collider.tag == "Obstacle" || hit.collider.tag == "Scrap")
                 {
                     if (!temp.Contains(hit.collider.gameObject))
                     {
-                        if (hit.transform.tag == "Obstacle")
-                        {
-                            hit.transform.gameObject.GetComponent<ObstacleMovement>().tractorBeamed = true;
-                        }
                         temp.Add(hit.collider.gameObject);
                     }
                 }
             }
-            RaycastHit2D[] rightHits = Physics2D.RaycastAll(origin.transform.position, Quaternion.Euler(0, 0, coneAngle) * transform.up, tractorDistance);
-            foreach (RaycastHit2D hit in rightHits)
+
+            RaycastHit2D leftHit = Physics2D.Raycast(origin.transform.position, Quaternion.Euler(0, 0, -coneAngle) * transform.up, tractorDistance);
+            if (leftHit.collider != null)
             {
-                if (hit.collider != null)
+                if (leftHit.collider.tag == "Obstacle" || leftHit.collider.tag == "Scrap")
                 {
-                    if (!temp.Contains(hit.collider.gameObject))
+                    if (!temp.Contains(leftHit.collider.gameObject))
                     {
-                        if (hit.transform.tag == "Obstacle")
-                        {
-                            hit.transform.gameObject.GetComponent<ObstacleMovement>().tractorBeamed = true;
-                        }
-                        temp.Add(hit.collider.gameObject);
+                        temp.Add(leftHit.collider.gameObject);
                     }
                 }
             }
-            foreach(GameObject obj in objects)
+            RaycastHit2D rightHit = Physics2D.Raycast(origin.transform.position, Quaternion.Euler(0, 0, coneAngle) * transform.up, tractorDistance);
+            if (rightHit.collider != null)
+            {
+                if (rightHit.collider.tag == "Obstacle" || rightHit.collider.tag == "Scrap")
+                {
+                    if (!temp.Contains(rightHit.collider.gameObject))
+                    {
+                        temp.Add(rightHit.collider.gameObject);
+                    }
+                }
+            }
+            Debug.Log(objects.Count);
+            foreach (GameObject obj in objects)
             {
                 if (!temp.Contains(obj))
                 {
