@@ -65,10 +65,13 @@ public class ObstacleHealth : MonoBehaviour {
             switch (obsType)
             {
                 case ObstacleType.AST:
+                    col.gameObject.GetComponent<ShipHealth>().TakeDamage(Health);
                     break;
                 case ObstacleType.SAT:
+                    col.gameObject.GetComponent<ShipHealth>().TakeDamage(Health);
                     break;
                 case ObstacleType.BLI:
+                    col.gameObject.GetComponent<ShipHealth>().TakeDamage(Health);
                     GameObject bl = Instantiate(BlimpExp, transform.position, Quaternion.identity) as GameObject;
                     
                     Destroy(this.gameObject,1f);

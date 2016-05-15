@@ -20,15 +20,19 @@ public class mainMenu : MonoBehaviour {
 
     void Start () {
         eventSystem.SetSelectedGameObject(startButton);
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        Time.timeScale = 0;
+
+    }
+
+    // Update is called once per frame
+    void Update () {
 	
 	}
 
     public void startMenu()
     {
+        Time.timeScale = 1;
+
         select.Play();
         canvas.gameObject.SetActive(false);
         foreach(GameObject start in startUps)
