@@ -139,7 +139,16 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private 
+    private void gun()
+    {
+
+    }
+
+    private void beam()
+    {
+
+    }
+
     private void checkIsGrounded()
     {
         Vector3 center     = bc.bounds.center;
