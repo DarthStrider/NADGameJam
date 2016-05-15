@@ -30,9 +30,6 @@ public class ShipMovment : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        Debug.Log(transform.position);
-
-
         if(transform.position.x < -18.5f)
         {
             rb.velocity = Vector2.zero;
