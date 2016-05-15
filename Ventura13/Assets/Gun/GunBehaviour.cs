@@ -12,15 +12,18 @@ public class GunBehaviour : MonoBehaviour
     public GameObject bullet;
     public float cooldownTime = .2f;
     private float cooldownTimer = 0.0f;
+    public float startAngle;
 
     // Use this for initialization
     void Start()
     {
+        transform.localRotation = Quaternion.Euler(new Vector3(0, 0, startAngle));
     }
 
     // Update is called once per frame
     void Update()
     {
+        
     }
     public void gunMovement(Vector2 input)
     {
@@ -70,7 +73,7 @@ public class GunBehaviour : MonoBehaviour
     {
         if (cooldownTimer <= 0)
         {
-            Instantiate(bullet, bulletSpawn.position, Quaternion.identity);
+            Instantiate(bullet, bulletSpawn.position, bulletSpawn.localRotation);
             bullet.GetComponent<BulletForce>().parentShooter = bulletSpawn;
             cooldownTimer = cooldownTime;
             this.GetComponent<x360_Gamepad>().AddRumble(playerIndex-1, 0.2f, new Vector2(5.0f, 5.0f));
