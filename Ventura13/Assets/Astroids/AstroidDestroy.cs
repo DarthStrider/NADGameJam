@@ -13,16 +13,23 @@ public class AstroidDestroy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
         if (health <= 0)
         {
+
             
-            Destroy(this.gameObject);
-            for(int i =0; i < 8; i++)
+            for (int i = 0; i < 8; i++)
             {
                 Instantiate(debris[i], transform.position, Quaternion.identity);
                 Destroy(debris[i], 2.0f);
             }
         }
-	}
+
+
+    }
+
+
+
+
+
+
 }
