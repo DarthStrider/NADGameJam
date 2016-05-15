@@ -32,7 +32,21 @@ public class ShipMovment : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-	}
+        Vector3 extent = box.bounds.extents;
+        float x = transform.position.x;
+        x = Mathf.Clamp(transform.position.x, xMin.x + extent.x, xMax.x - extent.x);
+        transform.position = new Vector2(x, transform.position.y);
+
+        if (transform.position.x <= xMin.x + extent.x + 0.001f && rb.velocity.x < 0)
+        {
+            rb.velocity = new Vector2(0, 0);
+        }
+
+        if (transform.position.x >= xMax.x - extent.x - 0.001f && rb.velocity.x > 0)
+        {
+            rb.velocity = new Vector2(0, 0);
+        }
+    }
 
     public void moveShip(Vector2 input, int player)
     {
@@ -119,21 +133,6 @@ public class ShipMovment : MonoBehaviour {
         if (rb.velocity.magnitude > maxSpeed)
         {
             rb.velocity = rb.velocity.normalized * maxSpeed;
-        }
-
-        Vector3 extent = box.bounds.extents;
-        float x = transform.position.x;
-        x = Mathf.Clamp(transform.position.x, xMin.x + extent.x, xMax.x - extent.x);
-        transform.position = new Vector2(x, transform.position.y);
-
-        if (transform.position.x <= xMin.x + extent.x + 0.001f && rb.velocity.x < 0)
-        {
-            rb.velocity = new Vector2(0, 0);
-        }
-        
-        if (transform.position.x >= xMax.x - extent.x - 0.001f && rb.velocity.x > 0)
-        {
-            rb.velocity = new Vector2(0, 0);
         }
     }
 }
