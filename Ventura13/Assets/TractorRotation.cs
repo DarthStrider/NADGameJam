@@ -6,24 +6,25 @@ public class TractorRotation : MonoBehaviour
     public float rotationSpeed;
     public float leftWorldAngle;
     public float rightWorldAngle;
+    public tractorBehaviour tractorFireScript;
+    public float startAngle;
+
     // Use this for initialization
     void Start()
     {
-
+        transform.localRotation = Quaternion.Euler(new Vector3(0, 0, startAngle));
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(Input.GetJoystickNames().Length);
-        float joyX = Input.GetAxis("RightAnalogHorizontal1");
-        float joyY = Input.GetAxis("RightAnalogVertical1");
 
-        if (joyX != 0 || joyY != 0)
+    }
+    public void beamMovement(Vector2 input)
+    {
+        if (input.x != 0 || input.y != 0)
         {
-            //Debug.Log("-----------------------------------------");
-            float angle = Mathf.Atan2(joyX, joyY) * Mathf.Rad2Deg;
-            //Debug.Log(angle);
+            float angle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg;
             if (leftWorldAngle == -135.0f && rightWorldAngle == 45.0f)  // left gun
             {
                 if (angle < 45 && angle > -135)
@@ -54,9 +55,9 @@ public class TractorRotation : MonoBehaviour
                     angle = 90;
                 }
             }
-            //Debug.Log(angle);
             angle = Mathf.Lerp(transform.localRotation.eulerAngles.z, angle, rotationSpeed * Time.deltaTime);
             transform.localRotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
     }
+
 }

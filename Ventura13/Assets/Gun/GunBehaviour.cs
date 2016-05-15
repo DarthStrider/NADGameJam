@@ -22,12 +22,9 @@ public class GunBehaviour : MonoBehaviour
     void Update()
     {
     }
+
     public void gunMovement(Vector2 input)
     {
-        //Debug.Log(Input.GetJoystickNames().Length);
-        float joyX = Input.GetAxis("RightAnalogHorizontal1");
-        float joyY = Input.GetAxis("RightAnalogVertical1");
-
         if (input.x != 0 || input.y != 0)
         {
             float angle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg;
