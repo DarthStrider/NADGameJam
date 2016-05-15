@@ -13,6 +13,8 @@ public class Spawner : MonoBehaviour {
     public Vector2 heightDifference;
     int heightChance = 1;
 
+
+    public GameObject Skybox;
     float timer = 0f;
     float coolDown = 2f;
 
@@ -31,6 +33,7 @@ public class Spawner : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        
         if (timer > (Ship.transform.position.y))
         {
             asteriodGenerator();
