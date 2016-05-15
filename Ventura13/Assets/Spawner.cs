@@ -2,7 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 public class Spawner : MonoBehaviour {
-    public GameObject asteroid;
+    public GameObject asteroid1;
+    public GameObject asteroid2;
+    public GameObject asteroid3;
+    public GameObject asteroid4;
+    public GameObject[] asteroids;
     public Camera main;
     public GameObject Ship;
     public Vector2 asteroidAmount;
@@ -14,13 +18,20 @@ public class Spawner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
-	}
+        asteroids = new GameObject[4];
+        asteroids[0] = asteroid1;
+        asteroids[1] = asteroid2;
+        asteroids[2] = asteroid3;
+        asteroids[3] = asteroid4;
+
+        //asteroids = asteroid1 }
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (timer > 2)
+        if (timer > (Ship.transform.position.y))
         {
             asteriodGenerator();
             timer = 0;
@@ -52,9 +63,14 @@ public class Spawner : MonoBehaviour {
             Vector2 local = main.ScreenToWorldPoint(spot);
             // local = starPlacement(locations, local);
             locations.Add(local);
-            GameObject newAsteroid = Instantiate(asteroid, local, Quaternion.identity) as GameObject ;
-
-
+            int randAsteroid = Random.Range(0, 4);
+            Debug.Log("Random Number Asteroids" +randAsteroid);
+            GameObject newAsteroid = Instantiate(asteroids[(int)randAsteroid], local, Quaternion.identity) as GameObject ;
+            Debug.Log(newAsteroid);
+            float randAsteroidSize = Random.Range(1f, 6f);
+            newAsteroid.transform.localScale = new Vector3(randAsteroidSize, randAsteroidSize,1);
+            
+            
         }
     }
 
