@@ -9,11 +9,14 @@ public class PlayerMovement : MonoBehaviour
 	public float moveSpeed = 4.5f;
 	public float jumpSpeed = 650.0f;
 
+	public GameObject theShip;
 	public GameObject theArm;
 	public GameObject theHead;
-
     public string[] ignoredLayers;
 
+	private Vector3 currentShipPos;
+	private Vector3 lastShipPos;
+	private float xOffset;
 	private Rigidbody2D rb;
 	private BoxCollider2D bc;
 	private Animator anim;
@@ -24,23 +27,16 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded = false;
     private bool isSideColliding = false;
     private bool lockPosition = false;
-    private GameObject terminalObject = null;
-    private Terminal.TerminalType terminalType;
-
-    private bool didJump;
-    private Vector2 leftAnalogInput;
-    private Vector2 rightAnalogInput;
-    private Vector2 triggers;
 
     private int hackedPlayerNumber; // adjusted because unity sometimes detects a non-existent controller as joystick 1
 
 	void Start ()
     {
-		rb       = GetComponent<Rigidbody2D> ();
-		bc       = GetComponent<BoxCollider2D> ();
-		arm      = theArm.GetComponent<RotateArm> ();
+		rb = GetComponent<Rigidbody2D> ();
+		bc = GetComponent<BoxCollider2D> ();
+		arm = theArm.GetComponent<RotateArm> ();
 		bobSpeed = theHead.GetComponent<HeadBob> ();
-
+		lastShipPos = theShip.transform.position;
         // hack that adjusts joystick number of player in case a non-existent joystick is using joystick 1
         string[] joysticks = Input.GetJoystickNames();
         if (joysticks.Length == 3 && joysticks[0] == "")
@@ -55,77 +51,56 @@ public class PlayerMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        collectInput();
-        if (terminalObject == null)
+
+		checkIsGrounded();
+
+		if (Input.GetAxis ("LeftAnalogHorizontal" + playerNumber) == 0) {
+			rb.velocity += new Vector2 (theShip.GetComponent<Rigidbody2D> ().velocity.x, 0);
+		}
+			
+		else if (Input.GetAxis ("LeftAnalogHorizontal" + playerNumber) > 0)
+		{
+			arm.RotateTheArmLeft ();
+			theHead.transform.eulerAngles = new Vector3(theHead.transform.eulerAngles.x, 180.0f, theHead.transform.eulerAngles.z);
+			bobSpeed.increaseSpeed (2);
+
+		}
+		else if	(Input.GetAxis ("LeftAnalogHorizontal" + playerNumber) < 0)
+		{
+			arm.RotateTheArmRight ();
+			theHead.transform.eulerAngles = new Vector3(theHead.transform.eulerAngles.x, 0.0f, theHead.transform.eulerAngles.z);
+			bobSpeed.increaseSpeed (2);
+		}
+		else
+		{
+			arm.ResetArm ();
+			bobSpeed.increaseSpeed (.5f);
+		}
+
+		string[] joys = Input.GetJoystickNames (); 
+		foreach (string joy in joys) {
+			//Debug.Log (joy);
+		}
+        if (lockPosition != true)
         {
-            checkIsGrounded();
+			rb.velocity = new Vector2(((Input.GetAxis("LeftAnalogHorizontal" + playerNumber) * moveSpeed) + theShip.GetComponent<Rigidbody2D> ().velocity.x), rb.velocity.y);
 
-            if (Input.GetAxis("LeftAnalogHorizontal" + playerNumber) > 0)
+            //Debug.DrawLine(bc.bounds.center, new Vector3(bc.bounds.center.x, (bc.bounds.center.y - (bc.bounds.extents.y + overcast)), bc.bounds.center.z));
+
+			if (Input.GetButtonDown("A" + playerNumber) && isGrounded)
             {
-                arm.RotateTheArmLeft();
-                theHead.transform.eulerAngles = new Vector3(theHead.transform.eulerAngles.x, 180.0f, theHead.transform.eulerAngles.z);
-                bobSpeed.increaseSpeed(2);
-
+                rb.AddForce(new Vector2(0, jumpSpeed));
             }
-            else if (Input.GetAxis("LeftAnalogHorizontal" + playerNumber) < 0)
-            {
-                arm.RotateTheArmRight();
-                theHead.transform.eulerAngles = new Vector3(theHead.transform.eulerAngles.x, 0.0f, theHead.transform.eulerAngles.z);
-                bobSpeed.increaseSpeed(2);
-            }
-            else
-            {
-                arm.ResetArm();
-                bobSpeed.increaseSpeed(.5f);
-            }
+		}
 
-            if (lockPosition != true)
-            {
-                rb.velocity = new Vector2(Input.GetAxis("LeftAnalogHorizontal" + playerNumber) * moveSpeed, rb.velocity.y);
-                if (Input.GetButtonDown("A" + playerNumber) && isGrounded)
-                {
-                    rb.AddForce(new Vector2(0, jumpSpeed));
-                }
-                didJump = false;
-            }
+		checkIsSideColliding ();
+		if (isSideColliding && !isGrounded)
+		{
+			rb.velocity = new Vector2(0.0f, rb.velocity.y);
+		}
 
-            checkIsSideColliding();
-            if (isSideColliding && !isGrounded)
-            {
-                rb.velocity = new Vector2(0.0f, rb.velocity.y);
-            }
-        }
-        else
-        {
-            switch (terminalType)
-            {
-                case Terminal.TerminalType.STEERING:
 
-                    break;
-                case Terminal.TerminalType.SLOW:
-
-                    break;
-                case Terminal.TerminalType.GUN:
-
-                    break;
-                case Terminal.TerminalType.BEAM:
-
-                    break;
-            }
-        }
 	}
-
-    private void collectInput()
-    {
-        if (Input.GetButtonDown("A" + playerNumber) && isGrounded)
-        {
-            didJump = true;
-        }
-        
-        leftAnalogInput = new Vector2();
-        rightAnalogInput;
-        triggers;
-    }
 
     private void checkIsGrounded()
     {
@@ -185,12 +160,6 @@ public class PlayerMovement : MonoBehaviour
 			}
 		}
 	}
-
-    public void setTerminalData(GameObject terminalObject, Terminal.TerminalType terminalType)
-    {
-        this.terminalObject = terminalObject;
-        this.terminalType   = terminalType;
-    }
 
     public int getPlayerNumber()
     {
