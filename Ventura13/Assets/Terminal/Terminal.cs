@@ -63,7 +63,7 @@ public class Terminal : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D collider)
     {
 
-        if (collider.gameObject.tag == "Player")
+        if (collider.gameObject.tag == "Player" && !lockTerminal)
         {
             lockTerminal = true;
             
@@ -74,11 +74,14 @@ public class Terminal : MonoBehaviour {
     }
     void OnTriggerExit2D(Collider2D collider)
     {
-        if (tempXButton != null)
+        if (tempPlayer.GetComponent<PlayerMovement>().getPlayerNumber() == collider.GetComponent<PlayerMovement>().getPlayerNumber())
         {
-            Destroy(tempXButton);
+            if (tempXButton != null)
+            {
+                Destroy(tempXButton);
+            }
+            lockTerminal = false;
         }
-        lockTerminal = false;
     }
 
     public bool GetLock()
