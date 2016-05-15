@@ -10,7 +10,9 @@ public class ShipMovment : MonoBehaviour {
     private float rightThrusterCooldownTimer = 0;
 	public BoxCollider2D box;
 	public float horizontalMoveSpeed = 7.0f;
-	public float maxSpeed = 5.0f;
+	public float maxSpeed = 3.0f;
+    public float boostThreshold = 1.0f;
+    public float boost = 2.5f;
     public float thrusterCooldown;
     public AudioSource thursters;
     GameObject[] rightThrusters;
@@ -30,30 +32,53 @@ public class ShipMovment : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if(transform.position.x < -18.5f)
-        {
-            rb.velocity = Vector2.zero;
-            transform.position = new Vector3(-18.5f, transform.position.y, transform.position.z);
-        }
-        else if(transform.position.x > 18.5f)
-        {
-            rb.velocity = Vector2.zero;
-            transform.position = new Vector3(18.5f, transform.position.y, transform.position.z);
-        }
-        else
-        {
-
-        }
-    
 	}
 
     public void moveShip(Vector2 input, int player)
     {
+        if (input.y > 0 && input.x <= 0)
+        {
+            Vector2 direction = new Vector2(-1,0);
+            if (Vector2.Dot(rb.velocity, direction) < 0)
+            {
+                horizontalMoveSpeed = 3500.0f;
+            }
+            else if (rb.velocity.magnitude < boostThreshold)
+            {
+                horizontalMoveSpeed = 1500.0f * boost;
+            }
+            else
+            {
+                horizontalMoveSpeed = 1500.0f;
+            }
+
+            rb.AddForce(-Vector2.right * input.y * horizontalMoveSpeed, ForceMode2D.Impulse);
+        }
+
+        if (input.x > 0 && input.y <= 0)
+        {
+            Vector2 direction = new Vector2(1, 0);
+            if (Vector2.Dot(rb.velocity, direction) < 0)
+            {
+                horizontalMoveSpeed = 3500.0f;
+            }
+            else if (rb.velocity.magnitude < boostThreshold)
+            {
+                horizontalMoveSpeed = 1500.0f * boost;
+            }
+            else
+            {
+                horizontalMoveSpeed = 1500.0f;
+            }
+
+            Debug.Log(horizontalMoveSpeed);
+
+            rb.AddForce(Vector2.right * input.x * horizontalMoveSpeed, ForceMode2D.Impulse);
+        }
+
+        // puff the magic dragon
         if (input.y > 0)
         {
-            //Debug.Log ("left trigger");
-            rb.AddForce(-Vector2.right * input.y * horizontalMoveSpeed, ForceMode2D.Impulse);
-
             if (rightThrusterCooldownTimer <= 0)
             {
                 thursters.Play();
@@ -72,11 +97,8 @@ public class ShipMovment : MonoBehaviour {
                 rightThrusterCooldownTimer -= Time.deltaTime;
             }
         }
-
         if (input.x > 0)
         {
-            rb.AddForce(Vector2.right * input.x * horizontalMoveSpeed, ForceMode2D.Impulse);
-
             if (leftThrusterCooldownTimer <= 0)
             {
                 thursters.Play();
@@ -104,12 +126,12 @@ public class ShipMovment : MonoBehaviour {
         x = Mathf.Clamp(transform.position.x, xMin.x + extent.x, xMax.x - extent.x);
         transform.position = new Vector2(x, transform.position.y);
 
-        if (transform.position.x <= xMin.x + extent.x)
+        if (transform.position.x <= xMin.x + extent.x + 0.001f && rb.velocity.x < 0)
         {
             rb.velocity = new Vector2(0, 0);
         }
-
-        if (transform.position.x >= xMax.x - extent.x)
+        
+        if (transform.position.x >= xMax.x - extent.x - 0.001f && rb.velocity.x > 0)
         {
             rb.velocity = new Vector2(0, 0);
         }
