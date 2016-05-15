@@ -36,6 +36,11 @@ public class ShipHealth : MonoBehaviour
             {
                 light.gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
             }
+
+            foreach (GameObject ex in exterior)
+            {
+                ex.gameObject.SetActive(false);
+            }
         }
       
         if(health/maxHealth <=0.3f)
@@ -43,6 +48,10 @@ public class ShipHealth : MonoBehaviour
             foreach (GameObject light in lights)
             {
                 light.gameObject.GetComponent<SpriteRenderer>().color = new Color(253/255f, 91/255f, 91/255f, 1f);
+            }
+            foreach (GameObject ex in exterior)
+            {
+                ex.gameObject.SetActive(true);
             }
         }
 
