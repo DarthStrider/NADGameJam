@@ -24,9 +24,9 @@ public class tractorBehaviour : MonoBehaviour {
     void Update()
     {
 
-        Debug.DrawRay(origin.transform.position, transform.up , Color.red, 30);
-        Debug.DrawRay(origin.transform.position, Quaternion.Euler(0, 0, coneAngle) * transform.up, Color.red, 30);
-        Debug.DrawRay(origin.transform.position, Quaternion.Euler(0, 0, -coneAngle) * transform.up, Color.red, 30);
+        //Debug.DrawRay(origin.transform.position, transform.up , Color.red, 30);
+       // Debug.DrawRay(origin.transform.position, Quaternion.Euler(0, 0, coneAngle) * transform.up, Color.red, 30);
+        //Debug.DrawRay(origin.transform.position, Quaternion.Euler(0, 0, -coneAngle) * transform.up, Color.red, 30);
         if (Input.GetAxis("RT1") <= 0 && pressed == true)
         {
             pressed = false;
@@ -170,7 +170,6 @@ public class tractorBehaviour : MonoBehaviour {
 
         if (hitObjects == true)
         {
-            Debug.Log(objects.Count);
             foreach(GameObject obj in objects){
                 //obj.transform.position = Vector3.MoveTowards(obj.transform.position, transform.gameObject.transform.position, 2 * Time.deltaTime);
                 Vector2 targetToBeam =  origin.transform.position - obj.transform.position;
