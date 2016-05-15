@@ -16,7 +16,6 @@ public class ShipMovment : MonoBehaviour {
     GameObject[] rightThrusters;
     GameObject[] leftThrusters;
     public GameObject puff;
-
     
 	void Start ()
 	{
@@ -39,10 +38,6 @@ public class ShipMovment : MonoBehaviour {
         {
             rb.velocity = Vector2.zero;
             transform.position = new Vector3(18.5f, transform.position.y, transform.position.z);
-        }
-        else
-        {
-
         }
     
 	}
