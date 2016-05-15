@@ -8,12 +8,15 @@ public class BulletForce : MonoBehaviour {
 	private Vector3 bulletWorldPoint;
 	private Renderer render;
     public Transform parentShooter;
+   
 
 	void Start () {
+        render = GetComponent<Renderer>();
 		rb = GetComponent<Rigidbody2D> ();
-        transform.rotation = parentShooter.transform.rotation;
-		rb.AddForce ( parentShooter.right * impulseSpeed, ForceMode2D.Impulse);
-		render = GetComponent<Renderer> ();
+         transform.rotation = parentShooter.transform.rotation;
+        transform.Rotate(Vector3.forward * 90);
+		rb.AddForce ( parentShooter.up * impulseSpeed, ForceMode2D.Impulse);
+		
 	}
 
 
