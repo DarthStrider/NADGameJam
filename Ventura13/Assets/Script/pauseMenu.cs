@@ -22,7 +22,7 @@ public class pauseMenu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetButtonDown("Start"))
+        if (Input.GetButtonDown("Start1") || Input.GetButtonDown("Start2") || Input.GetButtonDown("Start3"))
         {
             eventSystem.gameObject.SetActive(true);
 
