@@ -15,17 +15,18 @@ public class tractorBehaviour : MonoBehaviour {
     List<GameObject> objects=new List<GameObject>();
 	// Use this for initialization
 	void Start () {
+        //origin.transform.rotation = transform.rotation;
 		pressed = false;
         hitObjects = false;
-		
-	}
+    }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawLine(origin.transform.position, transform.up * tractorDistance, Color.red);
-        Debug.DrawLine(origin.transform.position, Quaternion.Euler(0, 0, coneAngle) * transform.up * tractorDistance, Color.red);
-        Debug.DrawLine(origin.transform.position, Quaternion.Euler(0, 0, -coneAngle) * transform.up * tractorDistance, Color.red);
+
+        Debug.DrawRay(origin.transform.position, transform.up , Color.red, 30);
+        Debug.DrawRay(origin.transform.position, Quaternion.Euler(0, 0, coneAngle) * transform.up, Color.red, 30);
+        Debug.DrawRay(origin.transform.position, Quaternion.Euler(0, 0, -coneAngle) * transform.up, Color.red, 30);
         if (Input.GetAxis("RT1") <= 0 && pressed == true)
         {
             pressed = false;
@@ -50,7 +51,8 @@ public class tractorBehaviour : MonoBehaviour {
         if (Input.GetAxis("RT1") > 0 && pressed == false)
         {
             pressed = true;
-            cone = Instantiate(conePrefab, transform.position, transform.rotation) as GameObject;
+            cone = Instantiate(conePrefab, transform.position + (transform.up * 6.7f), transform.rotation) as GameObject;
+            cone.transform.parent = origin.transform;
             RaycastHit2D[] hits = Physics2D.RaycastAll(origin.transform.position, transform.up, tractorDistance);
             foreach(RaycastHit2D hit in hits)
             {
@@ -101,19 +103,17 @@ public class tractorBehaviour : MonoBehaviour {
 
         if (pressed == true)
         {
+            List<GameObject> temp = new List<GameObject>();
             RaycastHit2D[] hits = Physics2D.RaycastAll(origin.transform.position, transform.up, tractorDistance);
             foreach (RaycastHit2D hit in hits)
             {
                 if (hit.collider != null)
                 {
-                    if (!objects.Contains(hit.collider.gameObject))
+                    if (hit.transform.tag == "Obstacle")
                     {
-                        if (hit.transform.tag == "Obstacle")
-                        {
-                            hit.transform.gameObject.GetComponent<ObstacleMovement>().tractorBeamed = true;
-                        }
-                        objects.Add(hit.collider.gameObject);
+                        hit.transform.gameObject.GetComponent<ObstacleMovement>().tractorBeamed = true;
                     }
+                    temp.Add(hit.collider.gameObject);
                 }
             }
             RaycastHit2D[] leftHits = Physics2D.RaycastAll(origin.transform.position, Quaternion.Euler(0, 0, -coneAngle) * transform.up, tractorDistance);
@@ -121,13 +121,13 @@ public class tractorBehaviour : MonoBehaviour {
             {
                 if (hit.collider != null)
                 {
-                    if (!objects.Contains(hit.collider.gameObject))
+                    if (!temp.Contains(hit.collider.gameObject))
                     {
                         if (hit.transform.tag == "Obstacle")
                         {
                             hit.transform.gameObject.GetComponent<ObstacleMovement>().tractorBeamed = true;
                         }
-                        objects.Add(hit.collider.gameObject);
+                        temp.Add(hit.collider.gameObject);
                     }
                 }
             }
@@ -136,16 +136,32 @@ public class tractorBehaviour : MonoBehaviour {
             {
                 if (hit.collider != null)
                 {
-                    if (!objects.Contains(hit.collider.gameObject))
+                    if (!temp.Contains(hit.collider.gameObject))
                     {
                         if (hit.transform.tag == "Obstacle")
                         {
                             hit.transform.gameObject.GetComponent<ObstacleMovement>().tractorBeamed = true;
                         }
-                        objects.Add(hit.collider.gameObject);
+                        temp.Add(hit.collider.gameObject);
                     }
                 }
             }
+            foreach(GameObject obj in objects)
+            {
+                if (!temp.Contains(obj))
+                {
+                    if (obj.tag == "Obstacle")
+                    {
+                        obj.GetComponent<ObstacleMovement>().tractorBeamed = false;
+                        obj.GetComponent<ObstacleMovement>().first = false;
+
+                    }
+                    objects.Remove(obj);
+                }
+              
+            }
+            objects.Clear();
+            objects = temp;
             if (objects.Count > 0)
             {
                 hitObjects = true;
@@ -173,12 +189,12 @@ public class tractorBehaviour : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "Scrap")
+        if (col.tag == "Scrap" && hitObjects == true)
         {
             objects.Remove(col.gameObject);
             Destroy(col.gameObject);
         }
-        if (col.tag == "Obstacle")
+        if (col.tag == "Obstacle" && hitObjects == true)
         {
             objects.Remove(col.gameObject);
             Destroy(col.gameObject);
