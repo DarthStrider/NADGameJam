@@ -32,7 +32,7 @@ public class pauseMenu : MonoBehaviour {
                 eventSystem.SetSelectedGameObject(pauseButton);
 
                 Time.timeScale = 0;
-                main.gameObject.GetComponent<Camera>().enabled = false;
+                main.gameObject.SetActive(false);
                 pause.gameObject.SetActive(true);
                 pauseCanvas.gameObject.SetActive(true);
                 eventSystem.SetSelectedGameObject(pauseButton);
@@ -62,7 +62,9 @@ public class pauseMenu : MonoBehaviour {
         Time.timeScale = 1;
         pause.gameObject.SetActive(false);
         main.gameObject.SetActive(true);
+
         eventSystem.SetSelectedGameObject(pauseButton);
+
     }
 
     public void newGameButton()
