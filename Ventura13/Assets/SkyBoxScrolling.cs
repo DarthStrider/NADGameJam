@@ -2,18 +2,17 @@
 using System.Collections;
 
 public class SkyBoxScrolling : MonoBehaviour {
-    public bool start;
+    public GameObject skybox;
 
+  
 
 	// Use this for initialization
 	
 	
 	// Update is called once per frame
 	void Update () {
-	if (start == true)
-        {
-            
-            transform.Translate(0, -1 * Time.deltaTime, 0);
-        }
+       
+            skybox.transform.Translate(0, -1 * Time.deltaTime, 0);
+        
 	}  
 }

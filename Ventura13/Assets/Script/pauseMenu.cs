@@ -7,7 +7,11 @@ using UnityEngine.UI;
 public class pauseMenu : MonoBehaviour {
     public EventSystem eventSystem;
     public Canvas pauseCanvas;
-	// Use this for initialization
+    public GameObject pauseButton;
+    public AudioSource select;
+    public AudioSource inMenu;
+
+    // Use this for initialization
 
     void Awake()
     {
@@ -20,11 +24,11 @@ public class pauseMenu : MonoBehaviour {
 	void Update () {
         if (Input.GetButtonDown("Start1") || Input.GetButtonDown("Start2") || Input.GetButtonDown("Start3"))
         {
-
+            inMenu.Play();
                 Time.timeScale = 0;
                 pauseCanvas.gameObject.SetActive(true);
-                //eventSystem.SetSelectedGameObject(pauseButton);
-   
+            eventSystem.SetSelectedGameObject(pauseButton);
+
         }
 
         if (Input.GetButtonDown("Start1"))
@@ -43,6 +47,8 @@ public class pauseMenu : MonoBehaviour {
 
     public void continueButton()
     {
+        select.Play();
+
         pauseCanvas.gameObject.SetActive(false);
        
         Time.timeScale = 1;
@@ -53,6 +59,8 @@ public class pauseMenu : MonoBehaviour {
 
     public void exitButton()
     {
+        select.Play();
+
         Application.Quit();
     }
 }
