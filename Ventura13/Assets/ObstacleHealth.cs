@@ -16,7 +16,9 @@ public class ObstacleHealth : MonoBehaviour {
         {
             switch (obsType) {
                 case ObstacleType.AST:
-                    gameObject.GetComponent<AstroidDestroy>().destAsteroid();
+                    Debug.Log(gameObject.tag);
+                    this.gameObject.GetComponent<AstroidDestroy>().destAsteroid();
+                    Destroy(this.gameObject);
                     break;
                 case ObstacleType.SAT:
                     break;
@@ -30,6 +32,7 @@ public class ObstacleHealth : MonoBehaviour {
         if(col.gameObject.tag == "Bullet")
         {
             Health -= col.gameObject.GetComponent<BulletForce>().BulletDamage;
+            Destroy(col.gameObject);
         }
     }
 

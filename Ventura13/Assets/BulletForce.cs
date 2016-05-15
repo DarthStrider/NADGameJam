@@ -43,4 +43,13 @@ public class BulletForce : MonoBehaviour {
         Debug.Log("Hit by " + col.gameObject.name);
 
     }*/
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Obstacle")
+        {
+           
+            Destroy(this.gameObject, .2f);
+        }
+    }
 }
