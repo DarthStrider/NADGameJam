@@ -92,6 +92,11 @@ public class PlayerMovement : MonoBehaviour
                 rb.AddForce(new Vector2(0, jumpSpeed));
             }
 		}
+        else
+        {
+            rb.velocity = Vector2.zero;
+            rb.velocity = new Vector2(theShip.GetComponent<Rigidbody2D>().velocity.x, 0);
+        }
 
 		checkIsSideColliding ();
 		if (isSideColliding && !isGrounded)

@@ -22,8 +22,25 @@ public class ButtonPressed : MonoBehaviour {
             {
                 tempPlayer.GetComponent<PlayerMovement>().theArm.transform.localEulerAngles = new Vector3(0, 0, -60);
                 Destroy(tempXButton);
+                counter = 30;
             }
         }
+
+        if(counter > 15)
+        {
+            transform.Translate(transform.position.x + 0.001f, transform.position.y, transform.position.z);
+            counter--;
+        }
+        else if(counter > 0 && counter <= 15)
+        {
+            transform.Translate(transform.position.x - 0.001f, transform.position.y, transform.position.z);
+            counter--;
+        }
+        else
+        {
+
+        }
+
 
 
     }
@@ -47,6 +64,7 @@ public class ButtonPressed : MonoBehaviour {
         {
             Destroy(tempXButton);
             tempPlayer = null;
+            unlockPush = false;
         }
     }
 }
