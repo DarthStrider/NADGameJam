@@ -6,7 +6,10 @@ public class ButtonPressed : MonoBehaviour {
     public GameObject xButton;
     GameObject tempXButton;
     bool unlockPush = false;
-    int counter = 0;
+    public float animationSpeed;
+    public float animationDepth;
+    public float cooldownTimer = 0;
+    public float coolDownTime = 0;
     // Use this for initialization
     void Start () {
 	
@@ -15,35 +18,24 @@ public class ButtonPressed : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        float animationTimer = 0;
 
+        Debug.Log(transform.position + "    " + (transform.position + (transform.right * animationDepth)));
         if (unlockPush == true)
         {
             if (Input.GetButton("X" + tempPlayer.GetComponent<PlayerMovement>().getPlayerNumber()))
             {
                 tempPlayer.GetComponent<PlayerMovement>().theArm.transform.localEulerAngles = new Vector3(0, 0, -60);
                 Destroy(tempXButton);
-                counter = 30;
+                
+                animationTimer = 0.15f;
             }
         }
 
-        if(counter > 15)
-        {
-            transform.Translate(transform.position.x + 0.001f, transform.position.y, transform.position.z);
-            counter--;
-        }
-        else if(counter > 0 && counter <= 15)
-        {
-            transform.Translate(transform.position.x - 0.001f, transform.position.y, transform.position.z);
-            counter--;
-        }
-        else
-        {
-
-        }
-
-
-
-    }
+ 
+        //transform.position = Vector2.Lerp(transform.position, new Vector2(transform.position.x + animationDepth, transform.position.y), animationSpeed);
+   }
+    
 
 
     void OnTriggerEnter2D(Collider2D collider)
