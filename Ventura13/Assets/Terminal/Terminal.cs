@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Terminal : MonoBehaviour {
-    public enum TerminalType { GUN, STEERING, SLOW, BEAM};
+    public enum TerminalType { GUN, STEERING, SLOW, BEAM, FREE};
     public TerminalType terminalType;
     public GameObject terminalObject;
 
@@ -31,7 +31,8 @@ public class Terminal : MonoBehaviour {
 
                 tempPlayer.GetComponent<PlayerMovement>().setLockPosition(true);
 				tempPlayer.GetComponent<SwapSprites> ().SwapFace ();
-                
+                tempPlayer.GetComponent<PlayerMovement>().setTerminalAttributes(terminalObject, terminalType);
+
                 Destroy(tempXButton);
 
                 if (bCount == 0)
@@ -49,7 +50,8 @@ public class Terminal : MonoBehaviour {
                 Destroy(tempBButton);
                 bCount = 0;
                 tempPlayer.GetComponent<PlayerMovement>().setLockPosition(false);
-				tempPlayer.GetComponent<SwapSprites> ().SwapSide ();
+                tempPlayer.GetComponent<PlayerMovement>().setTerminalAttributes(null, TerminalType.FREE);
+                tempPlayer.GetComponent<SwapSprites> ().SwapSide ();
                 
             }
         }

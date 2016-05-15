@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 
-
 public class PlayerMovement : MonoBehaviour
 {
 	public int playerNumber;
@@ -27,8 +26,13 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded = false;
     private bool isSideColliding = false;
     private bool lockPosition = false;
+    private GameObject terminalObject = null;
+    private Terminal.TerminalType terminalType = Terminal.TerminalType.FREE;
 
-    private int hackedPlayerNumber; // adjusted because unity sometimes detects a non-existent controller as joystick 1
+    private bool didJump;
+    private Vector2 leftAnalogInput;
+    private Vector2 rightAnalogInput;
+    private Vector2 triggers;
 
 	void Start ()
     {
@@ -51,56 +55,103 @@ public class PlayerMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-
-		checkIsGrounded();
-
-		if (Input.GetAxis ("LeftAnalogHorizontal" + playerNumber) == 0) {
-			rb.velocity += new Vector2 (theShip.GetComponent<Rigidbody2D> ().velocity.x, 0);
-		}
-			
-		else if (Input.GetAxis ("LeftAnalogHorizontal" + playerNumber) > 0)
-		{
-			arm.RotateTheArmLeft ();
-			theHead.transform.eulerAngles = new Vector3(theHead.transform.eulerAngles.x, 180.0f, theHead.transform.eulerAngles.z);
-			bobSpeed.increaseSpeed (2);
-
-		}
-		else if	(Input.GetAxis ("LeftAnalogHorizontal" + playerNumber) < 0)
-		{
-			arm.RotateTheArmRight ();
-			theHead.transform.eulerAngles = new Vector3(theHead.transform.eulerAngles.x, 0.0f, theHead.transform.eulerAngles.z);
-			bobSpeed.increaseSpeed (2);
-		}
-		else
-		{
-			arm.ResetArm ();
-			bobSpeed.increaseSpeed (.5f);
-		}
-
-		string[] joys = Input.GetJoystickNames (); 
-		foreach (string joy in joys) {
-			//Debug.Log (joy);
-		}
-        if (lockPosition != true)
+        collectInput();
+        if (terminalObject == null)
         {
-			rb.velocity = new Vector2(((Input.GetAxis("LeftAnalogHorizontal" + playerNumber) * moveSpeed) + theShip.GetComponent<Rigidbody2D> ().velocity.x), rb.velocity.y);
-
-            //Debug.DrawLine(bc.bounds.center, new Vector3(bc.bounds.center.x, (bc.bounds.center.y - (bc.bounds.extents.y + overcast)), bc.bounds.center.z));
-
-			if (Input.GetButtonDown("A" + playerNumber) && isGrounded)
+            checkIsGrounded();
+            Debug.Log("walking");
+            if (Input.GetAxis("LeftAnalogHorizontal" + playerNumber) == 0)
             {
-                rb.AddForce(new Vector2(0, jumpSpeed));
+                rb.velocity += new Vector2(theShip.GetComponent<Rigidbody2D>().velocity.x, 0);
             }
-		}
 
-		checkIsSideColliding ();
-		if (isSideColliding && !isGrounded)
-		{
-			rb.velocity = new Vector2(0.0f, rb.velocity.y);
-		}
+            else if (Input.GetAxis("LeftAnalogHorizontal" + playerNumber) > 0)
+            {
+                arm.RotateTheArmLeft();
+                theHead.transform.eulerAngles = new Vector3(theHead.transform.eulerAngles.x, 180.0f, theHead.transform.eulerAngles.z);
+                bobSpeed.increaseSpeed(2);
 
+            }
+            else if (Input.GetAxis("LeftAnalogHorizontal" + playerNumber) < 0)
+            {
+                arm.RotateTheArmRight();
+                theHead.transform.eulerAngles = new Vector3(theHead.transform.eulerAngles.x, 0.0f, theHead.transform.eulerAngles.z);
+                bobSpeed.increaseSpeed(2);
+            }
+            else
+            {
+                arm.ResetArm();
+                bobSpeed.increaseSpeed(.5f);
+            }
 
+            string[] joys = Input.GetJoystickNames();
+            foreach (string joy in joys)
+            {
+                //Debug.Log (joy);
+            }
+            if (lockPosition != true)
+            {
+                rb.velocity = new Vector2(((Input.GetAxis("LeftAnalogHorizontal" + playerNumber) * moveSpeed) + theShip.GetComponent<Rigidbody2D>().velocity.x), rb.velocity.y);
+
+                if (Input.GetButtonDown("A" + playerNumber) && isGrounded)
+                {
+                    rb.AddForce(new Vector2(0, jumpSpeed));
+                }
+            }
+
+            else
+            {
+                rb.velocity = Vector2.zero;
+                rb.velocity = new Vector2(theShip.GetComponent<Rigidbody2D>().velocity.x, 0);
+            }
+
+            checkIsSideColliding();
+            if (isSideColliding && !isGrounded)
+            {
+                rb.velocity = new Vector2(0.0f, rb.velocity.y);
+            }
+        }
+        else
+        {
+            switch (terminalType)
+            {
+                case Terminal.TerminalType.STEERING:
+                    steering();
+                    break;
+                case Terminal.TerminalType.SLOW:
+                    slow();
+                    break;
+                case Terminal.TerminalType.GUN:
+                    gun();
+                    break;
+                case Terminal.TerminalType.BEAM:
+                    beam();
+                    break;
+            }
+        }
+        didJump = false;
 	}
+
+    private void steering()
+    {
+        Debug.Log("steering");
+        terminalObject.GetComponent<ShipMovment>().moveShip(triggers, playerNumber);
+    }
+
+    private void slow()
+    {
+
+    }
+
+    private void gun()
+    {
+
+    }
+
+    private void beam()
+    {
+
+    }
 
     private void checkIsGrounded()
     {
@@ -128,8 +179,21 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-		
-	private void checkIsSideColliding()
+
+    private void collectInput()
+    {
+        if (Input.GetButtonDown("A" + playerNumber) && isGrounded)
+        {
+            didJump = true;
+        }
+
+        leftAnalogInput  = new Vector2(Input.GetAxis("LeftAnalogHorizontal" + playerNumber), (Input.GetAxis("LeftAnalogVertical" + playerNumber)));
+        rightAnalogInput = new Vector2(Input.GetAxis("RightAnalogHorizontal" + playerNumber), (Input.GetAxis("RightAnalogVertical" + playerNumber)));
+        triggers.x = Input.GetAxis("LT" + playerNumber);
+        triggers.y = Input.GetAxis("RT" + playerNumber);
+    }
+
+    private void checkIsSideColliding()
 	{
 		Vector3 center = bc.bounds.center;
 		float yHeight = bc.bounds.extents.y * raycastInset;
@@ -160,6 +224,12 @@ public class PlayerMovement : MonoBehaviour
 			}
 		}
 	}
+
+    public void setTerminalAttributes(GameObject terminalObject, Terminal.TerminalType terminalType)
+    {
+        this.terminalObject = terminalObject;
+        this.terminalType = terminalType;
+    }
 
     public int getPlayerNumber()
     {
