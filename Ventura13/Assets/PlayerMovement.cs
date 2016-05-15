@@ -62,6 +62,8 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetAxis("LeftAnalogHorizontal" + playerNumber) == 0)
             {
                 rb.velocity += new Vector2(theShip.GetComponent<Rigidbody2D>().velocity.x, 0);
+                arm.ResetArm();
+                bobSpeed.increaseSpeed(.5f);
             }
 
             else if (Input.GetAxis("LeftAnalogHorizontal" + playerNumber) > 0)
@@ -77,12 +79,7 @@ public class PlayerMovement : MonoBehaviour
                 theHead.transform.eulerAngles = new Vector3(theHead.transform.eulerAngles.x, 0.0f, theHead.transform.eulerAngles.z);
                 bobSpeed.increaseSpeed(2);
             }
-            else
-            {
-                arm.ResetArm();
-                bobSpeed.increaseSpeed(.5f);
-            }
-
+           
             string[] joys = Input.GetJoystickNames();
             foreach (string joy in joys)
             {

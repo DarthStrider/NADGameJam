@@ -7,18 +7,20 @@ public class BulletForce : MonoBehaviour {
 	private float impulseSpeed = 50.0f;
 	private Vector3 bulletWorldPoint;
 	private Renderer render;
-    public Transform parentShooter;
    
-
-	void Start () {
+    
+    public void Initalize(Transform gunTip)
+    {
         render = GetComponent<Renderer>();
-		rb = GetComponent<Rigidbody2D> ();
-         transform.rotation = parentShooter.transform.rotation;
+        rb = GetComponent<Rigidbody2D>();
+        rb.AddForce(gunTip.up * impulseSpeed, ForceMode2D.Impulse);
+        transform.rotation = gunTip.rotation;
         transform.Rotate(Vector3.forward * 90);
-		rb.AddForce ( parentShooter.up * impulseSpeed, ForceMode2D.Impulse);
-		
-	}
+       
+    }
+    
 
+    
 
 	void Update(){
 		if (render.isVisible == false) {

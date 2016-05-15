@@ -73,8 +73,8 @@ public class GunBehaviour : MonoBehaviour
     {
         if (cooldownTimer <= 0)
         {
-            Instantiate(bullet, bulletSpawn.position, bulletSpawn.localRotation);
-            bullet.GetComponent<BulletForce>().parentShooter = bulletSpawn;
+            GameObject laser = Instantiate(bullet, bulletSpawn.position, bulletSpawn.localRotation) as GameObject;
+            laser.GetComponent<BulletForce>().Initalize(bulletSpawn);
             cooldownTimer = cooldownTime;
             this.GetComponent<x360_Gamepad>().AddRumble(playerIndex-1, 0.2f, new Vector2(5.0f, 5.0f));
         }
