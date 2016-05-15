@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ObstacleHealth : MonoBehaviour {
     public float Health = 50;
-    public enum ObstacleType { AST, SAT};
+    public enum ObstacleType { AST, SAT, BLI};
     public ObstacleType obsType;
     // Use this for initialization
     void Start() {
