@@ -5,6 +5,7 @@ public class ObstacleHealth : MonoBehaviour {
     public float Health = 50;
     public enum ObstacleType { AST, SAT, BLI};
     public ObstacleType obsType;
+    public GameObject PuffHit;
     // Use this for initialization
     void Start() {
 
@@ -28,10 +29,26 @@ public class ObstacleHealth : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
+
         if(col.gameObject.tag == "Bullet")
         {
-            Health -= col.gameObject.GetComponent<BulletForce>().BulletDamage;
-            Destroy(col.gameObject);
+            switch (obsType)
+            {
+                case ObstacleType.AST:
+                    Health -= col.gameObject.GetComponent<BulletForce>().BulletDamage;
+                    
+                    break;
+                case ObstacleType.SAT:
+
+                    break;
+                case ObstacleType.BLI:
+                    GameObject ph = Instantiate(PuffHit, col.transform.position, Quaternion.identity) as GameObject;
+                    Destroy(ph, .83f);
+                    Destroy(col.gameObject);
+                    break;
+
+            }
+
         }
     }
 
